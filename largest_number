@@ -1,0 +1,33 @@
+//Find the Largest Number
+
+#include <stdio.h>
+
+int main(void)
+{
+	int counter = 1;
+	int number = 1;
+	int next = 2;
+	int largest;
+	int t;
+	
+	while(counter < 11)
+	{
+		t = next * 10;
+		//printf("number%d ", number);
+		next = rand()%t;
+	//	printf("next%d ", next);
+		if(next > number)
+		{
+			largest = next;
+		}
+		else
+		{
+			largest = number;
+		}
+		
+		number = largest;
+		printf("%d  ", largest);
+		counter++;
+	}
+	printf("\nLargest: %d\n", largest);
+}
