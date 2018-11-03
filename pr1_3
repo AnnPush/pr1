@@ -1,0 +1,48 @@
+#include <stdio.h>
+
+int main(void)
+{
+    int hours ;
+    int k = 40;
+    
+    float rate;
+    float salary = 0;
+    
+   /* while(hours <= k)
+    {
+    puts("Enter # of hours worked (-1 to end):");
+    scanf("Hours: %d\n", &hours);
+    
+    puts("Enter hourly rate of the worker:");
+    scanf("Rate: %f\n", &rate);
+    
+   
+    
+    if(hours > k)
+    {
+    	salary = k * rate + (hours - k) * rate * 1,5;
+    }
+     else
+    {
+    	salary = hours * rate;
+    }
+    printf("Salary is: %f\n", salary);
+    }*/
+    
+    hours = 45;
+    rate = 10;
+    
+    printf("Hours: %d\nRate: %.2f\n", hours, rate);
+    
+    
+    if(hours > k)
+    {
+    	salary = k * rate + (hours - k) * rate * 1.5;
+    }
+    else
+    {
+    	salary = hours * rate;
+    }
+    
+    printf("Salary is: %.2f\n", salary);
+}
