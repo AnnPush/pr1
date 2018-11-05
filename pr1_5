@@ -1,0 +1,29 @@
+//Checkerboard Pattern of Asterisks
+
+#include <stdio.h>
+
+int main(void)
+{
+	int i = 0;
+	int m;
+	int j=1;
+	
+	while(j<=8)
+	{
+	   m = j%2;
+	   
+	   if(m==0 )
+	   {
+                  printf("%s", " ");
+	   }
+	   
+               while(i < 8)
+	   {
+	      printf("%s", "* ");
+	      i++;
+               }
+               i=0;
+               puts ("");
+	   j++;
+	}
+}
