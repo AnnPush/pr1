@@ -1,0 +1,23 @@
+#include <stdio.h>
+
+int main(void)
+{
+    int number = 10001;
+    int i = 1;
+    int next = 1;
+    int a;
+    int m;
+    int sum = 0;
+    int n = 1;
+    
+    while(next != number)
+    {
+        m = i*10;
+        next = number%m;
+        a = next/i;
+        sum += a*n;
+        n *= 2;
+        i *= 10;
+    }
+    printf("%d\n", sum);
+}
