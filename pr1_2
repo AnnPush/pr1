@@ -1,33 +1,18 @@
 #include <stdio.h>
-int isPerfect(int);
 
-int main()
+int main(void)
 {
-	for(int i = 1; i <= 10000; i++)
+	int counter =0;
+	int a;
+	
+	while(counter <= 3000000)
 	{
-		if(isPerfect(i) == 1)
+		counter++;
+		a=counter % 1000000;
+		if(a == 0)
 		{
-			printf("%d factors: ", i);
-			for(int j = 1; j <= i; j++)
-			{
-				if(i%j == 0 && i != j)
-					printf("%d ", j);
-			}
-			printf("%s", "\n");
+			printf("%d", counter);
 		}
+		
 	}
-}
-
-int isPerfect(int a)
-{
-    	int sum = 0;
-		for( int j = 1; j < a; j++)
-		{
-			if(a%j == 0)
-			sum += j;
-		}
-		if( sum == a)
-			return 1;
-		else
-			return 0;
 }
