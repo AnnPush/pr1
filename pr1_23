@@ -1,0 +1,18 @@
+#include <stdio.h>
+
+int main(void)
+{
+	int counter =0;
+	int a;
+	
+	while(counter <= 3000000)
+	{
+		counter++;
+		a=counter % 1000000;
+		if(a == 0)
+		{
+			printf("%d", counter);
+		}
+		
+	}
+}
