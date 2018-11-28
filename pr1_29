@@ -1,0 +1,17 @@
+#include <stdio.h>
+
+int main(void)
+{
+	int n = 7600000;
+	int i = 0;
+	int m = 100000;
+	int j = 2018;
+	
+	while ( i < 5)
+	{
+		n = n + m;
+		printf("%d: %d\n", j, n);
+		j++;
+		i++;
+	}
+}
