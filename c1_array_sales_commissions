@@ -1,33 +1,62 @@
-//Find the Largest Number
+/*(Sales Commissions) Use a one-dimensional array to solve the following problem. A company
+pays its salespeople on a commission basis. The salespeople receive $200 per week plus 9% of
+their gross sales for that week. For example, a salesperson who grosses $3,000 in sales in a week receives
+$200 plus 9% of $3,000, or a total of $470. Write a C program (using an array of counters)
+that determines how many of the salespeople earned salaries in each of the following ranges (assume
+that each salesperson’s salary is truncated to an integer amount):
+a) $200–299
+b) $300–399
+c) $400–499
+d) $500–599
+e) $600–699
+f) $700–799
+g) $800–899
+h) $900–999
+i) $1000 and over*/
+
 
 #include <stdio.h>
+#define SALES_SIZE 20   //define array sizes
+#define FREQUENCY_SIZE 9
+
 
 int main(void)
 {
-	int counter = 1;
-	int number = 1;
-	int next = 2;
-	int largest;
-	int t;
-	
-	while(counter < 11)
+	// initialize frequency counters to 0
+	int frequency[FREQUENCY_SIZE] = {0};
+
+	// place the survey salaries in the salaries array
+	int  sales[SALES_SIZE] = {3410, 2549, 5637, 5746, 3988, 6765, 2389, 2457, 4858, 3310,
+                                5458, 5354, 2362, 809, 653, 4210, 8763, 738, 1294, 2754};
+
+	// for each salary, select value of an element of array sales
+        // and use that value as an index in array frequency to
+        // determine element to increment
+	for (size_t salary = 0; salary < SALES_SIZE; ++salary)
 	{
-		t = next * 10;
-		//printf("number%d ", number);
-		next = rand()%t;
-	//	printf("next%d ", next);
-		if(next > number)
+		sales[salary] = sales[salary] * 9/10000;
+		if(sales[salary] > FREQUENCY_SIZE - 1)
 		{
-			largest = next;
+			sales[salary] = FREQUENCY_SIZE - 1;
+		}
+		++frequency[sales[salary]];		
+	}
+
+	// display results
+	printf("%s%19s\n", "Salary", "Frequency");
+
+	// output the frequencies in a tabular format
+	for (size_t rating = 0; rating < FREQUENCY_SIZE; ++rating)
+	{
+		int n = (rating + 2) * 100;
+
+		if(n > 999)
+		{
+			printf("$%d and over %10d\n", n, frequency[rating]);
 		}
 		else
 		{
-			largest = number;
-		}
-		
-		number = largest;
-		printf("%d  ", largest);
-		counter++;
-	}
-	printf("\nLargest: %d\n", largest);
+			 printf("$%d-%d%17d\n", n, n + 99, frequency[rating]);
+		}       
+        }
 }
