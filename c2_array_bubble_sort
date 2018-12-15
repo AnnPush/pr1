@@ -63,15 +63,22 @@ int main(void)
 
     puts("Data items in original order");
 
+        //вывести исходный массив
 	for (size_t i = 0; i < SIZE; ++i)
 	{
 		printf("%4d", a[i]);
 	}
 
+        //пузырьковая сортировка
+	
+        //цикл для контроля числа проходов
 	for (unsigned int pass = 1; pass < SIZE; ++pass)
 	{
+	        //цикл для контроля числа сравнений на данном проходе
 		for (size_t i =0; i < SIZE - 1; ++i)
 		{
+		        //сравнить соседние элементы и обменять их,
+			//если первый элемент больше второго
 			if(a[i] > a[i + 1]
 			{
 				int hold = a[i];
@@ -83,6 +90,7 @@ int main(void)
 
 	puts("\nData items in ascending order");
 
+        //вывести сортированный массив
 	for (size_t i = 0; i < SIZE; ++i)
 	{
 		printf("%4d", a[i]);
