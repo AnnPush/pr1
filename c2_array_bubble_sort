@@ -75,7 +75,7 @@ int main(void)
 	for (unsigned int pass = 1; pass < SIZE; ++pass)
 	{
 	        //цикл для контроля числа сравнений на данном проходе
-		for (size_t i =0; i < SIZE - 1; ++i)
+		for (size_t i =0; i < SIZE - pass; ++i)
 		{
 		        //сравнить соседние элементы и обменять их,
 			//если первый элемент больше второго
