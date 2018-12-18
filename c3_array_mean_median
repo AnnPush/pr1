@@ -1,13 +1,2 @@
-#include <stdio.h>
-
-int main(void)
-{
-	int n[5] = {6, 23, 56, 34, 78};
-
-	printf("%s%13s\n", "Element", "Value");
-
-	for(size_t i = 0; i < 5; ++i)
-	{
-		printf("%7u%13d\n", i, n[i]);
-	}
-}
+/*(Mean, Median and Mode Program Modifications)
+*/
