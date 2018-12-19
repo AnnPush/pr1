@@ -1,4 +1,5 @@
 /*(Mean, Median and Mode Program Modifications). 
+  Программа вычисляет среднее, медиану и модус данных.
 
 
 #include <stdio.h>
