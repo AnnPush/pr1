@@ -220,6 +220,7 @@ void median(unsigned int answer[])
 				SIZE / 2, SIZE, answer[SIZE / 2]);	                    
 }
 
+//определить наиболее частый отклик
 void mode(unsigned int freq[], const unsigned int answer[])
 {
 	printf("\n%s\n%s\n%s\n", "********", "  Mode", "********");
