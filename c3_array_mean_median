@@ -224,7 +224,8 @@ void median(unsigned int answer[])
 void mode(unsigned int freq[], const unsigned int answer[])
 {
 	printf("\n%s\n%s\n%s\n", "********", "  Mode", "********");
-
+	
+	//инициализировать частоты нулями
 	for (size_t rating = 1; rating <= 9; ++rating)
 	{
 		freq[rating] = 0;
