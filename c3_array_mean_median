@@ -230,7 +230,8 @@ void mode(unsigned int freq[], const unsigned int answer[])
 	{
 		freq[rating] = 0;
 	}
-
+	
+	//суммировать частоты
 	for (size_t j = 0; j < SIZE; ++j)
 	{
 		++freq[answer[j]];
