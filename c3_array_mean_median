@@ -241,8 +241,9 @@ void mode(unsigned int freq[], const unsigned int answer[])
 	printf("%s%11s%19s\n\n%54s\n%54s\n\n",
 		   "Response", "Frequensy", "Histogram",
 		   "1 1 2 2", "5 0 5 0 5");
-	unsigned int largest = 0;
-	unsigned int modeValue = 0;
+	unsigned int largest[10] = {0};
+	unsigned int modeValue[10] = {0};
+	unsigned int count = 1;
 	
 	//вывести результаты
 	for (size_t rating = 1; rating <= 9; ++rating)
