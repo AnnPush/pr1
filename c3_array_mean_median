@@ -107,13 +107,9 @@ void mode(unsigned int freq[], const unsigned int answer[])
 	    puts("");
 	}
 
-	while(count > 0)
-	{		    
-	    printf("\nThe mode is the most frequent value.\n"
-	    "For this run the mode is %u which occurred"
-	    " %u times. \n", modeValue[count], largest[count]);
-	    --count;
-	}
+	printf("\nThe mode is the most frequent value.\n"
+	"For this run the mode is %u which occurred"
+	" %u times. \n", modeValue, largest);
 }
 
 void bubbleSort(unsigned int a[])
@@ -275,9 +271,13 @@ void mode(unsigned int freq[], const unsigned int answer[])
 	    puts("");
 	}
 
-	printf("\nThe mode is the most frequent value.\n"
-	"For this run the mode is %u which occurred"
-	" %u times. \n", modeValue, largest);
+	while(count > 0)
+	{		    
+	    printf("\nThe mode is the most frequent value.\n"
+	    "For this run the mode is %u which occurred"
+	    " %u times. \n", modeValue[count], largest[count]);
+	    --count;
+	}
 }
 
 void bubbleSort(unsigned int a[])
