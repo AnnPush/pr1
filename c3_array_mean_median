@@ -250,11 +250,18 @@ void mode(unsigned int freq[], const unsigned int answer[])
 	{
 		printf("%8u%11u        ", rating, freq[rating]);
 
-	    if(freq[rating] > largest)
-	    {
-			largest = freq[rating];
-		    modeValue = rating;
-	    }
+	        if(freq[rating] > largest[count])
+	        {
+			largest[count] = freq[rating];
+			modeValue[count] = rating;
+
+	        }
+		else if(freq[rating] == largest[count])
+		{
+		        count++;
+			largest[count] = freq[rating];
+			modeValue[count] = rating;
+		}
 
 	    for(unsigned int h = 1; h <= freq[rating]; ++h)
 	    {
