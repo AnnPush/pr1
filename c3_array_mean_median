@@ -214,10 +214,20 @@ void median(unsigned int answer[])
 	printf("%s", "\n\nThe sorted array is");
 	printArray(answer);
 
-	printf("\n\nThe median is element %u of\n"
+	if (SIZE%2 == 0)
+	{
+	    printf("\n\nThe median are elements %u and of %u\n"
 	        "the sorted %u element array. \n"
 			"For this run the median is %u\n\n",
-				SIZE / 2, SIZE, answer[SIZE / 2]);	                    
+				SIZE / 2, SIZE / 2 + 1, SIZE, (answer[SIZE / 2] + answer[SIZE / 2 + 1]) / 2);
+	}
+	else
+	{
+    	printf("\n\nThe median is element %u of\n"
+	        "the sorted %u element array. \n"
+			"For this run the median is %u\n\n",
+				SIZE / 2, SIZE, answer[SIZE / 2]);	 
+	}	                    
 }
 
 //определить наиболее частый отклик
