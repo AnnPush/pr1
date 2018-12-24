@@ -207,12 +207,12 @@ void median(unsigned int answer[])
 		"********", "Median", "********",
 		"The unsorted array of responses is");
 
-	printArray(answer);
+	printArray(answer);//вывести несортированный массив
 
-	bubbleSort(answer);
+	bubbleSort(answer);//сортировать массив
 
 	printf("%s", "\n\nThe sorted array is");
-	printArray(answer);
+	printArray(answer);//вывести сортированный массив
 
 	if (SIZE%2 == 0)
 	{
