@@ -3,3 +3,51 @@
 В процессе считывания выводите это число только в том случае, если оно не дублирует
 одного из уже считанных чисел. Предусмотрите "наихудший случай", когда все 20 чисел
 различны. Объявите для решения этой задачи массив наименьшего возможного размера.*/
+//---------------------------------------------------------------------------
+#include <vcl.h>
+#include <iostream>
+#include <cstdlib>
+#include <iomanip>
+ 
+using namespace std;
+ 
+int main()
+{
+    const int size=20;
+    int counts[size]={0};
+    int a,flag;
+    for(int x=0;x<size;x++)
+    {
+      flag=0;
+      cout << "Vvedite chisla masiva: ";
+      cin >> a;
+      while(a<10||a>100)
+      {
+        cout << "Neverni vvod,vvedite zanovo: ";
+        cin >> a;
+      }
+      if(x==0)
+      {
+         counts[x]=a;
+         cout << "Chislo - " << counts[x] << endl;
+      }
+      else
+      {   for(int b=0;b<x;b++)
+          {
+               if(counts[b]==a)
+                  flag++;
+          }
+      }
+      if(flag==0&&x!=0)
+      {
+        counts[x]=a;
+        cout << "Chislo - " << counts[x] << endl;
+      }
+    }
+    for(int c=0;c<size;c++)
+       if(counts[c]!=0)
+          cout << counts[c] << " " ;
+    cout << endl;
+    system("pause");
+    return 0;
+}
