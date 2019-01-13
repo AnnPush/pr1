@@ -1,3 +1,10 @@
+/*
+Напишите программу, в которой разыгрываются 1000 партий в крепс
+*/
+
+
+
+
 # include <stdio.h>
 
 float isMinimum(float, float, float);
