@@ -5,51 +5,63 @@
 различны. Объявите для решения этой задачи массив наименьшего возможного размера.
 */
 
+#include <stdio.h>
+#define SIZE 5
 
-#include <vcl.h>
-#include <iostream>
-#include <cstdlib>
-#include <iomanip>
- 
-using namespace std;
- 
-int main()
+int main(void)
 {
-    const int size=20;
-    int counts[size]={0};
-    int a,flag;
-    for(int x=0;x<size;x++)
-    {
-      flag=0;
-      cout << "Vvedite chisla masiva: ";
-      cin >> a;
-      while(a<10||a>100)
-      {
-        cout << "Neverni vvod,vvedite zanovo: ";
-        cin >> a;
-      }
-      if(x==0)
-      {
-         counts[x]=a;
-         cout << "Chislo - " << counts[x] << endl;
-      }
-      else
-      {   for(int b=0;b<x;b++)
-          {
-               if(counts[b]==a)
-                  flag++;
-          }
-      }
-      if(flag==0&&x!=0)
-      {
-        counts[x]=a;
-        cout << "Chislo - " << counts[x] << endl;
-      }
-    }
-    for(int c=0;c<size;c++)
-       if(counts[c]!=0)
-          cout << counts[c] << " " ;
-    cout << endl;
-    system("pause");
-    return 0;
+	int a[SIZE] = {0};
+	int ch;//число
+ int flag;//флаг, определяющий, дублируется ли число
+	int m = 0;//размер массива считанных чисел
+
+	for (size_t i = 0; i < SIZE; i++)
+	{
+	   	flag = 0;
+     //ввести число от 10 до 100
+	    printf("%s", "Enter a integer at 10 to 100: ");
+	    scanf("%d", &ch);
+
+  //если получено некорректное значение, повторить ввод числа
+  while(ch <10 || ch >100)
+		{
+			printf("%s", "No, enter a integer again: ");
+			scanf("%d", &ch);
+		}
+  
+  //если это первое значение в массиве, выводим число на печать
+		if(i == 0)
+		{
+			a[i] = ch;
+			printf("%d\n", a[i]);
+			m++;
+		}
+  //необходимо проверить, не дублирует ли число одно из считанных чисел
+		else
+		{
+			for(int j = 0; j < i; j++)
+			{
+				if(a[j] == ch)
+				{
+					flag++;
+				}
+			}
+		}
+		//вывести на печать число, если оно не дублирует ранее считанное число
+		if(flag==0 && i!=0)
+        {
+            a[i]=ch;
+            printf("%d\n", a[i]);
+            m++;
+        }
+	}
+
+ //вывести массив считанных чисел
+ puts("Array: ");
+	for(int j = 0; j < m; j++)
+	{
+        if(a[j]!= 0)
+	        printf("%d\t", a[j]);
+	}
+
 }
