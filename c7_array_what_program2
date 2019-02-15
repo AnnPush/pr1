@@ -1,53 +1,32 @@
-#include <stdio.h>
+/*Что делает следующая функция?*/
 
-void staticArrayInit(void);
-void automaticArrayInit(void);
+#include <stdio.h>
+#define SIZE 10
+
+void someFunction(const int b[], size_t startIndex, size_t size);//прототип функции
 
 int main(void)
 {
-	puts("First call to each function:");
-	staticArrayInit();
-	automaticArrayInit();
+	int a[SIZE] = { 8, 3, 1, 2, 6, 0, 9, 7, 4, 5 };//инициализация одномерного массива
 
-	puts("\n\nSecond call to each function:");
-	staticArrayInit();
-	automaticArrayInit();
+	puts("Answer is:");
+	someFunction(a, 0, SIZE);
+	puts("");
 }
 
-void staticArrayInit(void)
+//определение рекурсивной функции, которая переворачивает массив
+void someFunction(const int b[], size_t startIndex, size_t size)
 {
-	static int array1[3];
-
-	puts("\nValues on entering staticArrayInit:");
-
-	for(size_t i = 0; i <= 2; ++i)
+        //проверяем, начальный индекс меньше размера массива
+        if (startIndex < size)
 	{
-		printf("array1[%u] = %d ", i, array1[i]);
-	}
-
-	puts("\nValues on existing staticArrayInit:");
-
-	for(size_t i = 0; i <= 2; ++i)
-	{
-		printf("array1[%u] = %d ", i, array1[i] += 5);
+	        //функция вызывает саму себя, при этом увеличивается индекс на 1
+		someFunction(b, startIndex + 1, size);
+		printf("%d ", b[startIndex]);
 	}
 }
-
-void automaticArrayInit(void)
-{
-	int array2[3] = {1, 2, 3};
-
-	puts("\n\nValues on entering automaticArrayInit:");
-
-	for(size_t i = 0; i <= 2; ++i)
-	{
-		printf("array2[%u] = %d ", i, array2[i]);
-	}
-
-	puts("\nValues on exiting automaticArrayInit:");
-
-	for (size_t i = 0; i <= 2; ++i)
-	{
-		printf("array2[%u] = %d ", i, array2[i] += 5);
-	}
-}
+ /*
+ Вывод:
+ Answer is:
+ 5 4 7 9 0 6 2 1 3 8 
+*/
