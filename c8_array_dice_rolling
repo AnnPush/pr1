@@ -27,8 +27,8 @@
 int main(void)
 {
 	unsigned int frequency[SIZE] = {0};
-  float sum = 0;
-  float seven;
+        float sum = 0;
+        float seven;
 
 	srand(time(NULL));
 
