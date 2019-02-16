@@ -35,7 +35,7 @@ int main(void)
 	for (unsigned int roll = 1; roll <= 36000; ++roll )
 	{
 		size_t face1 = 1 + rand() % 6;
-    size_t face2 = 1 + rand() % 6;
+                size_t face2 = 1 + rand() % 6;
 
 		size_t face = face1 + face2;
 		++frequency[face];
@@ -44,13 +44,13 @@ int main(void)
 
 	for(size_t face = 2; face < SIZE; ++face)
 	{	    
-	    sum = sum + frequency[face];   
+	        sum = sum + frequency[face];   
 		printf("%4d%17d\n", face, frequency[face]);	
 	}
 
-    printf(" sum%20.2f\n", sum);
-	  seven = sum / frequency[7];
-	  printf("\nsum/frequency[7] = %.2f / %d = %.2f", sum, frequency[7], seven);
+        printf(" sum%20.2f\n", sum);
+	seven = sum / frequency[7];
+	printf("\nsum/frequency[7] = %.2f / %d = %.2f", sum, frequency[7], seven);
 }
 
 
