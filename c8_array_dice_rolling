@@ -19,6 +19,40 @@
 7 должны составить приблизительно одну шестую.
 */
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#define SIZE 13
+
+int main(void)
+{
+	unsigned int frequency[SIZE] = {0};
+  float sum = 0;
+  float seven;
+
+	srand(time(NULL));
+
+	for (unsigned int roll = 1; roll <= 36000; ++roll )
+	{
+		size_t face1 = 1 + rand() % 6;
+    size_t face2 = 1 + rand() % 6;
+
+		size_t face = face1 + face2;
+		++frequency[face];
+	}
+	printf("%s%17s\n", "Face", "Frequency");
+
+	for(size_t face = 2; face < SIZE; ++face)
+	{	    
+	    sum = sum + frequency[face];   
+		printf("%4d%17d\n", face, frequency[face]);	
+	}
+
+    printf(" sum%20.2f\n", sum);
+	  seven = sum / frequency[7];
+	  printf("\nsum/frequency[7] = %.2f / %d = %.2f", sum, frequency[7], seven);
+}
+
 
 
 
