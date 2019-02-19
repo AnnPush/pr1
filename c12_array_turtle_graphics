@@ -1,8 +1,6 @@
-#include <stdio.h>
+/*
+(Черепаховая графика) Язык Logo, особенно популярный среди пользователей 
+персональных компьютеров, сделал знаменитым принцип черепаховой графики (title graphics).
 
-int main(void)
-{
-	char array[5];
 
-	printf("   array = %p\n&array[0] = %p\n   &array = %p\n", array, &array[0], &array);
-}
+*/
