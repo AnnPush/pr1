@@ -7,5 +7,139 @@
 d) Какова средняя продолжительность игры в крепс?
 е) Увеличиваются ли шансы на выигрыш при большей продолжительности игры?
 */
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+enum Status {CONTINUE, WON, LOST};
+
+int rollDice(void);
+
+int main(void)
+{
+	srand(time(NULL));
+
+	int myPoint;
+	enum Status gameStatus;
+	int game = 1;
+	int won[22] = {0};
+	int lost[22] = {0};
+	int sum_w = 0;
+	int sum_l = 0;
+	int sum_t = 0;
+    int sum_t1 = 0;
+    int sum_t2 = 0;
+	int ver = 1;
+	int t1 =0, t2=0;
+
+	while(game <= 1000)
+	{
+		int start=clock();
+	    int n = 1;
+		printf("\nGame %d\n", game);
+		puts("___________");
+	    int sum = rollDice();
+
+	    switch(sum)
+	    {
+		    case 7:
+		    case 11:
+			    gameStatus = WON;
+			    ++won[n];
+		        break;
+
+		    case 2:
+		    case 3:
+		    case 12:
+			    gameStatus = LOST;
+			    ++lost[n];
+		        break;
+
+		    default:
+			    gameStatus = CONTINUE;
+		        myPoint = sum;
+			    printf("Point is %d\n", myPoint);
+			    break;
+	    }
+
+		
+   	    while (CONTINUE == gameStatus)
+	    {
+			n++;
+
+		    sum = rollDice();
+
+		    if (sum == myPoint)
+		    {
+			    gameStatus = WON;
+				++won[n];
+		    }
+		    else
+		    {
+			    if (7 == sum)
+			    {
+				    gameStatus = LOST;
+					++lost[n];
+			    }
+		    }
+	    }
+
+		
+
+	    if (WON == gameStatus)
+	    {
+	        puts("___________");
+		    puts("Player wins");
+			int end=clock();
+		    t1++;
+            sum_t1 += end-start;
+	    }
+	    else
+	    {
+	        puts("___________");
+		    puts("Player loses");
+			int end=clock();
+		    t2++;
+			sum_t2 += end-start;
+	    }
+        int end=clock();
+		sum_t = sum_t1 + sum_t2;
+
+        //printf("\n %d. Time: %d ms\n", game, t );
+		game++;
+		
+	}
+
+	for (int i = 1; i < 22; i++ )
+	{   
+		sum_w += won[i];
+		sum_l += lost[i];
+		
+		printf("\n%d: Won : %d", i, won[i]);
+        printf(", Lost: %d\n", lost[i]);
+		
+	}
+
+	ver = sum_w*100/1000;
+	printf("\n Sum_w: %d\n", sum_w);
+	printf("\n Sum_l: %d\n", sum_l);
+	printf("\n Ver won: %d%\n", ver);
+    int sred = sum_t/1000;
+    printf("\n Sred time: %d ms\n", sred);
+	int sred1 = sum_t1/t1;
+    int sred2 = sum_t2/t2;
+	printf("\n won time: %d", sred1);
+    printf("\n lost time: %d", sred2);
+	
+}
+
+int rollDice(void)
+{
+	int die1 = 1 + (rand() % 6);
+	int die2 = 1 + (rand() % 6);
+
+	printf("Player rolled %d + %d = %d\n", die1, die2, die1 + die2);
+	return die1 + die2;
+}
 
 
