@@ -7,6 +7,9 @@
 d) Какова средняя продолжительность игры в крепс?
 е) Увеличиваются ли шансы на выигрыш при большей продолжительности игры?
 */
+
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -27,14 +30,11 @@ int main(void)
 	int sum_w = 0;
 	int sum_l = 0;
 	int sum_t = 0;
-    int sum_t1 = 0;
-    int sum_t2 = 0;
-	int ver = 1;
-	int t1 =0, t2=0;
+	int chances = 1;
 
 	while(game <= 1000)
 	{
-		int start=clock();
+		int start = clock();
 	    int n = 1;
 		printf("\nGame %d\n", game);
 		puts("___________");
@@ -66,7 +66,6 @@ int main(void)
    	    while (CONTINUE == gameStatus)
 	    {
 			n++;
-
 		    sum = rollDice();
 
 		    if (sum == myPoint)
@@ -84,53 +83,36 @@ int main(void)
 		    }
 	    }
 
-		
-
 	    if (WON == gameStatus)
 	    {
 	        puts("___________");
 		    puts("Player wins");
-			int end=clock();
-		    t1++;
-            sum_t1 += end-start;
 	    }
 	    else
 	    {
 	        puts("___________");
 		    puts("Player loses");
-			int end=clock();
-		    t2++;
-			sum_t2 += end-start;
 	    }
-        int end=clock();
-		sum_t = sum_t1 + sum_t2;
-
-        //printf("\n %d. Time: %d ms\n", game, t );
-		game++;
-		
+        int end = clock();
+		sum_t += end - start;
+		game++;		
 	}
+
+    printf("\n%10s%12s\n", "WON", "LOST");
 
 	for (int i = 1; i < 22; i++ )
 	{   
 		sum_w += won[i];
 		sum_l += lost[i];
 		
-		printf("\n%d: Won : %d", i, won[i]);
-        printf(", Lost: %d\n", lost[i]);
-		
+        printf("%2d%8d%11d   \n", i, won[i], lost[i]);
 	}
 
-	ver = sum_w*100/1000;
-	printf("\n Sum_w: %d\n", sum_w);
-	printf("\n Sum_l: %d\n", sum_l);
-	printf("\n Ver won: %d%\n", ver);
-    int sred = sum_t/1000;
-    printf("\n Sred time: %d ms\n", sred);
-	int sred1 = sum_t1/t1;
-    int sred2 = sum_t2/t2;
-	printf("\n won time: %d", sred1);
-    printf("\n lost time: %d", sred2);
-	
+	chances = sum_w*100/1000;
+	printf("\n Games are won: %d\n", sum_w);
+	printf("\n Games are lost: %d\n", sum_l);
+	printf("\n The chances of winning at craps: %d%\n", chances);
+    printf("\n The average length of a game of craps: %d ms\n", sum_t/1000);	
 }
 
 int rollDice(void)
