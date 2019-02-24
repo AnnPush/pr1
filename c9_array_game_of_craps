@@ -14,40 +14,44 @@ d) Какова средняя продолжительность игры в к
 #include <stdlib.h>
 #include <time.h>
 
+//перечисляемые константы, представляющие состояние игры
 enum Status {CONTINUE, WON, LOST};
 
-int rollDice(void);
+int rollDice(void);//прототип функции бросания кубиков
 
 int main(void)
 {
-	srand(time(NULL));
+	srand(time(NULL));//рандомизировать генератор случайных чисел текущим временем
 
-	int myPoint;
+	int myPoint;//очки игрока
 	enum Status gameStatus;
-	int game = 1;
-	int won[22] = {0};
-	int lost[22] = {0};
-	int sum_w = 0;
-	int sum_l = 0;
-	int sum_t = 0;
-	int chances = 1;
+	int game = 1;//номер игры
+	int won[22] = {0};//массив выигыш
+	int lost[22] = {0};//массив проигрыш
+	int sum_w = 0;//количество выигрышей
+	int sum_l = 0;//количество проигрышей
+	int sum_t = 0;//время игры
+	int chances = 1;//вероятность выигрыша
 
-	while(game <= 1000)
+        while(game <= 1000)
 	{
-		int start = clock();
-	    int n = 1;
+	    int start = clock();//время начала игры
+	    int n = 1;//
 		printf("\nGame %d\n", game);
 		puts("___________");
-	    int sum = rollDice();
+	    int sum = rollDice();//первое бросание кубиков
 
+            //определить статус игры по выброшенной сумме
 	    switch(sum)
 	    {
+	            //выигрыш при первом броске
 		    case 7:
 		    case 11:
 			    gameStatus = WON;
 			    ++won[n];
 		        break;
 
+                    //проигрыш при первом броске
 		    case 2:
 		    case 3:
 		    case 12:
@@ -55,6 +59,7 @@ int main(void)
 			    ++lost[n];
 		        break;
 
+                    //запомнить пункт
 		    default:
 			    gameStatus = CONTINUE;
 		        myPoint = sum;
@@ -62,12 +67,13 @@ int main(void)
 			    break;
 	    }
 
-		
+	   //пока игра не завершится	
    	    while (CONTINUE == gameStatus)
 	    {
 			n++;
-		    sum = rollDice();
+		    sum = rollDice();//бросить кубики снова
 
+                    //определить статус игры
 		    if (sum == myPoint)
 		    {
 			    gameStatus = WON;
@@ -83,6 +89,7 @@ int main(void)
 		    }
 	    }
 
+            //вывести сообщение о проигрыше или выигрыше
 	    if (WON == gameStatus)
 	    {
 	        puts("___________");
@@ -93,35 +100,38 @@ int main(void)
 	        puts("___________");
 		    puts("Player loses");
 	    }
-        int end = clock();
-		sum_t += end - start;
-		game++;		
+	    
+            int end = clock();// время окончания игры
+	    sum_t += end - start;//продолжительность игры
+            game++;		
 	}
 
-    printf("\n%10s%12s\n", "WON", "LOST");
-
+        printf("\n%10s%12s\n", "WON", "LOST");
+        
+	//вывести сколько игр выигрывается и проигрывается при первом и последующих бросаниях
 	for (int i = 1; i < 22; i++ )
 	{   
 		sum_w += won[i];
 		sum_l += lost[i];
 		
-        printf("%2d%8d%11d   \n", i, won[i], lost[i]);
+                printf("%2d%8d%11d   \n", i, won[i], lost[i]);
 	}
 
 	chances = sum_w*100/1000;
-	printf("\n Games are won: %d\n", sum_w);
-	printf("\n Games are lost: %d\n", sum_l);
-	printf("\n The chances of winning at craps: %d%\n", chances);
-    printf("\n The average length of a game of craps: %d ms\n", sum_t/1000);	
+	printf("\n Games are won: %d\n", sum_w);//количество выигрышей
+	printf("\n Games are lost: %d\n", sum_l);//количество проигрышей
+	printf("\n The chances of winning at craps: %d%\n", chances);//вероятность выигрыша в крепс
+        printf("\n The average length of a game of craps: %d ms\n", sum_t/1000);//средняя продолжительность игры	
 }
 
+//функция отвечает за бросание кубиков
 int rollDice(void)
 {
-	int die1 = 1 + (rand() % 6);
-	int die2 = 1 + (rand() % 6);
+	int die1 = 1 + (rand() % 6);//первый кубик
+	int die2 = 1 + (rand() % 6);//второй кубик
 
 	printf("Player rolled %d + %d = %d\n", die1, die2, die1 + die2);
-	return die1 + die2;
+	return die1 + die2;//возвратить сумму очков, выпавших на двух кубиках
 }
 
 
