@@ -31,14 +31,14 @@ int main(void)
 	int sum_w = 0;//количество выигрышей
 	int sum_l = 0;//количество проигрышей
 	int sum_t = 0;//время игры
-	int chances = 1;//вероятность выигрыша
+	float chances;//вероятность выигрыша
 
         while(game <= 1000)
 	{
 	    int start = clock();//время начала игры
-	    int n = 1;//
-		printf("\nGame %d\n", game);
-		puts("___________");
+	    int n = 1;
+	    printf("\nGame %d\n", game);
+	    puts("___________");
 	    int sum = rollDice();//первое бросание кубиков
 
             //определить статус игры по выброшенной сумме
@@ -62,29 +62,29 @@ int main(void)
                     //запомнить пункт
 		    default:
 			    gameStatus = CONTINUE;
-		        myPoint = sum;
+		            myPoint = sum;
 			    printf("Point is %d\n", myPoint);
-			    break;
+			break;
 	    }
 
 	   //пока игра не завершится	
    	    while (CONTINUE == gameStatus)
 	    {
-			n++;
+		    n++;
 		    sum = rollDice();//бросить кубики снова
 
                     //определить статус игры
 		    if (sum == myPoint)
 		    {
 			    gameStatus = WON;
-				++won[n];
+			    ++won[n];
 		    }
 		    else
 		    {
 			    if (7 == sum)
 			    {
 				    gameStatus = LOST;
-					++lost[n];
+				    ++lost[n];
 			    }
 		    }
 	    }
@@ -93,12 +93,12 @@ int main(void)
 	    if (WON == gameStatus)
 	    {
 	        puts("___________");
-		    puts("Player wins");
+		puts("Player wins");
 	    }
 	    else
 	    {
 	        puts("___________");
-		    puts("Player loses");
+		puts("Player loses");
 	    }
 	    
             int end = clock();// время окончания игры
@@ -117,10 +117,10 @@ int main(void)
                 printf("%2d%8d%11d   \n", i, won[i], lost[i]);
 	}
 
-	chances = sum_w*100/1000;
+	chances = (float)sum_w*100/1000;
 	printf("\n Games are won: %d\n", sum_w);//количество выигрышей
 	printf("\n Games are lost: %d\n", sum_l);//количество проигрышей
-	printf("\n The chances of winning at craps: %d%\n", chances);//вероятность выигрыша в крепс
+	printf("\n The chances of winning at craps: %.2f%\n", chances);//вероятность выигрыша в крепс
         printf("\n The average length of a game of craps: %d ms\n", sum_t/1000);//средняя продолжительность игры	
 }
 
@@ -134,4 +134,4 @@ int rollDice(void)
 	return die1 + die2;//возвратить сумму очков, выпавших на двух кубиках
 }
 
-
+/*Шансы на выигрыш при любой продолжительности игры остаются одинаковыми.*/
