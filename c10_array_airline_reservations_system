@@ -21,27 +21,40 @@
 выведите сообщение "Следующий рейс через 3 часа"
 */
 
-
-
 #include <stdio.h>
-#define RESPONSES_SIZE 40
-#define FREQUENCY_SIZE 11
+#define SIZE 10
+
+void printBoardingPass(void);
+void economySection(void);
+void firstClass(void);
 
 int main(void)
 {
-	int frequency[FREQUENCY_SIZE] = {0};
+	int capacity[SIZE] = {0};
+	int type_class;
+	int t = 1;
 
-	int responses[RESPONSES_SIZE] = {1, 2, 6, 4, 8, 5, 9, 7, 8, 10, 1, 6, 3, 8, 6, 10, 3, 8, 2, 7, 6, 5, 7, 6, 8, 6, 7, 5, 6, 6, 5, 6, 7, 5, 6, 4, 8, 6, 8, 10};
-
-	for (size_t anser = 0; anser < RESPONSES_SIZE; ++anser)
+	if( t != 0)
 	{
-		++frequency[responses[anser]];
+	   printf("%s", "Enter please type 1 for \"first class\"\n Please type 2 for \"economy\"\n";
+	   scanf("%d", &type_class);
+
+	   if (type_class == 1)
+	   {
+	      firstClass(); 
+	   }
+	   else if (type_class == 2)
+	   {
+		  economySection();
+	   }
+	}
+	else
+	{
+		 puts("\nNext flight leaves in 3 hours.");
 	}
 
-	printf("%s%17s\n", "Rating", "Frequency");
 
-	for (size_t rating = 1; rating < FREQUENCY_SIZE; ++rating)
-	{
-		printf("%6d%17d\n", rating, frequency[rating]);
-	}
+
+
+
 }
