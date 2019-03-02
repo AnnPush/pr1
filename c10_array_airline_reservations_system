@@ -34,10 +34,10 @@ int main(void)
 {
 	int capacity[SIZE] = {0};//инициализировать массив мест в самолете нулями
 	int type_class;//тип класса
-	int n = 0;
+	int n = 0;//количество занятых мест в самолете
 	int t = 0;//флаг, что клиент не хочет бронировать оставшиеся места
 	int reserve_economy, reserve_first;
-	int pf, pe;
+	int pf, pe;//количество занятых мест в первом классе и эконом классе
 
 	puts("Welcome to \"Airline Reservations System\"!\n");
 	printBoardingPass(capacity, SIZE);//печать мест в самолете
