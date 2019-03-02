@@ -27,7 +27,7 @@
 #define SALESPERSON 4
 #define PRODUCT 5
 
-void printArray(int a[][SALESPERSON],  int goods, int people);
+void printArray(int a[][SALESPERSON],  int goods, int people);//печать массива
 
 int main(void)
 {
