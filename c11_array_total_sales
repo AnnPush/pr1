@@ -23,22 +23,43 @@
 
 
 #include <stdio.h>
-#define SIZE 5
+#include <stdlib.h>
+#define SALESPERSON 4
+#define PRODUCT 5
+
+void printArray(int a[][SALESPERSON],  int goods, int people);
 
 int main(void)
 {
-	int n[SIZE] = {19, 3, 15, 7, 11};
-
-	printf("%s%13s%17s\n", "Element", "Value", "Histogram");
-
-	for (size_t i = 0; i < SIZE; ++i)
+	int sales[PRODUCT][SALESPERSON] = {0};
+	srand(time(NULL));
+	
+	for(int m = 0; m < 30; m++)
 	{
-		printf("%7u%13d        ", i, n[i]);
 
-		for (int j = 0; j <= n[i]; ++j)
+	for ( int i = 0; i < PRODUCT; i++ )
+	{
+		for ( int j = 0; j < SALESPERSON; j++ )
 		{
-			printf("%c", '*');
+			sales[i][j] = sales[i][j] + (10 + rand()%20);
 		}
-		puts("");
+	}
+	}
+
+	printf("The array is:\n");
+	printArray(sales, SALESPERSON, PRODUCT);
+}
+void printArray(int a[][SALESPERSON], int goods, int people)
+{
+   printf("%s", "salesperson   [1]  [2]  [3]  [4]  [5]");
+  
+   for ( int i = 0; i < goods; i++ )
+	{
+	   printf("\nproduct[%d]    ", i + 1);
+
+	   for ( int j = 0; j < people; j++ )
+	   {
+	      printf( "%-5d", a[i][j]);
+	   }
 	}
 }
