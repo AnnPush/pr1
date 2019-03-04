@@ -24,38 +24,63 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#define SALESPERSON 4
-#define PRODUCT 5
+#include <time.h>
 
-void printArray(int a[][SALESPERSON],  int goods, int people);//печать массива
+#define SALESPERSON 5
+#define PRODUCT 6
+
+void printArray(int a[][SALESPERSON],  int goods, int people);
 
 int main(void)
 {
 	int sales[PRODUCT][SALESPERSON] = {0};
 	srand(time(NULL));
 	
+	printArray(sales, PRODUCT, SALESPERSON);
+	
 	for(int m = 0; m < 30; m++)
 	{
 
-	for ( int i = 0; i < PRODUCT; i++ )
+	for ( int i = 0; i < 5; i++ )
 	{
-		for ( int j = 0; j < SALESPERSON; j++ )
+		for ( int j = 0; j < 4; j++ )
 		{
 			sales[i][j] = sales[i][j] + (10 + rand()%20);
 		}
 	}
 	}
 
-	printf("The array is:\n");
-	printArray(sales, SALESPERSON, PRODUCT);
+	printf("\n\nThe array is:\n");
+	printArray(sales, PRODUCT, SALESPERSON);
+
+	for ( int i = 0; i < 5; i++ )
+	{
+		for ( int j = 0; j < 4; j++ )
+		{
+			sales[5][j] += sales[i][j];
+			sales[i][4] += sales[i][j];
+
+		}
+	}
+
+printf("\n\nThe array is:\n");
+	printArray(sales, PRODUCT, SALESPERSON);
+
 }
 void printArray(int a[][SALESPERSON], int goods, int people)
 {
-   printf("%s", "salesperson   [1]  [2]  [3]  [4]  [5]");
+   printf("%s", "salesperson   [1]  [2]  [3]  [4]  sum_prod ");
   
    for ( int i = 0; i < goods; i++ )
 	{
+	    if(i < 5)
+	    {
 	   printf("\nproduct[%d]    ", i + 1);
+	    }
+	    else
+	    {
+	        printf("\n%s    ", "summa_pers");
+	    }
 
 	   for ( int j = 0; j < people; j++ )
 	   {
