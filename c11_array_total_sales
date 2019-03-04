@@ -26,54 +26,55 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define SALESPERSON 5
-#define PRODUCT 6
+#define SALESPERSON 5//количество продавцов
+#define PRODUCT 6//количество видов товаров
 
-void printArray(int a[][SALESPERSON],  int goods, int people);
+void printArray(int a[][SALESPERSON],  int goods, int people);//печать массива
 
 int main(void)
 {
-	int sales[PRODUCT][SALESPERSON] = {0};
-	srand(time(NULL));
+	int sales[PRODUCT][SALESPERSON] = {0};//инициализация массива нулями
+	srand(time(NULL));//рандомизировать генератор случайных чисел текущим временем
 	
 	printArray(sales, PRODUCT, SALESPERSON);
 	
-	for(int m = 0; m < 30; m++)
+	for(int m = 0; m < 30; m++)//информация о сбыте за последний месяц
 	{
-
-	for ( int i = 0; i < 5; i++ )
-	{
-		for ( int j = 0; j < 4; j++ )
+           //информация о сбыте за 1 день
+	   for ( int i = 0; i < PRODUCT - 1; i++ )//продукты
+	   {
+		for ( int j = 0; j < SALESPERSON - 1; j++ )//продавцы
 		{
-			sales[i][j] = sales[i][j] + (10 + rand()%20);
+			sales[i][j] = sales[i][j] + (10 + rand()%20);//заполняем массив суммами, полученными за проданный товар
 		}
-	}
+	   }
 	}
 
 	printf("\n\nThe array is:\n");
 	printArray(sales, PRODUCT, SALESPERSON);
-
-	for ( int i = 0; i < 5; i++ )
+        
+	//вычисляем суммы по каждому продукту, по каждому продавцу
+	for ( int i = 0; i < PRODUCT - 1; i++ )
 	{
-		for ( int j = 0; j < 4; j++ )
+		for ( int j = 0; j < SALESPERSON - 1; j++ )
 		{
-			sales[5][j] += sales[i][j];
-			sales[i][4] += sales[i][j];
+			sales[PRODUCT - 1][j] += sales[i][j];
+			sales[i][SALESPERSON - 1] += sales[i][j];
 
 		}
 	}
 
-printf("\n\nThe array is:\n");
+        printf("\n\nThe array is:\n");
 	printArray(sales, PRODUCT, SALESPERSON);
 
 }
-void printArray(int a[][SALESPERSON], int goods, int people)
+void printArray(int a[][SALESPERSON], int goods, int people)//вывод данных в табличной форме
 {
    printf("%s", "salesperson   [1]  [2]  [3]  [4]  sum_prod ");
   
    for ( int i = 0; i < goods; i++ )
 	{
-	    if(i < 5)
+	    if(i < goods - 1)
 	    {
 	   printf("\nproduct[%d]    ", i + 1);
 	    }
