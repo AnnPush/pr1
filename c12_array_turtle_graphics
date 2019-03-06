@@ -46,3 +46,37 @@
 6
 9
 */
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+#define SIZE1 50
+#define SIZE2 50
+
+void printArray( int f[][SIZE2], int size1, int size2);
+
+int main(void)
+{
+	int floor[SIZE1][SIZE2] = {0};
+	printArray(floor, SIZE1, SIZE2);
+}
+
+void printArray( int f[][SIZE2], int size1, int size2)
+{
+	for(int i = 0; i < size1; i++)
+	{
+		puts(" ");
+		for(int j = 0; j < size2; j++)
+		{
+			if(f[i][j] == 1)
+			{
+				printf("%s", "*");
+			}
+			else
+			{
+				printf("%s", " ");
+			}
+		}
+	}
+}
