@@ -55,46 +55,46 @@
 #define SIZE2 50
 #define SIZE3 15
 
-void printArray(int array[][SIZE2], int size1, int size2);
-void move(int array[][SIZE2], int p, int t, int nn);
+void printArray(int array[][SIZE2], int size1, int size2);//печать поля
+void move(int array[][SIZE2], int p, int t, int nn);//движение черепахи
 	
 int main(void)
 {
-	int floors[SIZE1][SIZE2] = {0};
-	int a[SIZE3] = {2, 5, 12, 3, 5, 12, 3, 5, 12, 3, 5, 12, 6, 1, 9};
+	int floors[SIZE1][SIZE2] = {0};//массив поля
+	int a[SIZE3] = {2, 5, 12, 3, 5, 12, 3, 5, 12, 3, 5, 12, 6, 1, 9};//массив команд
 	int n, pen, tern = 0, command;
 
 	for(int i = 0; i < SIZE3; i++)
 	{
 		
-		command = a[i];
+  		command = a[i];//переменной command присваивается команда из массива
 	
 		
 		switch(command)
 		{
 			case 1:
-				pen = 0;
+				pen = 0;//перо поднято
 			break;
 
 			case 2:
-				pen = 1;
+				pen = 1;//перо опущено
 			break;
 
 			case 3:
-				tern = 0;
+				tern = 0;//поворот вправо
 			break;
 
 			case 4:
-				tern = 1;
+				tern = 1;//поворот влево
 			break;
 
 			case 5:
-			    n = a[i + 1];
-				move(floors, pen, tern, n);
+			        n = a[i + 1];//на сколько шагов двигается черепаха
+				move(floors, pen, tern, n);//движение
 				i++;
 			break;
 			case 6:
-				printArray(floors, SIZE1, SIZE2);
+				printArray(floors, SIZE1, SIZE2);//печать
 			break;
 			case 9:
 			break;
@@ -105,10 +105,10 @@ int main(void)
 
 void printArray( int array[][SIZE2], int size1, int size2)
 {
-	for(int i = 0; i < size2; i++)
+	for(int i = 0; i < size1; i++)
 	{
 		puts(" ");
-		for(int j = 0; j < size1; j++)
+		for(int j = 0; j < size2; j++)
 		{
 			if(array[i][j] == 1)
 			{
@@ -124,102 +124,147 @@ void printArray( int array[][SIZE2], int size1, int size2)
 
 move(int array[][SIZE2], int p, int t, int nn)
 {
-	int nowX = 25, nowY = 20, lastX = 26, lastY = 20;
-
+	static int curM = 20, curN = 20, preM = 21, preN = 20, mov = 1;//статические переменные, не изменяют своих значений при выходе из функции
+        //curM текущее значение строки
+	//curN текущее значение столбца
+	//preM предыдущее значение строки
+	//preN предыдущее значение столбца
+	//mov количество шагов
 	
 
-	if( t == 0)
+	if( t == 0)//поворот направо
 	{
-		if( nowY == lastY)
+		if( curN == preN)//черепаха не двигалась по горизонтали ранее
 		{
-			if(nowX < lastX)
+ 			if(curM + mov == preM)//черепаха передвинулась по вертикали на  mov шагов вниз ранее
 			{
+			        //предыдущие значения равны текущим значениям
+			        preM = curM;
+                                preN = curN;
+				
+				//передвинуть черепаху сейчас по горизонтали вправо
 				for (int i = 0; i < nn; i++)
-                {
-                   if( p == 1 )
-                   {
-                      array[ nowX ][ nowY ] = 1;
-                   }
-                    nowY++;
-                }
+                                {
+				//если перо поднято, нарисовать звездочки
+                                   if( p == 1 )
+                                       array[ curM ][ curN ] = 1;
+				   
+                                   curN++;//увеличить текущее значение по горизонтали
+                                 }
 			}
-			else 
+			else //черепаха передвинулась по вертикали на  mov шагов вверх ранее
 			{
-                for (int i = 0; i < nn; i++)
-                {
-                   nowY--;
-                   if( p == 1 )
-                      array[ nowX ][ nowY ] = 1;
-                }
+			    //предыдущие значения равны текущим значениям
+			    preM = curM;
+                            preN = curN;
+			    
+			    //передвинуть черепаху сейчас по горизонтали влево
+                            for (int i = 0; i < nn; i++)
+                            {
+                                //если перо поднято, нарисовать звездочки
+                                 if( p == 1 )
+                                     array[ curM ][ curN ] = 1;
+				 
+                                 curN--;//уменьшить текущее значение по горизонтали
+                             }
 			}
 		}
-		else if( nowX == lastX)
+		else if( curM == preM)//черепаха не двигалась по вертикали  ранее
 		{
-			if(nowY < lastY)
+			if(curN + mov == preN)//черепаха передвинулась по горизонтали на  mov шагов влево ранее
 			{
-				for (int i = 0; i < nn; i++)
-                {
-                   nowX--;
-                   if( p == 1 )
-                      array[ nowX ][ nowY ] = 1;
-                }
+			    //предыдущие значения равны текущим значениям
+			    preM = curM;
+                            preN = curN;
+			    
+			    //передвинуть черепаху сейчас по вертикали вниз
+	                    for (int i = 0; i < nn; i++)
+                            {
+			       //если перо поднято, нарисовать звездочки
+			        if( p == 1 )
+                                   array[ curM ][ curN ] = 1;
+				
+                                curM--;//уменьшить текущее значение по вертикали
+                             }
 			}
-			else 
+			else //черепаха передвинулась по горизонтали на  mov шагов вправо ранее
 			{
-                for (int i = 0; i < nn; i++)
-                {
-                   nowX++;
-                   if( p == 1 )
-                      array[ nowX ][ nowY ] = 1;
-                }
+			    //предыдущие значения равны текущим значениям
+			    preM = curM;
+                            preN = curN;
+                           
+			   //передвинуть черепаху сейчас по вертикали вверх
+			   for (int i = 0; i < nn; i++)
+                           { 
+                              if( p == 1 )
+                                 array[ curM ][ curN ] = 1;
+			      
+                              curM++;//увеличить текущее значение по вертикали
+                           }
 			}
 		}
 	}
-	else if( t == 1)
+	else if( t == 1)//поворот налево
 	{
-		if( nowY == lastY)
-		{
-			if(nowX < lastX)
+		if( curN == preN)
+		{		    
+			if(curM + mov == preM)
 			{
-				for (int i = 0; i < nn; i++)
-                {
-                   nowY--;
-                   if( p == 1 )
-                      array[ nowX ][ nowY ] = 1;
-                }
+			    preM = curM;
+                            preN = curN;
+			    
+			    for (int i = 0; i < nn; i++)
+                            {			            
+                                if( p == 1 )
+                                    array[ curM ][ curN ] = 1;
+				
+		                curN--;
+                            }
 			}
 			else 
 			{
-                for (int i = 0; i < nn; i++)
-                {
-                   nowY++;
-                   if( p == 1 )
-                      array[ nowX ][ nowY ] = 1;
-                }
+			   preM = curM;
+                           preN = curN;
+			   
+                          for (int i = 0; i < nn; i++)
+                          { 
+                              if( p == 1 )
+                                  array[ curM ][ curN ] = 1;
+			      
+		              curN++;
+                          }
 			}
 		}
-		else if( nowX == lastX)
-		{
-			if(nowY < lastY)
+		else if( curM == preM)
+		{   
+			if(curN+mov == preN)
 			{
+				preM = curM;
+                                preN = curN;
+				
 				for (int i = 0; i < nn; i++)
-                {
-                   nowX++;
-                   if( p == 1 )
-                      array[ nowX ][ nowY ] = 1;
-                }
+                                {
+                                    if( p == 1 )
+                                       array[ curM ][ curN ] = 1;
+				    
+				    curM++;
+                                }
 			}
 			else 
 			{
-                for (int i = 0; i < nn; i++)
-                {
-                   nowX--;
-                   if( p == 1 )
-                      array[ nowX ][ nowY ] = 1;
-                }
+			    preM = curM;
+                            preN = curN;
+			    
+                            for (int i = 0; i < nn; i++)
+                            { 
+                                if( p == 1 )
+                                   array[ curM ][ curN ] = 1;
+				
+		                curM--;
+                           }
 			}
 		}
 	}
-	lastX = nowX;
-    lastY = nowY;
+	mov = nn;//количество шагов, на которое передвигается черепаха
+
 }
