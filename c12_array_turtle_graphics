@@ -53,30 +53,173 @@
 
 #define SIZE1 50
 #define SIZE2 50
+#define SIZE3 15
 
-void printArray( int f[][SIZE2], int size1, int size2);
-
+void printArray(int array[][SIZE2], int size1, int size2);
+void move(int array[][SIZE2], int p, int t, int nn);
+	
 int main(void)
 {
-	int floor[SIZE1][SIZE2] = {0};
-	printArray(floor, SIZE1, SIZE2);
+	int floors[SIZE1][SIZE2] = {0};
+	int a[SIZE3] = {2, 5, 12, 3, 5, 12, 3, 5, 12, 3, 5, 12, 6, 1, 9};
+	int n, pen, tern = 0, command;
+
+	for(int i = 0; i < SIZE3; i++)
+	{
+		
+		command = a[i];
+	
+		
+		switch(command)
+		{
+			case 1:
+				pen = 0;
+			break;
+
+			case 2:
+				pen = 1;
+			break;
+
+			case 3:
+				tern = 0;
+			break;
+
+			case 4:
+				tern = 1;
+			break;
+
+			case 5:
+			    n = a[i + 1];
+				move(floors, pen, tern, n);
+				i++;
+			break;
+			case 6:
+				printArray(floors, SIZE1, SIZE2);
+			break;
+			case 9:
+			break;
+		}
+
+    }
 }
 
-void printArray( int f[][SIZE2], int size1, int size2)
+void printArray( int array[][SIZE2], int size1, int size2)
 {
-	for(int i = 0; i < size1; i++)
+	for(int i = 0; i < size2; i++)
 	{
 		puts(" ");
-		for(int j = 0; j < size2; j++)
+		for(int j = 0; j < size1; j++)
 		{
-			if(f[i][j] == 1)
+			if(array[i][j] == 1)
 			{
 				printf("%s", "*");
 			}
 			else
 			{
-				printf("%s", " ");
+				printf("%s", "-");
 			}
 		}
 	}
+}
+
+move(int array[][SIZE2], int p, int t, int nn)
+{
+	int nowX = 25, nowY = 20, lastX = 26, lastY = 20;
+
+	
+
+	if( t == 0)
+	{
+		if( nowY == lastY)
+		{
+			if(nowX < lastX)
+			{
+				for (int i = 0; i < nn; i++)
+                {
+                   if( p == 1 )
+                   {
+                      array[ nowX ][ nowY ] = 1;
+                   }
+                    nowY++;
+                }
+			}
+			else 
+			{
+                for (int i = 0; i < nn; i++)
+                {
+                   nowY--;
+                   if( p == 1 )
+                      array[ nowX ][ nowY ] = 1;
+                }
+			}
+		}
+		else if( nowX == lastX)
+		{
+			if(nowY < lastY)
+			{
+				for (int i = 0; i < nn; i++)
+                {
+                   nowX--;
+                   if( p == 1 )
+                      array[ nowX ][ nowY ] = 1;
+                }
+			}
+			else 
+			{
+                for (int i = 0; i < nn; i++)
+                {
+                   nowX++;
+                   if( p == 1 )
+                      array[ nowX ][ nowY ] = 1;
+                }
+			}
+		}
+	}
+	else if( t == 1)
+	{
+		if( nowY == lastY)
+		{
+			if(nowX < lastX)
+			{
+				for (int i = 0; i < nn; i++)
+                {
+                   nowY--;
+                   if( p == 1 )
+                      array[ nowX ][ nowY ] = 1;
+                }
+			}
+			else 
+			{
+                for (int i = 0; i < nn; i++)
+                {
+                   nowY++;
+                   if( p == 1 )
+                      array[ nowX ][ nowY ] = 1;
+                }
+			}
+		}
+		else if( nowX == lastX)
+		{
+			if(nowY < lastY)
+			{
+				for (int i = 0; i < nn; i++)
+                {
+                   nowX++;
+                   if( p == 1 )
+                      array[ nowX ][ nowY ] = 1;
+                }
+			}
+			else 
+			{
+                for (int i = 0; i < nn; i++)
+                {
+                   nowX--;
+                   if( p == 1 )
+                      array[ nowX ][ nowY ] = 1;
+                }
+			}
+		}
+	}
+	lastX = nowX;
+    lastY = nowY;
 }
