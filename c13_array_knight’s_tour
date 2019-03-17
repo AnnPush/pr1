@@ -19,6 +19,69 @@
 в первую клетку, в которую вы перемещаетесь, 2 во вторую клетку, 3 в третью и т. д.
 */
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define SIZE1 8
+#define SIZE2 8
+#define SIZE3 8
+
+void printArray(int b[][SIZE2], int size1, int size2);
+
+int main(void)
+{
+	int board[SIZE1][SIZE2] = {0};
+	int horizontal[SIZE3] = {2, 1, -1, -2, -2, -1, 1, 2};
+	int vertical[SIZE3] = {-1, -2, -2, -1, 1, 2, 2, 1};
+
+    int currentRow = 3;
+	int currentColumn = 4;
+	int moveNumber;
+    int n;
+	int t;
+
+	srand(time(NULL));
+
+	do
+	{
+        moveNumber = rand() % 8;
+		t = 0;
+	
+
+	    for (int i = 0; i < 8; i++)
+	    {
+		   
+		   if(i == moveNumber && currentRow < 8 && currentColumn < 8 && board[currentRow][currentColumn] == 0)
+		   {
+			   currentRow += vertical[moveNumber];
+			   currentColumn += horizontal[moveNumber];
+			   n++;
+               board[currentRow][currentColumn] = n;
+		   }
+           else
+		   {
+			  t++;
+		   }
+	   }
+	}
+	while (t < 8);
+
+	printArray(board, SIZE1, SIZE2);
+}
+
+void printArray( int b[][SIZE2], int size1, int size2)
+{
+	for(int i = 0; i < size1; i++)
+	{
+		puts(" ");
+		for(int j = 0; j < size2; j++)
+		{
+			printf("%d", b[i][j]);
+		}
+	}
+}
+
 
 
 
