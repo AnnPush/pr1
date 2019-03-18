@@ -38,34 +38,37 @@ int main(void)
     int currentRow = 3;
 	int currentColumn = 4;
 	int moveNumber;
-    int n;
-	int t;
-
+    int n = 0;
+	int preRow;
+	int preColumn;
+	
 	srand(time(NULL));
 
 	do
-	{
-        moveNumber = rand() % 8;
-		t = 0;
-	
-
-	    for (int i = 0; i < 8; i++)
-	    {
-		   
-		   if(i == moveNumber && currentRow < 8 && currentColumn < 8 && board[currentRow][currentColumn] == 0)
-		   {
-			   currentRow += vertical[moveNumber];
-			   currentColumn += horizontal[moveNumber];
-			   n++;
-               board[currentRow][currentColumn] = n;
-		   }
-           else
-		   {
-			  t++;
-		   }
+    {
+       if(board[currentRow][currentColumn] == 0)
+	   {
+	      board[currentRow][currentColumn] = n;
+          n++;
 	   }
-	}
-	while (t < 8);
+	   else
+	   {
+		  currentRow = preRow;
+	      currentColumn = preColumn;
+	   }
+		       
+	   moveNumber = rand() % 7;
+
+	   preRow =  currentRow;
+	   preColumn = currentColumn;
+		       
+	   currentRow += vertical[moveNumber];
+	   currentColumn += horizontal[moveNumber];
+	           
+	} while( currentRow < 8 && currentColumn < 8 && currentRow >= 0  && currentColumn >= 0 );
+		   
+	
+	
 
 	printArray(board, SIZE1, SIZE2);
 }
@@ -81,7 +84,4 @@ void printArray( int b[][SIZE2], int size1, int size2)
 		}
 	}
 }
-
-
-
 
