@@ -1,19 +1,70 @@
-#include <stdio.h>
+/*
+Ход конем
+*/
 
-void tryToModifyArray( const int b[]);
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define SIZE1 8
+#define SIZE2 8
+#define SIZE3 8
+
+void printArray(int b[][SIZE2], int size1, int size2);
 
 int main(void)
 {
-	int a[] ={ 10, 20, 30 };
+	int board[SIZE1][SIZE2] = {0};
+	int horizontal[SIZE3] = {2, 1, -1, -2, -2, -1, 1, 2};
+	int vertical[SIZE3] = {-1, -2, -2, -1, 1, 2, 2, 1};
 
-	tryToModifyArray(a);
+    int currentRow = 3;
+	int currentColumn = 4;
+	int moveNumber;
+    int n = 0;
+	int preRow;
+	int preColumn;
+	
+	srand(time(NULL));
 
-	printf("%d %d %d\n", a[0], a[1], a[2]);
+	do
+    {
+       if(board[currentRow][currentColumn] == 0)
+	   {
+	      board[currentRow][currentColumn] = n;
+          n++;
+	   }
+	   else
+	   {
+		  currentRow = preRow;
+	      currentColumn = preColumn;
+	   }
+		       
+	   moveNumber = rand() % 7;
+
+	   preRow =  currentRow;
+	   preColumn = currentColumn;
+		       
+	   currentRow += vertical[moveNumber];
+	   currentColumn += horizontal[moveNumber];
+	           
+	} while( currentRow < 8 && currentColumn < 8 && currentRow >= 0  && currentColumn >= 0 );
+		   
+	
+	
+
+	printArray(board, SIZE1, SIZE2);
 }
 
-void tryToModifyArray(const int b[])
+void printArray( int b[][SIZE2], int size1, int size2)
 {
-	b[0] /= 2;
-	b[1] /= 2;
-	b[2] /= 2;
+	for(int i = 0; i < size1; i++)
+	{
+		puts(" ");
+		for(int j = 0; j < size2; j++)
+		{
+			printf("%d", b[i][j]);
+		}
+	}
 }
+
