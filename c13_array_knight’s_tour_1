@@ -6,17 +6,15 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define SIZE1 8
-#define SIZE2 8
-#define SIZE3 8
+#define SIZE 8
 
-void printArray(int b[][SIZE2], int size1, int size2);//печать массива
+void printArray(int b[][SIZE2], int size);//печать массива
 
 int main(void)
 {
-	int board[SIZE1][SIZE2] = {0};//инициализация массива нулями
-	int horizontal[SIZE3] = {2, 1, -1, -2, -2, -1, 1, 2};//описания ходов по горизонтали
-	int vertical[SIZE3] = {-1, -2, -2, -1, 1, 2, 2, 1};//описание ходов по горизонтали
+	int board[SIZE][SIZE] = {0};//инициализация массива нулями
+	int horizontal[SIZE] = {2, 1, -1, -2, -2, -1, 1, 2};//описания ходов по горизонтали
+	int vertical[SIZE] = {-1, -2, -2, -1, 1, 2, 2, 1};//описание ходов по горизонтали
 
         int currentRow = 3;//строка текущего положения  коня
 	int currentColumn = 4;//столбец текущего положения коня
@@ -49,20 +47,20 @@ int main(void)
 	   currentRow += vertical[moveNumber];
 	   currentColumn += horizontal[moveNumber];
 	           
-	} while( currentRow < 8 && currentColumn < 8 && currentRow >= 0  && currentColumn >= 0 );
+	} while( currentRow < SIZE && currentColumn < SIZE && currentRow >= 0  && currentColumn >= 0 );
 		   
 	
 	
 
-	printArray(board, SIZE1, SIZE2);
+	printArray(board, SIZE);
 }
 
-void printArray( int b[][SIZE2], int size1, int size2)
+void printArray( int b[][SIZE], int size)
 {
-	for(int i = 0; i < size1; i++)
+	for(int i = 0; i < size; i++)
 	{
 		puts(" ");
-		for(int j = 0; j < size2; j++)
+		for(int j = 0; j < size; j++)
 		{
 			printf("%d", b[i][j]);
 		}
