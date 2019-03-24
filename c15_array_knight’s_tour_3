@@ -2,69 +2,172 @@
 Ход конем
 */
 
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
-#define SIZE1 8
-#define SIZE2 8
-#define SIZE3 8
+#define SIZE 8
 
-void printArray(int b[][SIZE2], int size1, int size2);
+
+void printArray(int b[][SIZE], int size);
+void accessibilityHeuristic(int b[][SIZE], int ac[][SIZE], int v[], int h[], int size);
 
 int main(void)
 {
-	int board[SIZE1][SIZE2] = {0};
-	int horizontal[SIZE3] = {2, 1, -1, -2, -2, -1, 1, 2};
-	int vertical[SIZE3] = {-1, -2, -2, -1, 1, 2, 2, 1};
-
-    int currentRow = 3;
-	int currentColumn = 4;
-	int moveNumber;
+	
+	int horizontal[SIZE] = {2, 1, -1, -2, -2, -1, 1, 2};
+	int vertical[SIZE] = {-1, -2, -2, -1, 1, 2, 2, 1};
+	
+		int board[SIZE][SIZE] = {0};
+	int accessibility[SIZE][SIZE] = {0};
+int currentRow = 0;
+  int currentColumn = 0;  
+	
     int n = 0;
+	int t = 1;
+	int m =0;
 	int preRow;
 	int preColumn;
-	
+	int minRow = 0 ;
+	int minColumn = 0;
+		
 	srand(time(NULL));
-
-	do
-    {
-       if(board[currentRow][currentColumn] == 0)
-	   {
-	      board[currentRow][currentColumn] = n;
-          n++;
-	   }
-	   else
-	   {
-		  currentRow = preRow;
-	      currentColumn = preColumn;
-	   }
-		       
-	   moveNumber = rand() % 7;
-
-	   preRow =  currentRow;
-	   preColumn = currentColumn;
-		       
-	   currentRow += vertical[moveNumber];
-	   currentColumn += horizontal[moveNumber];
-	           
-	} while( currentRow < 8 && currentColumn < 8 && currentRow >= 0  && currentColumn >= 0 );
-		   
-	
-	
-
-	printArray(board, SIZE1, SIZE2);
-}
-
-void printArray( int b[][SIZE2], int size1, int size2)
-{
-	for(int i = 0; i < size1; i++)
+	for( int j = 0; j< SIZE; j++)
 	{
-		puts(" ");
-		for(int j = 0; j < size2; j++)
+		for( int k = 0; k < SIZE; k++)
 		{
-			printf("%d", b[i][j]);
+
+for( int r = 0; r< SIZE; r++)
+	{
+		for( int u = 0; u < SIZE; u++)
+		{
+		    board[r][u] = 0;
 		}
 	}
+	
+currentRow = j;
+currentColumn = k;  
+n = 0;
+t = 1;
+m =0;
+minRow = 0 ;
+minColumn = 0;
+		board[j][k] = 1;
+	    
+	do
+    {
+        accessibilityHeuristic(board, accessibility, vertical, horizontal, SIZE);
+        
+		n=0;
+		t++;
+		for(int i = 0; i < 8; i++)
+		{
+
+			preRow =  currentRow;
+	        preColumn = currentColumn;
+	        
+	       
+			currentRow += vertical[i];
+	        currentColumn += horizontal[i];
+			if(  currentRow < 8 && currentColumn < 8 && currentRow >= 0  && currentColumn >= 0 && board[currentRow][currentColumn] == 0 )
+            {
+				m++;
+                
+		    if( m == 1 || accessibility[currentRow][currentColumn] <= accessibility[minRow][minColumn])
+	        {
+		        minRow = currentRow;
+		        minColumn = currentColumn;
+		        
+        	}
+        
+			
+			}
+			else
+			{
+                n++;
+			}
+
+			currentRow = preRow;
+	        currentColumn = preColumn;
+		}
+		m=0;
+		
+		board[minRow][minColumn] = t;
+        
+        currentRow = minRow;
+	    currentColumn = minColumn;
+         
+	   
+	              
+	} while( n < 8 );
+		 puts(" ");
+
+    printArray(board, SIZE);
+	printf("\n%d\n", t);
+	
+		}
+	}
+
+	
+	
+	
+}
+      
+
+void printArray( int b[][SIZE], int size)
+{
+	for(int i = 0; i < size; i++)
+	{
+		puts(" ");
+		for(int j = 0; j < size; j++)
+		{
+			printf("%4d", b[i][j]);
+		}
+	}
+}
+void accessibilityHeuristic(int b[][SIZE], int ac[][SIZE], int h[], int v[], int size)
+{
+	int currentRow = 0;
+	int currentColumn = 0;
+	int preRow;
+	int preColumn;
+
+	int n = 0;
+
+
+    for(int i = 0; i < 8; i++)
+       {     
+           for(int j = 0; j < 8; j++)
+           {
+			   for (int k = 0; k < 8; k++)
+			   {
+			       currentRow=i;    
+		           currentColumn = j;
+
+			       preRow =  currentRow;
+	               preColumn = currentColumn;
+		       
+	               currentRow += v[k];
+	               currentColumn += h[k];
+
+		          if( currentRow < 8 && currentColumn < 8 && currentRow >= 0  && currentColumn >= 0 && b[currentRow][currentColumn] == 0)
+		          {
+					
+			         n++;
+		          }
+
+			      currentRow = preRow;
+	              currentColumn = preColumn;
+			   }
+			    
+               ac[i][j] = n;
+		       n=0;
+          
+	      }
+       }
+
+
+//	printArray(ac, SIZE);
 }
 
