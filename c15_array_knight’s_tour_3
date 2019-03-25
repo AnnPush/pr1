@@ -4,9 +4,6 @@
 
 
 #include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-
 #define SIZE 8
 
 
@@ -19,99 +16,104 @@ int main(void)
 	int horizontal[SIZE] = {2, 1, -1, -2, -2, -1, 1, 2};
 	int vertical[SIZE] = {-1, -2, -2, -1, 1, 2, 2, 1};
 	
-		int board[SIZE][SIZE] = {0};
+	int board[SIZE][SIZE] = {0};
 	int accessibility[SIZE][SIZE] = {0};
-int currentRow = 0;
-  int currentColumn = 0;  
+
+    int currentRow = 0;
+    int currentColumn = 0;  
 	
     int n = 0;
 	int t = 1;
 	int m =0;
+
 	int preRow;
 	int preColumn;
+
 	int minRow = 0 ;
 	int minColumn = 0;
 		
-	srand(time(NULL));
 	for( int j = 0; j< SIZE; j++)
 	{
 		for( int k = 0; k < SIZE; k++)
 		{
 
-for( int r = 0; r< SIZE; r++)
-	{
-		for( int u = 0; u < SIZE; u++)
-		{
-		    board[r][u] = 0;
-		}
-	}
+           for( int r = 0; r< SIZE; r++)
+	       {
+		      for( int u = 0; u < SIZE; u++)
+		      {
+		         board[r][u] = 0;
+		      }
+	       }
 	
-currentRow = j;
-currentColumn = k;  
-n = 0;
-t = 1;
-m =0;
-minRow = 0 ;
-minColumn = 0;
-		board[j][k] = 1;
-	    
-	do
-    {
-        accessibilityHeuristic(board, accessibility, vertical, horizontal, SIZE);
-        
-		n=0;
-		t++;
-		for(int i = 0; i < 8; i++)
-		{
+           currentRow = j;
+           currentColumn = k;  
 
-			preRow =  currentRow;
-	        preColumn = currentColumn;
+           n = 0;
+           t = 1;
+           m =0;
+
+           minRow = 0 ;
+           minColumn = 0;
+
+		   board[j][k] = 1;
+	    
+	       while( n < SIZE )
+           {
+               accessibilityHeuristic(board, accessibility, vertical, horizontal, SIZE);
+               
+		       n = 0;
+		       t++;
+
+		       for(int i = 0; i < SIZE; i++)
+		       {
+
+			       preRow =  currentRow;
+	               preColumn = currentColumn;
 	        
 	       
-			currentRow += vertical[i];
-	        currentColumn += horizontal[i];
-			if(  currentRow < 8 && currentColumn < 8 && currentRow >= 0  && currentColumn >= 0 && board[currentRow][currentColumn] == 0 )
-            {
-				m++;
+			       currentRow += vertical[i];
+	               currentColumn += horizontal[i];
+
+			       if(  currentRow < 8 && currentColumn < 8 && currentRow >= 0  && currentColumn >= 0 && board[currentRow][currentColumn] == 0 )
+                   {
+				       m++;
                 
-		    if( m == 1 || accessibility[currentRow][currentColumn] <= accessibility[minRow][minColumn])
-	        {
-		        minRow = currentRow;
-		        minColumn = currentColumn;
+		               if( m == 1 || accessibility[currentRow][currentColumn] <= accessibility[minRow][minColumn])
+	                   {
+		                   minRow = currentRow;
+		                   minColumn = currentColumn;		        
+        	           }			
+			       }
+			       else
+			       {
+                      n++;
+			       }
+
+			       currentRow = preRow;
+	               currentColumn = preColumn;
+		        }
+
+		        m = 0;
 		        
-        	}
+				if(t <= 64)
+			    {
+					board[minRow][minColumn] = t;
+			    }
         
-			
-			}
-			else
-			{
-                n++;
-			}
+                currentRow = minRow;
+	            currentColumn = minColumn;              
+	      } 
 
-			currentRow = preRow;
-	        currentColumn = preColumn;
-		}
-		m=0;
-		
-		board[minRow][minColumn] = t;
-        
-        currentRow = minRow;
-	    currentColumn = minColumn;
-         
-	   
-	              
-	} while( n < 8 );
-		 puts(" ");
+		  puts(" ");
 
-    printArray(board, SIZE);
-	printf("\n%d\n", t);
+          printArray(board, SIZE);
+          if(t <= 64)
+		  {
+	          printf("\nt = %d\n", t);
+		  }
 	
-		}
-	}
-
-	
-	
-	
+	   }
+   }		
 }
       
 
@@ -166,8 +168,4 @@ void accessibilityHeuristic(int b[][SIZE], int ac[][SIZE], int h[], int v[], int
           
 	      }
        }
-
-
-//	printArray(ac, SIZE);
 }
-
