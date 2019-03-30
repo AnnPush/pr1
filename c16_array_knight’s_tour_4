@@ -1,83 +1,75 @@
 #include <stdio.h>
 #define SIZE 8
 
-void printArray(int b[][SIZE], int size);//печать массива
-void accessibilityHeuristic(int b[][SIZE], int ac[][SIZE], int v[], int h[], int size);//функция высчитывает доступность каждой клетки на доске
+
+void printArray(int b[][SIZE], int size);
+void accessibilityHeuristic(int b[][SIZE], int ac[][SIZE], int v[], int h[], int size);
+int min(int b[][SIZE], int ac[][SIZE], int v[], int h[], int size, int jj, int kk);
 
 int main(void)
 {
-	int board[SIZE][SIZE] = {0};//инициализация массива поле нулями
-	int accessibility[SIZE][SIZE] = {0};//инициализация массива таблицы эвристики доступности нулями
-
-	int horizontal[SIZE] = {2, 1, -1, -2, -2, -1, 1, 2};//описания ходов по горизонтали
-	int vertical[SIZE] = {-1, -2, -2, -1, 1, 2, 2, 1};//описание ходов по вертикали
-
-        int currentRow = 0;//строка текущего положения  коня
-	int currentColumn = 0;//столбец текущего положения коня
 	
-        int n = 0;//счетчик количества клеток, в которые ходить нельзя
-	int t = 1;//счетчик ходов от 1 до 64
-	int m =0;//счетчик количества доступных ходов из определенной клетки
-
-	int preRow;//строка предыдущго положения коня
-	int preColumn;//столбец предыдущего положения коня
-
-	int minRow = 0 ;//координата строки наименьшего показателя доступности
-	int minColumn = 0;//координата столбца наименьшего показателя доступности
+	int horizontal[SIZE] = {2, 1, -1, -2, -2, -1, 1, 2};
+	int vertical[SIZE] = {-1, -2, -2, -1, 1, 2, 2, 1};
 	
-	board[currentRow][currentColumn] = 1;/в первую клетку записать значение 1
-	    
-	while( n < SIZE )//цикл выполняется до тех пор, пока есть доступные для хода клетки
-        {
-           accessibilityHeuristic(board, accessibility, vertical, horizontal, SIZE);//рассчитать доступность клеток
-	  
-	   n=0;счетчик количества клеток, в которые ходить нельзя, обнуляем
-	   t++;//увеличить счетчик ходов от 1 до 64 на единицу
+	int board[SIZE][SIZE] = {0};
+	int accessibility[SIZE][SIZE] = {0};
 
-	   for(int i = 0; i < SIZE; i++)
-	   {
-		preRow =  currentRow;//строка предыдущему присваивается текущее значение 
-	        preColumn = currentColumn;//столбец предыдущему присваивается текущее значение 
-	        
-		//изменение положения коня
-		currentRow += vertical[i];
-	        currentColumn += horizontal[i];
+	int z =0;
+	
+	int moveNumber;
+
+    int currentRow = 0;
+    int currentColumn = 0;  
+    
+	int t = 1;
 		
-                //если в результате хода, конь не попадет за границы поля, и клетка пустая
-		if(  currentRow < SIZE && currentColumn < SIZE && currentRow >= 0  && currentColumn >= 0 && board[currentRow][currentColumn] == 0 )
-                {
-		    m++;//увеличить счетчик количества доступных ходов из определенной клетки
-		    
-                    //если это первая проверка или текущие значение доступности клетки меньше чем предыдущее
-		    if( m == 1 || accessibility[currentRow][currentColumn] <= accessibility[minRow][minColumn])
-	            {
-		        //координаты минимального значения доступности равны координатам текущей клетки
-		        minRow = currentRow;
-     	                minColumn = currentColumn;  
-        	    }
-		}
-		else//если в результате хода, конь  попадет за границы поля, или клетка занята значением
+	for( int j = 0; j< SIZE; j++)
+	{
+		for( int k = 0; k < SIZE; k++)
 		{
-                    n++;//счетчик количества клеток, в которые ходить нельзя
-		}
+			z++;
+			printf("\nZ = %d\n", z);
 
-		currentRow = preRow;//строке текущего положения коня присваивается предыдущее значение
-	        currentColumn = preColumn;//столбцу текущего положеия коня присваивается предыдущее значение
-	    }
+           for( int r = 0; r< SIZE; r++)
+	       {
+		      for( int u = 0; u < SIZE; u++)
+		      {
+		         board[r][u] = 0;
+		      }
+	       }
+	       
 
-	    m = 0; //обнулить счетчик количества доступных ходов из определенной клетки
+	       currentRow = j;
+           currentColumn = k;  
+       
+		   board[j][k] = 1;
 
-	    if(t <= 64)//если счетчик ходов от 1 до 64 меньше или равен 64
-	    {
-		board[minRow][minColumn] = t;//записываем в клетку вместо нуля новое значение
-	    }
-        
-            currentRow = minRow;//текущая координата строки равна координате минимальной доступности
-	    currentColumn = minColumn; //текущая координата столбца равна координате минимальной доступности            
-	} 
-	
-    puts(" ");
-    printArray(board, SIZE);//печать поля
+		   for(int i =0; i < 64; i++)
+           {
+		       t++;
+               
+	           moveNumber = min(board, accessibility, vertical, horizontal, SIZE, j, k);
+			   printf("\nmoveNumber%d\n", moveNumber);
+
+               currentRow += vertical[moveNumber];
+	           currentColumn += horizontal[moveNumber];
+	                   
+		       if(t <= 64)
+	           {
+		          board[currentRow][currentColumn] = t;
+				  printf("\nt%d\n", t);
+		       }
+			   
+		   }
+        t = 0;
+	       puts(" ");
+
+           printArray(board, SIZE);
+		   
+        }  
+	   
+   }		
 }
       
 
@@ -92,8 +84,7 @@ void printArray( int b[][SIZE], int size)
 		}
 	}
 }
-
-void accessibilityHeuristic(int b[][SIZE], int ac[][SIZE], int h[], int v[], int size)//определение доступности клеток
+void accessibilityHeuristic(int b[][SIZE], int ac[][SIZE], int h[], int v[], int size)
 {
 	int currentRow = 0;
 	int currentColumn = 0;
@@ -103,33 +94,120 @@ void accessibilityHeuristic(int b[][SIZE], int ac[][SIZE], int h[], int v[], int
 	int n = 0;
 
 
-        for(int i = 0; i < size; i++)
-        {     
-           for(int j = 0; j < size; j++)
+    for(int i = 0; i < 8; i++)
+       {     
+           for(int j = 0; j < 8; j++)
            {
-	       for (int k = 0; k < size; k++)
-	       {
-		    currentRow=i;    
-		    currentColumn = j;
+			   for (int k = 0; k < 8; k++)
+			   {
+			       currentRow=i;    
+		           currentColumn = j;
 
-	            preRow =  currentRow;
-	            preColumn = currentColumn;
+			       preRow =  currentRow;
+	               preColumn = currentColumn;
 		       
-	            currentRow += v[k];
-	            currentColumn += h[k];
+	               currentRow += v[k];
+	               currentColumn += h[k];
 
-		    if( currentRow < size && currentColumn < size && currentRow >= 0  && currentColumn >= 0 && b[currentRow][currentColumn] == 0)
-		    {		
-			  n++;
-		    }
-		    
-                    currentRow = preRow;
-	            currentColumn = preColumn;
-	        }
+		          if( currentRow < 8 && currentColumn < 8 && currentRow >= 0  && currentColumn >= 0 && b[currentRow][currentColumn] == 0)
+		          {
+					
+			         n++;
+		          }
+
+			      currentRow = preRow;
+	              currentColumn = preColumn;
+			   }
 			    
                ac[i][j] = n;
-	       n=0;
+		       n=0;
           
-	   }
+	      }
        }
+}
+
+int min(int b[][SIZE], int ac[][SIZE], int v[], int h[], int size, int jj, int kk)
+{
+	
+int mNumber;
+int mNumber1;
+int mNumber2;
+
+int mNumber22;
+
+		       
+	
+    
+	int dd = 0;
+	int m =0;
+
+	int preRow;
+	int preColumn;
+
+	int minRow = 0 ;
+	int minColumn = 0;
+
+	int  currentRow = jj;
+         int  currentColumn = kk;  
+
+           
+
+		   
+               accessibilityHeuristic(b, ac, v, h, SIZE);
+               
+		      
+		      
+
+		       for(int i = 0; i < SIZE; i++)
+		       {
+
+			       preRow =  currentRow;
+	               preColumn = currentColumn;
+	        
+	       
+			       currentRow += v[i];
+	               currentColumn += h[i];
+
+			       if(  currentRow < 8 && currentColumn < 8 && currentRow >= 0  && currentColumn >= 0 && b[currentRow][currentColumn] == 0 )
+                   {
+				       m++;
+                
+		               if( m == 1 || ac[currentRow][currentColumn] < ac[minRow][minColumn] )
+	                   {
+						   mNumber  = i;
+		                   minRow = currentRow;
+		                   minColumn = currentColumn;		        
+        	           }	
+        	           else if(ac[currentRow][currentColumn] == ac[minRow][minColumn] && dd == 0)
+        	           {
+						   dd++;
+						   mNumber22 = i;
+						     
+        	                 mNumber1  =  min(b, ac, v, h, SIZE, currentRow, currentColumn);
+							 mNumber2  =  min(b, ac, v, h, SIZE, minRow, minColumn);
+
+							 if(mNumber1 > mNumber2)
+						     {
+								 mNumber = mNumber22;
+						     }
+							
+
+        	                 
+        	           }
+			       }
+			      
+
+			       currentRow = preRow;
+	               currentColumn = preColumn;
+		       }
+		       
+
+		        m = 0;
+		        
+				
+                currentRow = minRow;
+	            currentColumn = minColumn;              
+	        
+
+		  return mNumber;
 }
