@@ -4,7 +4,7 @@
 
 void printArray(int b[][SIZE], int size);
 void accessibilityHeuristic(int b[][SIZE], int ac[][SIZE], int v[], int h[], int size);
-int min(int b[][SIZE], int ac[][SIZE], int v[], int h[], int size, int jj, int kk);
+int minM(int b[][SIZE], int ac[][SIZE], int v[], int h[], int size, int jj, int kk);
 
 int main(void)
 {
@@ -16,50 +16,109 @@ int main(void)
 	int accessibility[SIZE][SIZE] = {0};
 
 	int z =0;
-	
-	int moveNumber;
-
-    int currentRow = 0;
-    int currentColumn = 0;  
-    
+        int n = 0;
 	int t = 1;
+	int m =0;
+
+	int preRow;
+	int preColumn;
+
+	int minRow = 0 ;
+	int minColumn = 0;
+	
+        int currentRow = 0;
+        int currentColumn = 0;  
+    
+	int mNumber1;
+        int mNumber2;
 		
-	for( int j = 0; j< SIZE; j++)
-	{
-		for( int k = 0; k < SIZE; k++)
-		{
+	//for( int j = 0; j< SIZE; j++)
+	//{
+		//for( int k = 0; k < SIZE; k++)
+		//{
 			z++;
 			printf("\nZ = %d\n", z);
 
-           for( int r = 0; r< SIZE; r++)
-	       {
+         /*       for( int r = 0; r< SIZE; r++)
+	          {
 		      for( int u = 0; u < SIZE; u++)
 		      {
 		         board[r][u] = 0;
 		      }
-	       }
-	       
+	           }*/
+		   
+		   int j = 0;
+		   int k = 0;
+		   
+	           currentRow = j;
+                   currentColumn = k;  
 
-	       currentRow = j;
-           currentColumn = k;  
-       
+                   n = 0;
+                   t = 1;
+                   m =0;
+		   
+                   minRow = 0 ;
+                   minColumn = 0;
+
 		   board[j][k] = 1;
-
-		   for(int i =0; i < 64; i++)
-           {
+	    
+	           while( n < SIZE )
+                   {
+                       accessibilityHeuristic(board, accessibility, vertical, horizontal, SIZE);
+        
+		       n = 0;
 		       t++;
-               
-	           moveNumber = min(board, accessibility, vertical, horizontal, SIZE, j, k);
-			   printf("\nmoveNumber%d\n", moveNumber);
 
-               currentRow += vertical[moveNumber];
-	           currentColumn += horizontal[moveNumber];
+		       for(int i = 0; i < SIZE; i++)
+		       {
+			    preRow =  currentRow;
+	                    preColumn = currentColumn;
+	 
+			    currentRow += vertical[i];
+	                    currentColumn += horizontal[i];
+
+			       if(  currentRow < 8 && currentColumn < 8 && currentRow >= 0  && currentColumn >= 0 && board[currentRow][currentColumn] == 0 )
+                   {
+				       m++;
+                
+		               if( m == 1 || accessibility[currentRow][currentColumn] < accessibility[minRow][minColumn])
+	                   {
+		                   minRow = currentRow;
+		                   minColumn = currentColumn;		        
+        	           }
+					   else if(accessibility[currentRow][currentColumn] == accessibility[minRow][minColumn] )
+        	           {
+						     m = 0;
+						     
+        	                 mNumber1  =  minM(board, accessibility, vertical, horizontal, SIZE, currentRow, currentColumn);
+							 m = 0;
+							 mNumber2  =  minM(board, accessibility, vertical, horizontal, SIZE, minRow, minColumn);
+							 
+
+							 if(mNumber1 < mNumber2)
+						     {
+								 minRow = currentRow;
+		                        minColumn = currentColumn;
+						     }          
+        	           }
+			       }
+			       else
+			       {
+                      n++;
+			       }
+
+			       currentRow = preRow;
+	               currentColumn = preColumn;
+		        }
+
+		        m = 0;
 	                   
 		       if(t <= 64)
-	           {
-		          board[currentRow][currentColumn] = t;
-				  printf("\nt%d\n", t);
-		       }
+			   {
+		          board[minRow][minColumn] = t;
+				 // printf("\nt%d\n", t);
+			   }
+		       
 			   
 		   }
         t = 0;
@@ -69,8 +128,8 @@ int main(void)
 		   
         }  
 	   
-   }		
-}
+  // }		
+//}
       
 
 void printArray( int b[][SIZE], int size)
@@ -123,17 +182,16 @@ void accessibilityHeuristic(int b[][SIZE], int ac[][SIZE], int h[], int v[], int
 		       n=0;
           
 	      }
+		
        }
+	  //puts("");
+	    // printArray(ac, SIZE);
 }
 
-int min(int b[][SIZE], int ac[][SIZE], int v[], int h[], int size, int jj, int kk)
+int minM(int b[][SIZE], int ac[][SIZE], int v[], int h[], int size, int jj, int kk)
 {
 	
 int mNumber;
-int mNumber1;
-int mNumber2;
-
-int mNumber22;
 
 		       
 	
@@ -174,26 +232,11 @@ int mNumber22;
                 
 		               if( m == 1 || ac[currentRow][currentColumn] < ac[minRow][minColumn] )
 	                   {
-						   mNumber  = i;
-		                   minRow = currentRow;
+						  
+						   minRow = currentRow;
 		                   minColumn = currentColumn;		        
         	           }	
-        	           else if(ac[currentRow][currentColumn] == ac[minRow][minColumn] && dd == 0)
-        	           {
-						   dd++;
-						   mNumber22 = i;
-						     
-        	                 mNumber1  =  min(b, ac, v, h, SIZE, currentRow, currentColumn);
-							 mNumber2  =  min(b, ac, v, h, SIZE, minRow, minColumn);
-
-							 if(mNumber1 > mNumber2)
-						     {
-								 mNumber = mNumber22;
-						     }
-							
-
-        	                 
-        	           }
+        	           
 			       }
 			      
 
@@ -201,7 +244,7 @@ int mNumber22;
 	               currentColumn = preColumn;
 		       }
 		       
-
+ mNumber = ac[minRow][minColumn];
 		        m = 0;
 		        
 				
