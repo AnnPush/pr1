@@ -1,9 +1,15 @@
+/*
+Ход конем
+*/
+
+
 #include <stdio.h>
 #define SIZE 8
 
 
 void printArray(int b[][SIZE], int size);
 void accessibilityHeuristic(int b[][SIZE], int ac[][SIZE], int v[], int h[], int size);
+
 int minM(int b[][SIZE], int ac[][SIZE], int v[], int h[], int size, int jj, int kk);
 
 int main(void)
@@ -16,7 +22,9 @@ int main(void)
 	int accessibility[SIZE][SIZE] = {0};
 
 	int z =0;
-        int n = 0;
+	
+	int moveNumber;
+int n = 0;
 	int t = 1;
 	int m =0;
 
@@ -25,57 +33,55 @@ int main(void)
 
 	int minRow = 0 ;
 	int minColumn = 0;
-	
-        int currentRow = 0;
-        int currentColumn = 0;  
+    int currentRow = 0;
+    int currentColumn = 0;  
     
 	int mNumber1;
-        int mNumber2;
+    int mNumber2;
 		
-	//for( int j = 0; j< SIZE; j++)
-	//{
-		//for( int k = 0; k < SIZE; k++)
-		//{
+	for( int j = 0; j< SIZE; j++)
+	{
+		for( int k = 0; k < SIZE; k++)
+		{
 			z++;
 			printf("\nZ = %d\n", z);
 
-         /*       for( int r = 0; r< SIZE; r++)
-	          {
+           for( int r = 0; r< SIZE; r++)
+	       {
 		      for( int u = 0; u < SIZE; u++)
 		      {
 		         board[r][u] = 0;
 		      }
-	           }*/
+	       }
 		   
-		   int j = 0;
-		   int k = 0;
-		   
-	           currentRow = j;
-                   currentColumn = k;  
+	       currentRow = j;
+           currentColumn = k;  
 
-                   n = 0;
-                   t = 1;
-                   m =0;
-		   
-                   minRow = 0 ;
-                   minColumn = 0;
+           n = 0;
+           t = 1;
+           m =0;
+
+           minRow = 0 ;
+           minColumn = 0;
 
 		   board[j][k] = 1;
 	    
-	           while( n < SIZE )
-                   {
-                       accessibilityHeuristic(board, accessibility, vertical, horizontal, SIZE);
+	       while( n < SIZE )
+           {
+               accessibilityHeuristic(board, accessibility, vertical, horizontal, SIZE);
         
 		       n = 0;
 		       t++;
 
 		       for(int i = 0; i < SIZE; i++)
 		       {
-			    preRow =  currentRow;
-	                    preColumn = currentColumn;
-	 
-			    currentRow += vertical[i];
-	                    currentColumn += horizontal[i];
+
+			       preRow =  currentRow;
+	               preColumn = currentColumn;
+	        
+	       
+			       currentRow += vertical[i];
+	               currentColumn += horizontal[i];
 
 			       if(  currentRow < 8 && currentColumn < 8 && currentRow >= 0  && currentColumn >= 0 && board[currentRow][currentColumn] == 0 )
                    {
@@ -84,22 +90,28 @@ int main(void)
 		               if( m == 1 || accessibility[currentRow][currentColumn] < accessibility[minRow][minColumn])
 	                   {
 		                   minRow = currentRow;
-		                   minColumn = currentColumn;		        
+		                   minColumn = currentColumn;
+						   
+						  
+
         	           }
 					   else if(accessibility[currentRow][currentColumn] == accessibility[minRow][minColumn] )
         	           {
-						     m = 0;
+						     
+									
 						     
         	                 mNumber1  =  minM(board, accessibility, vertical, horizontal, SIZE, currentRow, currentColumn);
-							 m = 0;
+							 
 							 mNumber2  =  minM(board, accessibility, vertical, horizontal, SIZE, minRow, minColumn);
 							 
-
+							 
 							 if(mNumber1 < mNumber2)
 						     {
 								 minRow = currentRow;
 		                        minColumn = currentColumn;
-						     }          
+									
+						     } 
+							
         	           }
 			       }
 			       else
@@ -116,20 +128,21 @@ int main(void)
 		       if(t <= 64)
 			   {
 		          board[minRow][minColumn] = t;
-				 // printf("\nt%d\n", t);
+				 
 			   }
-		       
+		        currentRow = minRow;
+	            currentColumn = minColumn;  
 			   
 		   }
         t = 0;
-	       puts(" ");
+	       
 
            printArray(board, SIZE);
 		   
         }  
 	   
-  // }		
-//}
+  }		
+}
       
 
 void printArray( int b[][SIZE], int size)
@@ -184,9 +197,10 @@ void accessibilityHeuristic(int b[][SIZE], int ac[][SIZE], int h[], int v[], int
 	      }
 		
        }
-	  //puts("");
-	    // printArray(ac, SIZE);
+	
 }
+
+
 
 int minM(int b[][SIZE], int ac[][SIZE], int v[], int h[], int size, int jj, int kk)
 {
@@ -196,7 +210,7 @@ int mNumber;
 		       
 	
     
-	int dd = 0;
+	
 	int m =0;
 
 	int preRow;
@@ -211,7 +225,7 @@ int mNumber;
            
 
 		   
-               accessibilityHeuristic(b, ac, v, h, SIZE);
+              
                
 		      
 		      
@@ -234,7 +248,8 @@ int mNumber;
 	                   {
 						  
 						   minRow = currentRow;
-		                   minColumn = currentColumn;		        
+		                   minColumn = currentColumn;	
+						   
         	           }	
         	           
 			       }
@@ -245,11 +260,6 @@ int mNumber;
 		       }
 		       
  mNumber = ac[minRow][minColumn];
-		        m = 0;
-		        
-				
-                currentRow = minRow;
-	            currentColumn = minColumn;              
 	        
 
 		  return mNumber;
