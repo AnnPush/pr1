@@ -40,7 +40,7 @@ int main(void)
         int currentRow = 0;//строка текущего положения  коня
         int currentColumn = 0;//столбец текущего положения коня   
     
-	int mNumber1;//показатель доступности клетки для текущей клетки
+	int mNumber1;//показатель доступности  для текущей клетки
         int mNumber2;//показатель доступности клетки для предыдущей клетки
 		
 	//цикл для 64 обходов
@@ -100,50 +100,44 @@ int main(void)
 		                   minRow = currentRow;
 		                   minColumn = currentColumn;
         	               }
+			       //если текущее значение доступности равно предыдущему значению досступности
 			       else if(accessibility[currentRow][currentColumn] == accessibility[minRow][minColumn] )
-        	           {
-						     
-									
-						     
-        	                 mNumber1  =  minM(board, accessibility, vertical, horizontal, SIZE, currentRow, currentColumn);
+        	               {
+				    //	определить показатель доступности  для текущей клетки	     
+        	                    mNumber1  =  minM(board, accessibility, vertical, horizontal, SIZE, currentRow, currentColumn);
+				    
+				    //определить показатель доступности  для предыдущей клетки
+				    mNumber2  =  minM(board, accessibility, vertical, horizontal, SIZE, minRow, minColumn);
 							 
-							 mNumber2  =  minM(board, accessibility, vertical, horizontal, SIZE, minRow, minColumn);
-							 
-							 
-							 if(mNumber1 < mNumber2)
-						     {
-								 minRow = currentRow;
-		                        minColumn = currentColumn;
-									
-						     } 
-							
-        	           }
-			       }
-			       else
-			       {
-                      n++;
-			       }
+				    //если показатель доступности текущей клетки меньше показателя доступности предыдущей клетки		 
+	                            if(mNumber1 < mNumber2)
+			            {
+					minRow = currentRow;
+		                        minColumn = currentColumn;				
+				    } 
+				}
+			    }
+			    //если в результате хода, конь  попадет за границы поля, или клетка занята значением
+			    else
+			    {
+                                n++;//счетчик количества клеток, в которые ходить нельзя
+			    }
 
-			       currentRow = preRow;
-	               currentColumn = preColumn;
+			    currentRow = preRow;//строке текущего положения коня присваивается предыдущее значение
+	                    currentColumn = preColumn;//столбцу текущего положеия коня присваивается предыдущее значение
 		        }
 
-		        m = 0;
+		        m = 0;//обнулить счетчик количества доступных ходов из определенной клетки
 	                   
-		       if(t <= 64)
-			   {
-		          board[minRow][minColumn] = t;
-				 
-			   }
-		        currentRow = minRow;
-	            currentColumn = minColumn;  
-			   
+		        if(t <= 64)//если счетчик ходов от 1 до 64 меньше или равен 64
+			{
+		             board[minRow][minColumn] = t;	 
+			}
+		        currentRow = minRow;//текущая координата строки равна координате минимальной доступности
+	                currentColumn = minColumn;//текущая координата столбца равна координате минимальной доступности    	   
 		   }
-        t = 0;
-	       
-
-           printArray(board, SIZE);
-		   
+                   t = 0;//обнулить значение счетчика обхода поля
+                   printArray(board, SIZE);//печать поля	   
         }  
 	   
   }		
@@ -161,7 +155,7 @@ void printArray( int b[][SIZE], int size)
 		}
 	}
 }
-void accessibilityHeuristic(int b[][SIZE], int ac[][SIZE], int h[], int v[], int size)
+void accessibilityHeuristic(int b[][SIZE], int ac[][SIZE], int h[], int v[], int size)//определение доступности клеток
 {
 	int currentRow = 0;
 	int currentColumn = 0;
@@ -207,65 +201,43 @@ void accessibilityHeuristic(int b[][SIZE], int ac[][SIZE], int h[], int v[], int
 
 
 
-int minM(int b[][SIZE], int ac[][SIZE], int v[], int h[], int size, int jj, int kk)
-{
-	
-int mNumber;
+int minM(int b[][SIZE], int ac[][SIZE], int v[], int h[], int size, int jj, int kk//определение клетки с минимальной доступностью
+{	
+     int mNumber;
 
-		       
-	
-    
-	
-	int m =0;
+     int m =0;
 
-	int preRow;
-	int preColumn;
+     int preRow;
+     int preColumn;
 
-	int minRow = 0 ;
-	int minColumn = 0;
+     int minRow = 0 ;
+     int minColumn = 0;
 
-	int  currentRow = jj;
-         int  currentColumn = kk;  
-
-           
-
-		   
-              
-               
-		      
-		      
-
-		       for(int i = 0; i < SIZE; i++)
-		       {
-
-			       preRow =  currentRow;
-	               preColumn = currentColumn;
+     int  currentRow = jj;
+     int  currentColumn = kk;  
+     
+     for(int i = 0; i < SIZE; i++)
+     {
+	 preRow =  currentRow;
+	 preColumn = currentColumn;
 	        
-	       
-			       currentRow += v[i];
-	               currentColumn += h[i];
+	 currentRow += v[i];
+	 currentColumn += h[i];
 
-			       if(  currentRow < 8 && currentColumn < 8 && currentRow >= 0  && currentColumn >= 0 && b[currentRow][currentColumn] == 0 )
-                   {
-				       m++;
+	 if(  currentRow < 8 && currentColumn < 8 && currentRow >= 0  && currentColumn >= 0 && b[currentRow][currentColumn] == 0 )
+	 {
+             m++;
                 
-		               if( m == 1 || ac[currentRow][currentColumn] < ac[minRow][minColumn] )
-	                   {
-						  
-						   minRow = currentRow;
-		                   minColumn = currentColumn;	
-						   
-        	           }	
-        	           
-			       }
-			      
-
-			       currentRow = preRow;
-	               currentColumn = preColumn;
-		       }
+             if( m == 1 || ac[currentRow][currentColumn] < ac[minRow][minColumn] )
+	     {					  
+	         minRow = currentRow;
+		 minColumn = currentColumn;				   
+             }	
+         }
+         currentRow = preRow;
+	 currentColumn = preColumn;
+    }
 		       
- mNumber = ac[minRow][minColumn];
-	        
-
-		  return mNumber;
+    mNumber = ac[minRow][minColumn];
+    return mNumber;
 }
