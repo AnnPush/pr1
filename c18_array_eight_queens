@@ -1,104 +1,48 @@
-#include <stdio.h>
+/*Восемь ферзей*/
 
-int main(void)
+
+#include <stdio.h>
+#define SIZE 8
+
+//прототипы функций
+bool setQueens(int[][SIZE], int size);//проверить, расставлены все ферзи
+void printArray(int b[][SIZE], int size);
+
+int _tmain(int argc, _TCHAR* argv[])
 {
-    int ost;
-    
-    printf("%12s %12s %12s %18s\n", "Decimal", "Binary", "Octal", "Hexadecimal");
-    for (int i = 1; i <= 256; i++)
-    {
-        ost = i;
-        printf("%6d", i);
-        printf("\t\t%s", " ");
-        
-        if(i == 256)
+	int board[SIZE][SIZE] = {0};//инициализировать поле нулями
+    int accessibility[SIZE][SIZE] = {0};//инициализировать массив значений доступности нулями
+
+	do
+	{
+		//обнулить клетки доски
+		for(int i = 0; i < SIZE; i++)
+		{
+			for(int j = 0; j < SIZE; j++)
+			{
+				board[i][j] = 0;
+			}
+		}
+		//расставляем ферзей
+		for(int i = 1; i <= SIZE; i++)
         {
-            ost = ost % 128;
-            printf("%s", "1");
-        }
-        
-        if(i < 256 && i >= 128 || ost >= 128)
-        {
-            ost = ost % 128;
-            printf("%s", "1");
-        }
-        else
-        {
-            printf("%s", "0");
-        }
-        
-        if(i >= 64 && i < 128 || ost >= 64)
-        {
-            ost = ost % 64;
-            printf("%s", "1");
-        }
-        else
-        {
-            printf("%s", "0");
-        }
-        
-        if(i >= 32 && i < 64 || ost >= 32)
-        {
-            ost = ost % 32;
-            printf("%s", "1");
-        }
-        else
-        {
-            printf("%s", "0");
-        }
-        
-        if(i >= 16 && i < 32 ||ost >= 16)
-        {
-            ost = ost % 16;
-            printf("%s", "1");
-        }
-        else
-        {
-            printf("%s", "0");
-        }
-        
-        if(i >= 8 && i < 16 || ost >= 8)
-        {
-            ost = ost % 8;
-            printf("%s", "1");
-        }
-        else
-        {
-            printf("%s", "0");
-        }
-        
-        if(i >= 4 && i < 8 || ost >= 4)
-        {
-            ost = ost % 4;
-            printf("%s", "1");
-        }
-        else
-        {
-            printf("%s", "0");
-        }
-        
-        if(i >= 2 && i < 4 || ost >= 2)
-        {
-            ost = ost % 2;
-            printf("%s", "1");
-        }
-        
-        else
-        {
-            printf("%s", "0");
-        }
-        if(ost == 1)
-        {
-            printf("%s", "1");
-        }
-        else
-        {
-            printf("%s", "0");
-        }
-        
-        printf("\t\t%s%o\t\t%X", " ", i, i);
-        
-        printf("%s", "\n");
-    }
-    
+			board[x][y] = 1;
+		}
+
+	}while(!setQueens(board, SIZE));
 }
+//end main
+
+void printArray( int b[][SIZE], int size)
+{
+	for(int i = 0; i < size; i++)
+	{
+		puts(" ");
+		for(int j = 0; j < size; j++)
+		{
+			printf("%4d", b[i][j]);
+		}
+	}
+}
+//end printArray
+
