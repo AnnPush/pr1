@@ -1,1 +1,21 @@
+#include "stdafx.h"
 
+
+#include <stdio.h>
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	int a;//целое число
+	int *aPtr;//aPtr - указатель на целое число
+
+	a = 7;
+	aPtr = &a;//aPtr установлен на адрес a
+
+	printf("The addres of a is %p"
+		"\nThe value of aPtr is %p", &a, aPtr);
+	printf("\n\nThe value of a is %d"
+		"\nThe value of *aPtr is %d", a, *aPtr);
+	printf("\n\nShowing that * and & are complements of "
+		"each other\n&*aPtr = %p"
+		"\n*&aPtr = %p\n", &*aPtr, *&aPtr);
+}
