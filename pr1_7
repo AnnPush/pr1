@@ -1,60 +1,21 @@
-//Counting letter grades with switch
+#include "stdafx.h"
+
 
 #include <stdio.h>
 
-int main(void)
+int _tmain(int argc, _TCHAR* argv[])
 {
-	unsigned int aCount = 0;
-	unsigned int bCount = 0;
-	unsigned int cCount = 0;
-	unsigned int dCount = 0;
-	unsigned int fCount = 0;
-	
-	puts("Enter the letter grades.");
-	puts("Enter the EOF character to end input.");
-	
-	int grade;
-	
-	//loop until user types end-of-file key sequence
-	while((grade = getchar()) != EOF)
-	{
-		//determine which grade was input
-		switch(grade)
-		{
-			case 'A':
-			case 'a':
-			++aCount;
-			break;
-			case 'B':
-			case 'b':
-			++bCount;
-			break;
-			case 'C':
-			case 'c':
-			++cCount;
-			break;
-			case 'D':
-			case 'd':
-			++dCount;
-			break;
-			case 'F':
-			case 'f':
-			++fCount;
-			break;
-			case '\n':
-			case '\t':
-			case ' ':
-			break;
-			default:
-			printf("%s", "Incorrect letter grade entered.");
-			puts("Enter a new grade.");
-			break;
-		}
-	}
-	puts("\nTotals for each letter grade are:");
-	printf("A: %u\n", aCount);
-	printf("B: %u\n", bCount);
-	printf("C: %u\n", cCount);
-	printf("D: %u\n", dCount);
-	printf("F: %u\n", fCount);
+	int a;//целое число
+	int *aPtr;//aPtr - указатель на целое число
+
+	a = 7;
+	aPtr = &a;//aPtr установлен на адрес a
+
+	printf("The addres of a is %p"
+		"\nThe value of aPtr is %p", &a, aPtr);
+	printf("\n\nThe value of a is %d"
+		"\nThe value of *aPtr is %d", a, *aPtr);
+	printf("\n\nShowing that * and & are complements of "
+		"each other\n&*aPtr = %p"
+		"\n*&aPtr = %p\n", &*aPtr, *&aPtr);
 }
