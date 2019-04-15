@@ -1,17 +1,16 @@
-#include <stdio.h>
-
-int main(void)
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+function myFunction()
 {
-	int n = 7600000;
-	int i = 0;
-	int m = 100000;
-	int j = 2018;
-	
-	while ( i < 5)
-	{
-		n = n + m;
-		printf("%d: %d\n", j, n);
-		j++;
-		i++;
-	}
+   document.getElementById("demo").innerHTML = "JavaScript";
 }
+</script>
+</head>
+<body>
+<h1>JavaScript in head</h1>
+<p id="demo">Java</p>
+<button type="button" onclick="myFunction()">click</button>
+</body>
+</head>
