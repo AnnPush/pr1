@@ -1,68 +1,8 @@
-/*Восемь ферзей*/
-
-
-// Hod2.cpp: определяет точку входа для консольного приложения.
-//
-
-#include "stdafx.h"
-
-#include <stdio.h>
-#define SIZE 8
-
-//прототипы функций
-bool setQueens(int[][SIZE], int size);//проверить, расставлены все ферзи
-void printArray(int b[][SIZE], int size);
-int accessibilityHeuristic(int b[][SIZE], int r, int c, bool f);//эвристика доступности
-
-int _tmain(int argc, _TCHAR* argv[])
-{
-	int board[SIZE][SIZE] = {0};//инициализировать поле нулями
-    int accessibility[SIZE][SIZE] = {0};//инициализировать массив значений доступности нулями
-	
-	int currentRow;//текущая строка
-    int currentColumn;//текущий столбец
-
-	do
-	{
-		//обнулить клетки доски
-		for(int i = 0; i < SIZE; i++)
-		{
-			for(int j = 0; j < SIZE; j++)
-			{
-				board[i][j] = 0;
-			}
-		}
-		//расставляем ферзей
-		for(int i = 1; i <= SIZE; i++)
-        {
-			board[currentRow][currentColumn] = 1;
-		}
-
-	}while(!setQueens(board, SIZE));
-}
-//end main
-
-
-
-int accessibilityHeuristic(int b[][SIZE], int r, int c, bool f)
-{
-	int counter = 0;
-
-	//по диагонали вправо вниз
-
-
-}
-
-
-void printArray( int b[][SIZE], int size)
-{
-	for(int i = 0; i < size; i++)
-	{
-		puts(" ");
-		for(int j = 0; j < size; j++)
-		{
-			printf("%4d", b[i][j]);
-		}
-	}
-}
-//end printArray
+<!DOCTYPE html>
+<html>
+<body>
+<h1>Change content HTML</h1>
+<p id="demo">JavaScript can change content HTML.</p>
+<button type="button" onclick='document.getElementById("demo").innerHTML = "Hello!"'>Click</button>//метод getElementById ищет элемент с индентификатором (id="demo") и изменяет содержимое элемента внутри (innerHTML) на "Hello!"
+</body>
+</html>
