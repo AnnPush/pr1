@@ -1,8 +1,0 @@
-<!DOCTYPE html>
-<html>
-<body>
-<h1>Change content HTML</h1>
-<p id="demo">JavaScript can change content HTML.</p>
-<button type="button" onclick='document.getElementById("demo").innerHTML = "Hello!"'>Click</button>//метод getElementById ищет элемент с индентификатором (id="demo") и изменяет содержимое элемента внутри (innerHTML) на "Hello!"
-</body>
-</html>
