@@ -30,7 +30,7 @@ int main(void)
            if(board[currentRow][currentColumn] == 0)//если значение клетки равно нулю
 	   {
 	      board[currentRow][currentColumn] = n;//в текущую клетку записать новое значение
-              n++;//увеличить счетчик на единицу
+              n++;//увеличить счетчик
 	   }
 	   else
 	   {
