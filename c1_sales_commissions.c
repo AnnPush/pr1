@@ -16,7 +16,7 @@ i) $1000 and over*/
 
 
 #include <stdio.h>
-#define SALES_SIZE 20     //определение размера массива валовых продаж, SALES - продажи
+#define SALES_SIZE 20     //определение размера массива валовых продаж
 #define FREQUENCY_SIZE 9  //определение размера массива частот, FREQUENCY - частота, диапазон частот
 
 
