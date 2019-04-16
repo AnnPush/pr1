@@ -3,7 +3,7 @@
 #include <stdio.h>
 #define SIZE 10
 
-void someFunction(const int b[], size_t startIndex, size_t size);//прототип функции
+void someFunction(const int b[], size_t startIndex, size_t size);//прототип 
 
 int main(void)
 {
