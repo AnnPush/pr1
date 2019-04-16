@@ -1,10 +1,22 @@
-//изменяется изображение HTML путем изменения атрибута src (источник) в теге <img>
 <!DOCTYPE html>
 <html>
 <body>
-<h1>To change the attributes</h1>
-<button onclick="document.getElementById('myImage').src='1.jpg'">red square</button>
-<img id="myImage" src="2.jpg" style="width:100px">
-<button onclick="document.getElementById('myImage').src='2.jpg'">green square</button>
+<h1>Sort array reverse</h1>
+<button onclick="mFunction()">click</button>
+<p id="par"></p>
+<script>
+//создать и вывести на печать массив color
+var color = ["red", "blue", "green", "grey"];
+document.getElementById("par").innerHTML = color;
+
+function mFunction()
+{
+    //сортировка массива
+    color.sort();
+	  //инвертировать массив
+	color.reverse();
+	document.getElementById("par").innerHTML=color;
+}
+</script>
 </body>
 </html>
