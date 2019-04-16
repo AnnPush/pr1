@@ -1,9 +1,44 @@
-//Изменение стиля элемента HTML, тоже что и изменение атрибута в HTML JavaScript
+//Кофеварка
 <!DOCTYPE html>
 <html>
 <body>
-<h1>change style CSS</h1>
-<p id="demo">JavaScript change style CSS</p>
-<button type="button" onclick="document.getElementById('demo').style.fontSize='35px'">click</button>
+<h1>Cofee</h1>
+
+
+<script>
+
+//создать класс Кофеварка
+class Coffee
+{
+    constructor(power, water)
+	{
+	    this.power = power;//мощность кофеварки
+		this.setWater(water);//количество воды в кофеварке
+		this.waterHeat = 4200;//удельная теплоемкость воды
+	}
+	setWater(water)//метод, определяющий количество воды
+	{  
+        this.water = water;
+    }
+	getTimeBoil()//расчет времени кипения воды
+	{
+	    return this.water * this.waterHeat * 80 / this.power;
+	}
+	stop()
+	{
+	    return alert('Coffee ready!');//метод срабатывает через определенное время
+	}
+	start()
+	{
+	    setTimeout(this.stop, this.getTimeBoil());//через сколько напиток будет готов
+	}
+};
+
+let coffee = new Coffee(100);
+coffee.setWater(250);
+coffee.start();
+</script>
+
+
 </body>
 </html>
