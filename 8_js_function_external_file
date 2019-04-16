@@ -1,9 +1,0 @@
-<!DOCTYPE html>
-<html>
-<body>
-<h1>external file</h1>
-<p id="demo">Java</p>
-<button type="button" onclick="myFunction()">click</button>
-<script src="myScript.js"></script>
-</body>
-</html>
