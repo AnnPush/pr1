@@ -24,7 +24,7 @@
 #include <stdio.h>
 #define SIZE 10
 
-void printBoardingPass(int a[], int size);//Печать посадочных мест
+void printBoardingPass(int a[], int size);//печать посадочных мест
 void firstClass(int a[], int size, int p);//бронировать место в первом классе
 void economySection(int a[], int size, int p);//бронировать место в эконом классе
 int seatFirst(int a[], int size);//количество занятых мест в первом классе
