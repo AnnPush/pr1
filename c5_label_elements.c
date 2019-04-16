@@ -18,7 +18,7 @@ int main(void)
 	int sales[SIZE1][SIZE2];//объявляем двумерный массив
 	
         //устанавливаем элементы в нуль
-	for (int row = 0; row <=SIZE1; row++ )
+	for (int row = 0; row <= SIZE1; row++ )
 	{
 		for (int column = 0; column <= SIZE2; column++ )
 		{
