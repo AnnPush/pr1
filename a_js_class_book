@@ -15,7 +15,7 @@ class Book
 		  this.author = "";
 		  this.price = 0;
     
-      //переменная с набором свойств
+      //переменная класса с набором свойств
 	   	this.info =
 		{
 		    pagesCount: 100,
