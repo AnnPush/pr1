@@ -6,7 +6,8 @@
 #define SIZE 8
 
 void printArray(int b[][SIZE], int size);//печать массива
-void accessibilityHeuristic(int b[][SIZE], int ac[][SIZE], int v[], int h[], int size);//функция высчитывает доступность каждой клетки на доске
+void accessibilityHeuristic(int b[][SIZE], int ac[][SIZE], int v[], int h[], int size);//функция высчитывает доступность 
+//каждой клетки на доске
 
 int main(void)
 {
