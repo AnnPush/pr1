@@ -2,7 +2,7 @@
 #define SIZE 8
 
 
-void printArray(int b[][SIZE], int size);
+void printArray(int b[][SIZE], int size);//печать массива
 
 int main(void)
 {
