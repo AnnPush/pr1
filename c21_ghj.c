@@ -3,5 +3,5 @@
 #define SALES_SIZE 20     //определение размера массива валовых продаж
 
 //hglylugjgltyrtuty
-//fvgnkml,hfghjcgdfgrynbvjhgjgjsdfsdfsfsrehgjhgj
+//fvgnkml,hfghjcgdfgrynbvjhgjgjsdfsdfsfsrehhjgjgjgjhgj
 njkkjbnbvn
