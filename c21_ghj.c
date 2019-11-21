@@ -2,6 +2,6 @@
 #include <stdio.h>
 #define SALES_SIZE 20     //определение размера массива валовых продаж
 
-//hglylugjgltyrtutyjh;kl;khj
+//hglylugjgltyrtutyjh;kl;khjfdjdjd
 //fvgnkml,hfghjcgdfgrynbvjhgjgjsdfsdfsfsrehhjgjgjgjhgj
 njkkjbnbvnhfjjjgfj
