@@ -1,21 +1,39 @@
-//fig02_05.c
-//Addition program
+// Fig. 5.4: fig05_04.c
+// Finding the maximum of three integers.
 #include <stdio.h>
 
-//function main begins program execution
+int maximum(int x, int y, int z); // function prototype
+
 int main(void)
 {
-	int integer1; //first number to be entered by user
-	int integer2; //second number to be entered by user
+	int number1; // first integer entered by the user
+	int number2; // second integer entered by the user
+	int number3; // third integer entered by the user
 
-	printf( "Enter first integer\n" ); //prompt
-	scanf( "%d", &integer1 ); //read an integer
+	printf("%s", "Enter three integers: ");
+	scanf("%d%d%d", &number1, &number2, &number3);
 
-	printf( "Enter second integer\n" ); //prompt
-	scanf( "%d", &integer2 ); //read an integer
+	// number1, number2, number3 are arguments
+	// to the maximum function call
+	printf("Maximum is: %d\n", maximum(number1, number2, number3));
+}
 
-	int sum; //variable in which sum will be stored
-	sum = integer1 + integer2; //assign total to sum
+// Function maximum definition
+// x, y, z are parameters
+int maximum(int x, int y, int z)
+{
+	int max = x; // assume x is largest
 
-	printf( "Sum is %d\n", sum ); //print sum
-}//end function main
+	if (y > max) // if y is larger than max, assign to max
+	{
+		max = y;
+	}
+
+	if (z > max) // if z is larger than max, assign z to max
+	{
+		max = z;
+	}
+
+	return max;
+}
+
