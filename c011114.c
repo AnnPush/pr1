@@ -1,30 +1,22 @@
-//Fig. 3.6: fig03_06.c
-//Ckass average program with counter-controlled iteration.
+// Fig. 5.11: fig05_11.c
+// Shifted, scaled random integers produced by 1 + rand() % 6.
 #include <stdio.h>
+#include <stdlib.h>
 
-//function main begins program execution
-int main( void )
+int main(void)
 {
-	unsigned int counter; //number of grade to be entered next
-	int grade; //grade value
-	int total; //sum of grades entered by user
-	int average; //average of grades
+	// loop 20 times
+	int i;
 
-	//initialization phase
-	total = 0; //initialize total
-	counter = 1;  //initialize loop counter
-
-	//processing phase
-	while ( counter <= 10 ) //loop 10 times
+	for (i = 1; i <= 20; ++i)
 	{
-		printf( "%s", "Enter grade: "); //prompt for input
-		scanf( "%d", &grade ); //read grade from user
-		total = total + grade; //add grade to total
-		counter = counter + 1; //increment counter
-	} //end while
+		// pick random number from 1 to 6 and output it
+		printf("%10d", 1 + (rand() % 6));
 
-	//termination phase
-	average = total / 10; //integer division
-
-	printf( "Class average is %d\n", average ); //display result
-} //end function main
+		// if counter is divisible by 5, begin new line of output
+		if (i % 5 == 0)
+		{
+			printf("%s","\n");
+		}
+	}
+}
