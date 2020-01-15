@@ -1,47 +1,20 @@
-//Fig. 2.13: fig02_13.c
-//Using if statements, relational
-//operators, amd equality operators.
+// Fig. 5.6: fig05_06.c
+// Demonstrating the function call stack
+// and stack frames using a function square.
 #include <stdio.h>
 
-//function main begins program execution
-int main( void )
+int square(int); // prototype for function square
+
+int main()
 {
-	printf( "Enter two integers, and I will tell you\n" );
-	printf( "the relationships they satisfy: " );
+	int a = 10; //value to square (local automatic variable in main)
 
-	int num1;//first number to be read from user
-	int num2;//second number to be read from user
+	printf("%d squared: %d\n", a, square(a)); // display a squared
+}
 
-	scanf( "%d %d", &num1, &num2 ); //read two integers
-
-	if ( num1 == num2 )
-	{
-		printf( "%d is equal to %d\n", num1, num2 );
-	} // end if
-
-	if ( num1 != num2 )
-	{
-		printf( "%d is not equal to %d\n", num1, num2 );
-	} //end if
-
-	if ( num1 < num2 )
-	{
-		printf( "%d is less than %d\n", num1, num2 );
-	} //end if
-
-	if ( num1 > num2 )
-	{
-		printf( "%d is greater than %d\n", num1, num2 );
-	} //end if
-
-	if ( num1 <= num2 )
-	{
-		printf( "%d is less than or equal to %d\n", num1, num2 );
-	} //end if
-
-	if ( num1 >= num2 )
-	{
-		printf( "%d is geater than or equal to %d\n", num1, num2 );
-	} //end if	
-} //end function main
+//returns the square of an integer
+int square(int x) // x is a local variable
+{
+	return x * x; // calculate square and return result
+}
 
