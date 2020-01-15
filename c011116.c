@@ -1,43 +1,28 @@
-// Fig. 3.10: fig03_10.c
-// Analysis of examination results.
+// Fig. 5.13: fig05_13.c
+// Randomizing the die-rolling program.
 #include <stdio.h>
+#include <stdlib.h>
 
-// function main begins program execution
-int main ( void )
+int main(void)
 {
-	// initialize variables in definitions
-	unsigned int passes = 0; // number of passes
-	unsigned int failures = 0; // number of failures
-	unsigned int student = 1; // student counter
-	int result; // one exam result
+	unsigned int seed; // number used to seed the random number generator
+	unsigned int i;
 
-	// process 10 students using counter-controlled loop
-	while ( student <= 10 )
+	printf("%s", "Enter seed:");
+	scanf("%u", &seed); // note %u for unsigned int
+
+	srand(seed); // seed the number generator
+
+	// loop 10 times
+	for ( i = 1; i <= 10; ++i)
 	{
-		// prompt user for input and obtain value from user
-		printf( "%s", "Enter result ( 1 = pass, 2 = fail ): " );
-		scanf( "%d", &result );
+		// pick a random number from 1 to 6 and output it
+		printf("%10d", 1 + (rand() % 6));
 
-		// if result 1, increment passes
-		if ( result == 1 )
+		// if counter is divisible by 5, begin a new line of output
+		if (i % 5 == 0)
 		{
-			passes = passes + 1;
-		} // end if
-		else // otherwise, increment failures
-		{
-			failures = failures + 1;
+			puts("");
 		}
-
-		student = student + 1; // increment student counter
-	} // end while
-
-	// termination phase; display number of passes and failures
-	printf( "Passed %u\n", passes );
-	printf( "Failed %u\n", failures );
-
-	//if more than eight student passed print "Bonus to instructor!"
-	if ( passes > 8 )
-	{
-		puts ( "Bonus to instructor!" );
-	} // end if
-} // end function mail
+	}
+}
