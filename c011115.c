@@ -1,48 +1,60 @@
-// Fig. 3.8: fig03_08.c
-// Class-average program with sentinel-controlled iteration
+// Fig. 5.12: fig05_12.c
+// Rolling a six-sided die 600 times.
 #include <stdio.h>
+#include <stdlib.h>
 
-// function main begin program execution
-int main( void )
+int main(void)
 {
-	unsigned int counter; //number of grades entered
-	int grade; // grade value
-	int total; // sum of grades
+	unsigned int frequency1 = 0; // rolled 1 counter
+	unsigned int frequency2 = 0; // rolled 2 counter
+	unsigned int frequency3 = 0; // rolled 3 counter
+	unsigned int frequency4 = 0; // rolled 4 counter
+	unsigned int frequency5 = 0; // rolled 5 counter
+	unsigned int frequency6 = 0; // rolled 6 counter
 
-	float average; // number with decimal point for average
+	unsigned int roll;
+	int face;
 
-	// initialization phase
-	total = 0; // initialize total
-	counter = 0; // initialize loop counter
-
-	// processing phase
-	// get first grade from user
-	printf( "%s", "Enter grade, -1 to end: "); // prompt for input
-	scanf( "%d", &grade); // read grade from user
-
-	//loop while sentinel value not yet read from user
-	while ( grade != -1)
+	// loop 600 times and summsrize results
+	for (roll = 1; roll <= 600; ++roll)
 	{
-		total = total + grade; // add grade to total
-		counter = counter + 1; // increment counter
+		face = 1 + rand() % 6; // random number from 1 to 6
 
-		//get next grade from user
-		printf( "%s", " Enter grade, -1 end: "); //prompt for input
-		scanf( "%d", &grade); // read next grade
-	} // end while
+		// determinate face value and increment appropriate counter
+		switch (face)
+		{
+		    case 1:
+			   ++frequency1;
+			   break;
 
-	//termination phase
-	//if user entered at least one grade
-	if (counter != 0)
-	{
-		// calculate average of all grades entered
-		average = ( float ) total / counter; // avoid truncation
+			case 2:
+			   ++frequency2;
+			   break;
 
-		//display average with two digits of precision
-		printf( "Class average is %.2f\n", average);
-	} // end if
-	else //if grades were entered, output message
-	{
-		puts ( "No grades were entered" );
-	} // end else
-} // end function main
+		    case 3:
+			   ++frequency3;
+			   break;
+
+			case 4:
+			   ++frequency4;
+			   break;
+
+			case 5:
+			   ++frequency5;
+			   break;
+
+			case 6:
+			   ++frequency6;
+			   break;
+		}
+	}
+
+	//display results in tabular format
+	printf("%s%13s\n", "Face", "Frequency");
+	printf("   1%13u\n", frequency1);
+	printf("   2%13u\n", frequency2);
+	printf("   3%13u\n", frequency3);
+	printf("   4%13u\n", frequency4);
+	printf("   5%13u\n", frequency5);
+	printf("   6%13u\n", frequency6);
+}
