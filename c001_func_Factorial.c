@@ -1,5 +1,4 @@
-// Fig. 5.18: fig05_18.c
-// Recursive factorial function/
+// Recursive factorial function.
 #include <stdio.h>
 
 unsigned long long int factorial(unsigned int number);
@@ -8,15 +7,12 @@ int main(void)
 {
 	unsigned int i;
 
-	// during each iteration, calculate
-	// factorial(i) and display result
 	for (i = 0; i <= 10; ++i)
 	{
 		printf("%u! = %LLu\n", i, factorial(i));
 	}
 }
 
-// recursive definition of function fsctorial
 unsigned long long int factorial(unsigned int number)
 {
 	// base case
