@@ -25,7 +25,7 @@ unsigned long long int fibonacci(unsigned int n)
 	}
 	else
 	{
-		return fibonacci(n -1 ) + fibonacci(n - 2);
+		return fibonacci(n - 1) + fibonacci(n - 2);
 	}
 }
 
