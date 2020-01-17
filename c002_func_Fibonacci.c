@@ -1,39 +1,31 @@
-// Fig. 5.4: fig05_04.c
-// Finding the maximum of three integers.
+// Recursive fibonacci function
 #include <stdio.h>
 
-int maximum(int x, int y, int z); // function prototype
+unsigned long long int fibonacci(unsigned int n);
 
 int main(void)
 {
-	int number1; // first integer entered by the user
-	int number2; // second integer entered by the user
-	int number3; // third integer entered by the user
+	unsigned int number;
+	unsigned long long int result;
 
-	printf("%s", "Enter three integers: ");
-	scanf("%d%d%d", &number1, &number2, &number3);
+	printf("%s", "Enter an integer: ");
+	scanf("%u", &number);
 
-	// number1, number2, number3 are arguments
-	// to the maximum function call
-	printf("Maximum is: %d\n", maximum(number1, number2, number3));
+	result = fibonacci(number);
+
+	printf("Fibonacci(%u) = %llu\n", number, result);
 }
 
-// Function maximum definition
-// x, y, z are parameters
-int maximum(int x, int y, int z)
+unsigned long long int fibonacci(unsigned int n)
 {
-	int max = x; // assume x is largest
-
-	if (y > max) // if y is larger than max, assign to max
+	//base case
+	if (0 == n || 1 == n)
 	{
-		max = y;
+		return n;
 	}
-
-	if (z > max) // if z is larger than max, assign z to max
+	else
 	{
-		max = z;
+		return fibonacci(n -1 ) + fibonacci(n - 2);
 	}
-
-	return max;
 }
 
