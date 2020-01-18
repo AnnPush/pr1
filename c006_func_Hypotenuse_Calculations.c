@@ -1,28 +1,17 @@
-// Fig. 5.13: fig05_13.c
-// Randomizing the die-rolling program.
 #include <stdio.h>
-#include <stdlib.h>
+#include <math.h>
+
+double hypotenuse(double a, double b);
 
 int main(void)
 {
-	unsigned int seed; // number used to seed the random number generator
-	unsigned int i;
-
-	printf("%s", "Enter seed:");
-	scanf("%u", &seed); // note %u for unsigned int
-
-	srand(seed); // seed the number generator
-
-	// loop 10 times
-	for ( i = 1; i <= 10; ++i)
-	{
-		// pick a random number from 1 to 6 and output it
-		printf("%10d", 1 + (rand() % 6));
-
-		// if counter is divisible by 5, begin a new line of output
-		if (i % 5 == 0)
-		{
-			puts("");
-		}
-	}
+    printf("1. %.2f\n", hypotenuse(3.0, 4.0));
+    printf("2. %.2f\n", hypotenuse(5.0, 12.0));
+    printf("3. %.2f\n", hypotenuse(8.0, 15.0));
 }
+
+double hypotenuse(double a, double b)
+{
+    return sqrt(a * a + b * b);
+}
+
