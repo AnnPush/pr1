@@ -1,86 +1,42 @@
-// Fig. 5.14: fig05_14.c
-// Simulating the game of craps.
+/*Write a function integerPower(base, exponent) that returns the value of
+base^exponent
+For example, integerPower(3, 4) = 3 * 3 * 3 * 3. Assume that exponent is a positive, nonzero integer,
+and base is an integer. Function integerPower should use for to control the calculation. Do
+not use any math library functions.*/
+
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
+#include <stdio.h>
 
-// enumeration constants represent game status
-enum Status { CONTINUE, WON, LOST };
+int integerPower(int, int);
 
-int rollDice(void); // function prototype
-
-int main(void)
+int main()
 {
-	
-	int sum;
-	int myPoint; // player must make this point to win
-	enum Status gameStatus; // can contain CONTINUE, WON, or LOST
-	
-	srand(time(NULL));
+    int base, exponent;
+    
+    puts("Enter base:");
+    scanf("%d", &base);
+    
+    puts("Enter exponent:");
+    scanf("%d", &exponent);
+    
+    if(exponent <= 0)
+    {
+        puts("Error");
+    }
+    else
+    {
+        printf("Result: %d\n", integerPower(base, exponent));
+    }
+}  
 
-	sum = rollDice(); // first roll of the dice
-
-	// determine game status based on sum of dice
-	switch(sum)
-	{
-		//win on first roll
-	    case 7:  // 7 is a winner
-	    case 11: // 11 is a winner
-			gameStatus = WON;
-			break;
-
-		// lose on first roll
-		case 2: // 2 is a loser
-		case 3: // 3 is a loser
-		case 12: // 12 is a loser
-			gameStatus = LOST;
-			break;
-
-		// remember point
-		default:
-			gameStatus = CONTINUE; //player should keep rolling
-			myPoint = sum; // remember the point
-			printf("Point is %d\n", myPoint);
-			break; // optional
-	}
-
-	//while game not complete
-	while (CONTINUE == gameStatus) // player should keep rolling
-	{
-		sum = rollDice(); // roll dice again
-
-		// determine game status
-		if (sum == myPoint) // win by making point
-		{
-			gameStatus = WON;
-		}
-		else
-		{
-			if (7 == sum) // lose by rolling 7
-			{
-				gameStatus = LOST;
-			}
-		}
-	}
-
-	// display won or lost message
-	if (WON == gameStatus) // did player win
-	{
-		puts("Player wins");
-	}
-	else //player lost
-	{
-		puts("Player loses");
-	}
-}
-
-// roll dice, calculate sum and display results
-int rollDice(void)
+int integerPower(int b, int e)
 {
-	int die1 = 1 + (rand() % 6); // pick random die1 value
-	int die2 = 1 + (rand() % 6); // pick random die2 value
-
-	// display results of this roll
-	printf("Player rolled %d + %d = %d\n", die1, die2, die1 + die2);
-	return die1 + die2; // return sum of dice
+    int p = 1;
+        
+    for(int i = 1; i <= e; i++)
+    {
+        p = p * b;
+    }
+     return p;
 }
