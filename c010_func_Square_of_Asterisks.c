@@ -1,34 +1,31 @@
-// Fig. 5.19: fig5_19.c
-// Recursive fibonacci function
+/*(Square of Asterisks) Write a function that displays a solid square of asterisks whose side is
+specified in integer parameter side. For example, if side is 4, the function displays.*/
+
 #include <stdio.h>
 
-unsigned long long int fibonacci(unsigned int n);
+void isSquare(int);
 
-int main(void)
+int main()
 {
-	unsigned int number;
-	unsigned long long int result;
+    int asterisks;
 
-	printf("%s", "Enter an integer: ");
-	scanf("%u", &number);
-
-	//calculate fibonacci value for number input by user
-	result = fibonacci(number);
-
-	//display result
-	printf("Fibonacci(%u) = %llu\n", number, result);
+    puts("Enter asterisks:");
+    scanf("%d", &asterisks);
+    
+    isSquare(asterisks);
 }
 
-// Recursive definition of function fibinscci
-unsigned long long int fibonacci(unsigned int n)
+void isSquare(int ast)
 {
-	//base case
-	if (0 == n || 1 == n)
-	{
-		return n;
-	}
-	else
-	{
-		return fibonacci(n -1 ) + fibonacci(n - 2);
-	}
+    for(int i = 1; i <= ast; i ++)
+    {
+        for(int j = 1; j <= ast; j ++)
+        {
+            if (j == ast)
+            printf("*\n");
+            else
+            printf("*");
+        }
+    }    
+        
 }
