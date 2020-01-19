@@ -1,31 +1,42 @@
-// Fig. 5.18: fig05_18.c
-// Recursive factorial function/
 #include <stdio.h>
 
-unsigned long long int factorial(unsigned int number);
+int isEven(int);
 
-int main(void)
+int main()
 {
-	unsigned int i;
+	int number;
 
-	// during each iteration, calculate
-	// factorial(i) and display result
-	for (i = 0; i <= 10; ++i)
+	puts("Enter number:(Exit: 0)");
+	scanf("%d", &number);
+
+	while (number != 0)
 	{
-		printf("%u! = %LLu\n", i, factorial(i));
+		if(isEven(number) == 1)
+		{
+			puts("Even");
+		}
+		else
+		{
+                        puts("Odd");
+		}
+		puts("Enter number:(Exit: 0)");
+	        scanf("%d", &number);
 	}
 }
 
-// recursive definition of function fsctorial
-unsigned long long int factorial(unsigned int number)
+int isEven(int n)
 {
-	// base case
-	if (number <= 1)
+	int t;
+	float z;
+	z = n % 2;
+
+	if(z == 0)
 	{
-		return 1;
+		t = 1;
 	}
-	else // recursive step
+	else
 	{
-		return (number * factorial(number - 1));
+		t = 0;
 	}
+	return t;
 }
