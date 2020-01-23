@@ -21,7 +21,7 @@ void f( int n, int a, int b) // n - число дисков, a -  стержен
     {
 	    printf("Move disk %d from pin %d -> %d\n", n, a, b);
     }
-    else
+    else// recursive step
     {
        //tmp -промежуточный стержень
        int tmp = 6 - a - b; // формула для вычисления номера промежуточного стержня (1 + 2 + 3 = 6 => a + b + temp = 6)
