@@ -5,35 +5,23 @@
 
 #include <stdio.h>
 
-void f(int, int, int);
+void f(int, int, int, int);
 
 int main()
 {
     int rings = 3;
-    f(rings, 1, 3);
+    f(rings, 1, 3, 2);
 }
 
-void f( int n, int a, int b) // n - число дисков, a -  стержень, с которого перемещаем диски, b - стержень, на который перемещаем диски.
+void f( int n, int a, int b, int tmp) // n - число дисков, a -  стержень, с которого перемещаем диски, b - стержень, на который перемещаем диски, tmp -промежуточный стержень.
 {
+     if (n == 0)
+	 return;
 
-    //base case
-    if(n == 1)
-    {
-	    printf("Move disk %d from pin %d -> %d\n", n, a, b);
-    }
-    else// recursive step
-    {
-       //tmp -промежуточный стержень
-       int tmp = 6 - a - b; // формула для вычисления номера промежуточного стержня (1 + 2 + 3 = 6 => a + b + temp = 6)
+     f(n - 1, a, tmp, b);
+
+     printf("Move disk %d from pin %d -> %d\n", n, a, b);
+     printf("%s\n", "______________");
         
-        f(n - 1, a, tmp);
-        
-        printf("Move disk %d from pin %d -> %d\n", n, a, b);
-        printf("%s\n", "______________");
-        
-     
-        f(n - 1, tmp, b);
-        
-      
-    }
+     f(n - 1, tmp, b, a);
 }
