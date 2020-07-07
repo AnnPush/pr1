@@ -2,7 +2,8 @@
 write a program that deals two five-card poker hands, evaluates each, and determines which is the
 better hand.
 */
-#include <stdio.h>
+
+  #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 
@@ -13,7 +14,7 @@ better hand.
 //prototypes
 void shuffle(unsigned int wDeck[][FACES]); // shuffling modifies wDeck
 void deal(unsigned int wDeck[][FACES], unsigned int wHand[][2],  const char *wFace[], const char *wSuit[], unsigned int n1,  unsigned int f1); // dealing doesn't modify the arrays
-int pair(unsigned int wHand[][2], const char *wFace[], const char *wSuit[]);
+int pair(unsigned int wHand[][2], const char *wFace[], const char *wSuit[], unsigned int *mm, unsigned int *wHightCard);
 
 int main(void)
 {
@@ -22,7 +23,16 @@ int main(void)
      // represents hand
 	 unsigned int hand[5][2];
 	 unsigned int hand2[5][2];
+
+     unsigned int hightCard1[5];
+	 unsigned int hightCard2[5];
+
 	 unsigned int better, better2;
+	 unsigned int mm1 = 0;
+	 unsigned int mm2 = 0;
+unsigned int flag = 0;
+
+	 
 	  
 	 srand(time(NULL)); // seed random-number generator
      shuffle(deck); // shuffle the deck
@@ -35,12 +45,17 @@ int main(void)
                                 "Five", "Six", "Seven", "Eight",
                                 "Nine", "Ten", "Jack", "Queen", "King"};
 
+    
+	 
+
+	
+
     printf("\nHand1\n\n");
 	deal(deck, hand, face, suit, 1, 5); // deal the deck
-	better = pair(hand, face, suit);
+	better = pair(hand, face, suit, &mm1, hightCard1);
     printf("\nHand2\n\n");
-	deal(deck, hand2, face, suit, 5, 10); // deal the deck
-	better2 = pair(hand2, face, suit);
+	deal(deck, hand2, face, suit, 5, 9); // deal the deck
+	better2 = pair(hand2, face, suit, &mm2, hightCard2);
 
 	if(better > better2)
 	{
@@ -52,7 +67,41 @@ int main(void)
 	}
 	else
 	{
-		printf("\nHand2  = Hand2\n");
+		
+		if(mm1>mm2)
+		{
+			printf("\nHand1 is the better hand\n");
+		}
+		else if(mm1<mm2)
+		{
+			printf("\nHand2 is the better hand\n");
+		}
+		else
+		{
+			for(size_t i =0 ; i < 5; ++i)
+			{
+				if( hightCard1[i] > hightCard2[i])
+				{ 
+					printf("\nHand1 is the better hand\n");
+					flag=1;
+					break;
+				}
+				else if (hightCard1[i] < hightCard2[i])
+				{
+					printf("\nHand2 is the better hand\n");
+					flag = 1;
+					break;
+
+				}
+				
+			}
+			if(flag == 0)
+			{
+				printf("\nHand1 = Hand2\n");
+			}
+			
+		    
+		}
 	}
     
 }
@@ -105,34 +154,39 @@ void deal(unsigned int wDeck[][FACES], unsigned int wHand[][2], const char *wFac
      }
 }
 
-int  pair(unsigned int wHand[][2],  const char *wFace[], const  char *wSuit[])
+int  pair(unsigned int wHand[][2],  const char *wFace[], const  char *wSuit[], unsigned int *mm, unsigned int *wHightCard)
 {
+	void swap(unsigned int * element1Ptr, unsigned int * element2Ptr);
      unsigned int counter[FACES]={0};
      unsigned int counter1[SUITS]={0};
-     unsigned int temp;
+     unsigned int s[5] ={0};
+     unsigned int w[5] ={0};
+     unsigned int k1=0;
+	 unsigned int k2 = 0;
 
      size_t t = 0;
-	 size_t m1 = 0;
-	 size_t m2 = 0;
+	
      
-     for( size_t r = 0; r < 5; ++r)
+     for(unsigned int r = 0; r < 5; ++r)
      {
          ++counter[wHand[r][1]];
          ++counter1[wHand[r][0]];
+		 s[r] = wHand[r][1];
+		 w[r] = wHand[r][1];
      }
      
-     for( size_t p = 0; p < FACES; ++p)
+     for( unsigned int p = 0; p < FACES; ++p)
      {
          if(counter[p] == 2 )
          {
              t++;
 			 if(t == 1)
 			 {
-				 m1 = p;
+				 k1 = p;
 			 }
 			 else if(t == 2)
 			 {
-				 m2 = p;
+				 k2 = p;
 			 }
          }
          else if(counter[p] == 3 )
@@ -143,17 +197,21 @@ int  pair(unsigned int wHand[][2],  const char *wFace[], const  char *wSuit[])
          else if(counter[p] == 4 )
          {
              printf("\nThe hand contains a four %s\n", wFace[p] );
-			 t = 4;
+			 t = 6;
          }
      }
      
      if(t == 1)
      {
-        printf("\nThe hand contains a pair %s\n", wFace[m1] );
+        printf("\nThe hand contains a pair %s\n", wFace[k1] );
+		*mm = k1;
+		
+		
 	 }
      else if(t == 2)
      {
-         printf("\nThe hand contains a two pairs %s and  %s\n", wFace[m1],wFace[m2]  );
+         printf("\nThe hand contains a two pairs %s and  %s\n", wFace[k1],wFace[k2]  );
+		 *mm = k1 + k2;
      }
 
 
@@ -164,34 +222,56 @@ int  pair(unsigned int wHand[][2],  const char *wFace[], const  char *wSuit[])
 		    if(counter1[p] == 5 )
             {
 		        printf("\nThe hand contains a flush %s\n", wSuit[p] );
-				t = 6;
+				
+				t = 5;
 		    }
 	    }
+		for (size_t i=0; i<5;++i )
+		{
+			*mm = w[0] + w[1] + w[2] + w[3] + w[4];
+		}
 	 }
 
+     for( size_t i = 0; i < 4; ++i)
+        {
+		    for( size_t j = 0; j < 4; ++j)
+            {
+			    if(s[j]< s[j+1])
+			    {
+				    swap(&s[j], &s[j+1]);
+			    }
+				
+		    }
+	    }
+		printf("\nSort:\n ");
+		for( size_t i = 0; i < 5; ++i)
+        {
+			
+			printf("%s\n ", wFace[s[i]] );
+		}
+		for( size_t i = 0; i < 5; ++i)
+        {
+           wHightCard[i] = s[i];
+		   
+		}
 
      if( t == 0)
 	 {
-	    for( size_t i = 0; i < 5; ++i)
-        {
-		    for( size_t j = 0; j < 5; ++j)
-            {
-			    if(counter[j]> counter[j+1])
-			    {
-				    temp = counter[j];
-				    counter[j] = counter[j+1];
-				    counter[j+1] = temp;
-			    }
-		    }
-	    }
+	    
 
-       if(counter[4]-1 == counter[3] && counter[3]-1 == counter[2]&& counter[2]-1 == counter[1]&& counter[1]-1 == counter[0])
+       if(s[4]-1 == s[3] && s[3]-1 == s[2] && s[2]-1 == s[1] && s[1]-1 == s[0])
 	   {
-		   printf("The hand contains a straight from %s to %s/ \n", wFace[counter[0]], wFace[counter[4]]);
-		   t = 5;
+		   printf("The hand contains a straight from %s to %s/ \n", wFace[s[0]], wFace[s[4]]);
+		   *mm = s[0] + s[1] + s[2] + s[3] + s[4];
+		   t = 4;
 	   }
 	 }
       return t;
 }
 
-
+void swap(unsigned int * element1Ptr, unsigned int * element2Ptr)
+{
+	unsigned int temp = * element1Ptr;
+    * element1Ptr = * element2Ptr;
+    * element2Ptr = temp;
+}
