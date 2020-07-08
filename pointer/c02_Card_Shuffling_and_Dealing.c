@@ -222,12 +222,12 @@ int  rating(unsigned int wPlayer[][2],  const char *wFace[], const  char *wSuit[
 		 }
 	 }
 
-     //тестирование программы
+    /* //тестирование программы
 	 printf("\nSort:\n ");
 	 for( size_t i = 0; i < 5; ++i)
      {		
 		  printf("%s\n ", wFace[ wSortPlayer[i]] );
-	 }
+	 }*/
 
 
      //определить, идут ли карты по порядку, но масти разные
