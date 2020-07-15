@@ -15,11 +15,12 @@ void deal(unsigned int wDeck[][FACES], unsigned int wPlayer[][2],  const char *w
 int main(void)
 {
 	 // èíèöèàëèçàöèÿ êîëîäû êàðò 
-     unsigned int deck[SUITS][FACES] = { 28,  27, 31, 32,  33, 22, 1, 19, 14,  17, 24, 21, 20, 26, 6, 4, 7, 10, 30, 8, 12, 9, 29,  15, 11,  13,  16, 18,   3,  23, 25, 34, 35, 36, 37, 38, 39, 40, 41,  42,2, 43, 44, 45, 46, 47, 48, 49, 50, 51, 5, 52 };
-   //  unsigned int deck[SUITS][FACES] = { 28,  27, 31, 32,  33, 22, 19, 14,  17, 24, 21, 20, 26, 6, 7, 10, 30, 8, 12, 9, 29,  15, 11,  13,  16, 18, 2, 1, 3, 4, 23, 25, 34, 35, 36, 37, 38, 39, 40, 41,  42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 5, 52 };
+     unsigned int deck[SUITS][FACES] = { 1, 28,  27, 31, 32,  33, 22,  19, 14,  17, 24, 21, 20, 26, 6, 4, 7, 10, 30, 8, 12, 9, 29,  15, 11,  13,  16, 18,   3,  23, 25, 34, 35, 36, 37, 38, 39, 40, 41,  5, 2, 42,  43, 44,  45, 46, 47, 48, 49, 50, 51,  52 };
+  // 1_para unsigned int deck[SUITS][FACES] = { 28,  27, 31, 32,  33, 22, 1, 19, 14,  17, 24, 21, 20, 26, 6, 4, 7, 10, 30, 8, 12, 9, 29,  15, 11,  13,  16, 18,   3,  23, 25, 34, 35, 36, 37, 38, 39, 40, 41,  42,2, 43, 44, 45, 46, 47, 48, 49, 50, 51, 5, 52 };
+   //FLash_DRO  unsigned int deck[SUITS][FACES] = { 28,  27, 31, 32,  33, 22, 19, 14,  17, 24, 21, 20, 26, 6, 7, 10, 30, 8, 12, 9, 29,  15, 11,  13,  16, 18, 2, 1, 3, 4, 23, 25, 34, 35, 36, 37, 38, 39, 40, 41,  42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 5, 52 };
      
-	 unsigned int player1[5][2]; //= {{1, 2}, {0, 2}, {4, 2}, {5, 2}, {6, 2}};//êàðòû íà ðóêàõ ó ïåðâîãî èãðîêà
-	 unsigned int player2[5][2]; //= {{8, 1}, {5, 1}, {0, 1}, {3, 1}, {10, 1}};//êàðòû íà ðóêàõ ó âòîðîãî èãðîêà
+	 unsigned int player1[5][2]; //êàðòû íà ðóêàõ ó ïåðâîãî èãðîêà
+	 unsigned int player2[5][2]; //êàðòû íà ðóêàõ ó âòîðîãî èãðîêà
    
 	 unsigned int combination1;//êîìáèíàöèÿ êàðò ïåðâîãî èãðîêà
 	 unsigned int combination2;//êîìáèíàöèÿ êàðò âòîðîãî èãðîêà
@@ -86,18 +87,18 @@ finish = 3;
 
 	 deal(deck, player1, face, suit, &start, &finish); 
 	 printf("\nHand1\n\n");
-for (size_t i = 0; i < 5; ++i)
+/*for (size_t i = 0; i < 5; ++i)
 {
 	
      printf("%u of %u\n", player1[i][1], player1[i][0]);
 printf("%5s of %-8s\n", face[player1[i][1]], suit[player1[i][0]]);
-}
+}*/
 combination1 = rating(player1, face, suit, &nominal1);
 
 
 printf("\nHand2\n\n");
  
-	  combination2 = rating(player2, face, suit, &nominal2);
+	  //combination2 = rating(player2, face, suit, &nominal2);
 
 
 
@@ -172,10 +173,10 @@ int  rating(unsigned int wPlayer[][2],  const char *wFace[], const  char *wSuit[
 
      unsigned int counter[FACES]={0};//ñêîëüêî îäèíàêîâûõ íîìèíàëîâ êàðò íà ðóêàõ ó èãðîêà
      unsigned int counter1[SUITS]={0};//ñêîëüêî îäèíàêîâûõ ìàñòåé êàðò íà ðóêàõ ó èãðîêà
-     unsigned int wSortPlayer[5][2];
+     unsigned int wSortPlayer[5][2] = {0};
      unsigned int k1 = 0;//ïåðåìåííàÿ äëÿ çàïîìèíàíèÿ íîìèíàëà ïåðâîé ïàðû êàðò
 	 unsigned int k2 = 0;//ïåðåìåííàÿ äëÿ çàïîìèíàíèÿ íîìèíàëà âòîðîé ïàðû êàðò
-
+unsigned int k3 = 0;
      size_t t = 0;//ïðèîðèòåò êîìáèíàöèè
 	
      
@@ -203,10 +204,11 @@ int  rating(unsigned int wPlayer[][2],  const char *wFace[], const  char *wSuit[
          else if(counter[p] == 3 )//åñëè íà ðóêàõ òðè îäèíàêîâûå êàðòû
          {
              printf("\nThe hand contains a three %s\n", wFace[p] );//âûâîäèì ñîîáùåíèå è íîìèíàë êàðòû íà ýêðàí
+			 k3 = p;
 			 t = 3;//ïðèîðèòåò êîìáèíàöèè
          }
 		 // ---------------------------6------------------------------
-         else if(counter[p] == 4 )//ååñëè íà ðóêàõ ÷åòûðå îäèíàêîâûå êàðòû
+         else if(counter[p] == 4 )//åñëè íà ðóêàõ ÷åòûðå îäèíàêîâûå êàðòû
          {
              printf("\nThe hand contains a four %s\n", wFace[p] );//âûâîäèì ñîîáùåíèå è íîìèíàë êàðòû íà ýêðàí
 			 t = 6;//ïðèîðèòåò êîìáèíàöèè
@@ -262,11 +264,128 @@ int  rating(unsigned int wPlayer[][2],  const char *wFace[], const  char *wSuit[
 			if(wPlayer[j][1] < wPlayer[j + 1][1])
 			 {
 				 swap(&wPlayer[j][1], &wPlayer[j + 1][1]);//îáìåí ýëåìåíòîâ
+				 swap(&wPlayer[j][0], &wPlayer[j + 1][0]);
 			 }			
 	     }
 	 }
 
-	     /*if (t == 1 && wPlayer[i][1] == k1)
+	
+ printf("\nSort1:\n ");
+	 for( size_t i = 0; i < 5; ++i)
+     {		
+		  printf("%5s of %-8s\n ", wFace[ wPlayer[i][1]],  wSuit[ wPlayer[i][0]] );
+	 }
+ printf("\n ");
+
+ unsigned int x = 0;
+	    unsigned int m = 0;
+
+    if( t < 7 && t > 4)
+	{
+		m = 0;
+	}
+	else if(t == 0 || t == 1)
+	{
+		m = 3;
+	}
+	else if(t == 3)
+	{
+		m = 2;
+	}
+	else
+	{
+		m = 1;
+	}
+
+	printf("Take %u cards!", m);
+        
+
+        for( size_t i = 0; i < 5; ++i)
+		{
+
+            /*if(m == 8 && wPlayer[i][0] != *nominal)
+			{*/
+            if( wPlayer[i][1] != *nominal )
+			{
+				wSortPlayer[x][1] = wPlayer[i][1];
+				x++;
+			}
+			else
+			{
+				wSortPlayer[m][1] = wPlayer[i][1];
+				++m;
+			}
+		}
+		
+	/* unsigned int b = 0;
+	 unsigned int m = 0;
+    if( t == 1)
+	{
+	    for( size_t i = 0; i < 5; ++i)
+		{
+		  if( wPlayer[i][1] == k1)
+			{
+			  
+			  if(b == 1)
+				 {
+					 wSortPlayer[3][1] = wPlayer[i][1];
+					 wSortPlayer[3][0] = wPlayer[i][0];
+				 }
+				 else
+				{wSortPlayer[4][1] = wPlayer[i][1];
+			  wSortPlayer[4][0] = wPlayer[i][0];
+				}
+				 b = 1;
+			}
+			else
+			{
+               wSortPlayer[m][1] = wPlayer[i][1];
+			   wSortPlayer[m][0] = wPlayer[i][0];
+			   ++m;
+			}
+		}
+for( size_t i = 0; i < 5; ++i)
+		{
+	wPlayer[i][1]=wSortPlayer[i][1];
+	wPlayer[i][0]=wSortPlayer[i][0];
+		}
+ 
+
+	}
+	if( t == 2)
+	{ m = 1;
+	    for( size_t i = 0; i < 5; ++i)
+		{
+		  if( wPlayer[i][1] != k1 && wPlayer[i][1] != k2)
+			{
+			  wSortPlayer[0][1] = wPlayer[i][1];
+					 wSortPlayer[0][0] = wPlayer[i][0];
+
+					  
+                       //printf("%5s of %-8s\n", wFace[wPlayer[i][1]], wSuit[wPlayer[i][0]]);
+			}
+			else
+			{
+				wSortPlayer[m][1] = wPlayer[i][1];
+			   wSortPlayer[m][0] = wPlayer[i][0];
+			   //printf("%u of %u, %d\n", wSortPlayer[m][1], wSortPlayer[m][0], m);
+			   ++m;
+			}
+		}
+		for( size_t i = 0; i < 5; ++i)
+		{
+	wPlayer[i][1]=wSortPlayer[i][1];
+	wPlayer[i][0]=wSortPlayer[i][0];
+		}
+	}*/
+
+
+	   printf("\nSort2:\n ");
+	 for( size_t i = 0; i < 5; ++i)
+     {	
+		 
+		  printf("%5s of %-8s\n ", wFace[ wPlayer[i][1]],  wSuit[ wPlayer[i][0]] );
+	 }  /*if (t == 1 && wPlayer[i][1] == k1)
 			 {
                  wSortPlayer[4][1] = wPlayer[i][1];
 				 if(b == 1)
@@ -287,12 +406,7 @@ wPlayer[i][1] = wSortPlayer[i][1];
 		 }*/
 
      //òåñòèðîâàíèå ïðîãðàììû
-	 printf("\nSort:\n ");
-	 for( size_t i = 0; i < 5; ++i)
-     {		
-		  printf("%5s of %-8s\n ", wFace[ wPlayer[i][1]],  wSuit[ wPlayer[i][0]] );
-	 }
-
+	
 // ---------------------------4(STRAIGHT)------------------------------
      //îïðåäåëèòü, èäóò ëè êàðòû ïî ïîðÿäêó, íî ìàñòè ðàçíûå
      	    
