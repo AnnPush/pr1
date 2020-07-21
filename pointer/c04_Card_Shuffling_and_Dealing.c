@@ -10,7 +10,7 @@
 void shuffle(unsigned int wDeck[][FACES]); // òàñîâàòü êîëîäó êàðò
 int printRating(unsigned int*, unsigned int*);//ïå÷àòü ðåçóëüòàòà îöåíèâàíèÿ êàðò
 void deal(unsigned int wDeck[][FACES], unsigned int wPlayer[][2],  const char *wFace[], const char *wSuit[], unsigned int *n1,  unsigned int *f1); // ðàçäàòü êàðòû, íå èçìåíÿÿ ìàññèâ
-int combination(unsigned int wPlayer[][2], const char *wFace[], const char *wSuit[], unsigned int *nominal, unsigned int *kk1, unsigned int *kk2);
+int combination(unsigned int wPlayer[][2], const char *wFace[], const char *wSuit[], unsigned int *nominal, unsigned int *kk1, unsigned int *kk2, unsigned int *com);
 void printArray(unsigned int wPlayer[][2], const char *wFace[], const char *wSuit[], unsigned int pd);
 void printCombination(unsigned int tt);
 void takeCards(unsigned int wPlayer[][2], unsigned int *nominal, unsigned int tt, unsigned int *kk1, unsigned int *kk2, unsigned int *f1);
@@ -19,10 +19,10 @@ void takeCards(unsigned int wPlayer[][2], unsigned int *nominal, unsigned int tt
 int main(void)
 {
 	 //1_ èíèöèàëèçàöèÿ êîëîäû êàðò íóëÿìè(ïðè òåñòèðîâàíèè çàêîììåíòèðîâàòü ýòó ñòðîêó è âûáðàòü îäíó èç ïîñëåäóþùèõ)
-	 //unsigned int deck[SUITS][FACES] = {0};
+	 unsigned int deck[SUITS][FACES] = {0};
 
 	 //2_ èíèöèàëèçàöèÿ êîëîäû êàðò_íåò êîìáèíàöèé_ó_èãðîêîâ
-     //unsigned int deck[SUITS][FACES] = {28,  1, 13, 31, 32, 33,  8, 21,  5, 17, 19, 11, 20, 26, 37,  9, 50, 12, 30, 22, 24, 47,  2, 29, 15, 10,  3, 27, 16, 18, 23, 25, 34, 35, 36,  6, 38, 39, 40, 41, 14, 42, 43, 44, 45, 46,  4, 48, 49,  7, 51, 52};
+     //unsigned int deck[SUITS][FACES] = {28,  2, 13, 31, 32, 33,  8, 21,  4, 17, 19, 11, 20, 26, 37,  9, 50, 12, 30, 22, 24, 47, 5, 29, 15, 10,  1, 27, 16, 18, 23, 25, 34, 35, 36,  6, 38, 39, 40, 41, 14, 42, 43, 44, 45, 46,  3,  48, 49,  7, 51, 52};
      //ìàññèâ_ïî_ïîðÿäêó
 	 //unsigned int deck[SUITS][FACES] = { 1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52};
 	 
@@ -57,7 +57,7 @@ int main(void)
      //unsigned int deck[SUITS][FACES] = {28,  1, 13, 31, 32, 33,  8, 21,  5, 17, 19, 11, 20, 26, 37,  9, 50, 12, 30, 22, 24, 47,  2, 29, 15, 10, 27,  3, 16, 18, 23, 25, 34, 35, 36, 40, 38, 39,  6, 41, 14, 42, 43, 44, 45, 46,  4, 48, 49,  7, 51, 52};
     
 	 //13_ èíèöèàëèçàöèÿ êîëîäû êàðò_êîìáèíàöèÿ_2_ÏÀÐÛ_ó_äâóõ_èãðîêîâ
-     unsigned int deck[SUITS][FACES] = {28,  1, 13, 31, 32, 33,  8, 21,  5, 17,  9, 11, 20, 26, 37, 49, 50, 12, 30, 22, 24, 47,  2, 29, 15, 10, 27,  3, 16, 18, 23, 25, 34, 35, 36, 40, 38, 39,  6, 41, 14, 42, 43, 44, 45, 46, 19, 48,  4,  7, 51, 52};
+     //unsigned int deck[SUITS][FACES] = {28,  1, 13, 31, 32, 33,  8, 21,  5, 17,  9, 11, 20, 26, 37, 49, 50, 12, 30, 22, 24, 47,  2, 29, 15, 10, 27,  3, 16, 18, 23, 25, 34, 35, 36, 40, 38, 39,  6, 41, 14, 42, 43, 44, 45, 46, 19, 48,  4,  7, 51, 52};
     
 	 //14_ èíèöèàëèçàöèÿ êîëîäû êàðò_êîìáèíàöèÿ_3_ÊÀÐÒÛ_ó_äâóõ_èãðîêîâ
      //unsigned int deck[SUITS][FACES] = {28,  1, 13, 31, 32, 33,  8, 21,  5, 17, 19, 11,  9, 26, 37, 20, 50, 12, 30, 22, 24, 47,  2, 29, 15, 10, 27,  3, 16, 18, 23, 25, 34, 35, 36, 40, 38, 39,  6, 41,  4, 42, 43, 44, 45, 46, 49, 48, 14,  7, 51, 52};
@@ -75,7 +75,7 @@ int main(void)
      //unsigned int deck[SUITS][FACES] = { 4,  1, 13, 31, 48, 33,  3, 21,  5, 17, 19, 37, 20, 26,  8, 16, 50, 12, 30, 22, 24, 10, 32,  7, 15,  9, 27, 11, 47, 18, 23, 25, 34, 35, 36, 44, 38, 39, 40, 41, 28, 42, 43,  6, 45, 46, 49,  2, 14, 29, 51, 52};
      
 	 //19_ èíèöèàëèçàöèÿ êîëîäû êàðò_ÑÐÈÒ_ÄÐÎ_ó_ïåðâîãî_äâóõ_èãðîêîâ
-     //unsigned int deck[SUITS][FACES] = {25, 38, 13, 10,  5, 33, 50, 21, 42, 17, 19, 11, 20, 26, 37,  8,  3, 12, 52, 22, 24, 47, 32, 29, 15, 31,  6, 28, 16, 18, 23,  4, 34, 35, 36, 27,  1, 39, 40, 41,  9,  2, 43, 44, 45, 46, 49, 48, 14, 30, 51,  7};
+     //unsigned int deck[SUITS][FACES] = {25, 38, 13, 10,  4, 33, 50, 21, 42, 17, 19, 11, 20, 26, 37,  8,  3, 12, 52, 22, 24, 47, 32, 29, 15, 31,  6, 28, 16, 18, 23, 5, 34, 35, 36, 27,  1, 39, 40, 41,  9,  2, 43, 44, 45, 46, 49, 48, 14, 30, 51,  7};
       
      //20_ èíèöèàëèçàöèÿ êîëîäû êàðò_ÊÎÌÁÎ_ÄÐÎ_ó_ïåðâîãî_äâóõ_èãðîêîâ
      //unsigned int deck[SUITS][FACES] = {25,  1, 13, 31, 48, 33, 50, 21, 42, 17, 19, 11, 20, 26, 37, 47, 14, 12,  7,  6,  8,  9, 32, 29, 15, 27, 10, 24, 16, 18, 23, 46, 34, 35, 36, 22, 38, 39, 40, 41, 28, 49, 43, 44, 45,  4,  2,  5,  3, 30, 51, 52};
@@ -92,8 +92,11 @@ int main(void)
 	 unsigned int combination1;//êîìáèíàöèÿ êàðò ïåðâîãî èãðîêà
 	 unsigned int combination2;//êîìáèíàöèÿ êàðò âòîðîãî èãðîêà
 
-	 unsigned int nominal1 = 0;//ñóììà íîìèíàëîâ êàðò ïåðâîãî èãðîêà
-	 unsigned int nominal2 = 0;//ñóììà íîìèíàëîâ êàðò âòîðîãî èãðîêà
+	 unsigned int nominal1 = 100;//ñóììà íîìèíàëîâ êàðò ïåðâîãî èãðîêà
+	 unsigned int nominal2 = 100;//ñóììà íîìèíàëîâ êàðò âòîðîãî èãðîêà
+
+     unsigned int combo1 = 0;
+	 unsigned int combo2 = 0;
 
 	 unsigned int start = 1;
 	 unsigned int finish = 5;
@@ -114,7 +117,7 @@ int main(void)
 	 //çàñåÿòü ãåíåðàòîð ñëó÷àéíûõ ÷èñåë 
 	 srand(time(NULL)); 
 	 //òàñîâàòü êîëîäó êàðò(ïðè òåñòèðîâàíèè çàêîììåíòèðîâàòü ýòó ñòðîêó)
-     //shuffle(deck);
+     shuffle(deck);
 
      //ñäàòü êàðòû ïåðâîìó èãðîêó
      printf("\nHand1-------------------\n\n");
@@ -128,10 +131,11 @@ int main(void)
      printArray(player2, face, suit, 0);
 
 	 printf("\nHand1-------------------\n");
-	 combination1 = combination(player1, face, suit, &nominal1, &k1, &k2);
+	 combination1 = combination(player1, face, suit, &nominal1, &k1, &k2, &combo1);
 	 printArray(player1, face, suit, 0);
 	 printCombination(combination1);
 	 takeCards(player1, &nominal1, combination1, &k1, &k2, &finish);
+	  printf("\nTake %u cards!\n\n", finish);
      printArray(player1, face, suit, 0);
 	 if(finish != 0)
 	 {
@@ -139,31 +143,32 @@ int main(void)
 		 printf("\nNew_array\n");
 		 printArray(player1, face, suit, 0);
 	 }
-	 combination1 = combination(player1, face, suit, &nominal1, &k1, &k2);
+	 combination1 = combination(player1, face, suit, &nominal1, &k1, &k2, &combo1);
 	 printArray(player1, face, suit, 0);
 	 printCombination(combination1);
 
 	 printf("\nHand2-------------------\n\n");
-	 combination2 = combination(player2, face, suit, &nominal2, &k1, &k2);
+	 combination2 = combination(player2, face, suit, &nominal2, &k1, &k2, &combo2);
 	 printArray(player2, face, suit, 0);
 	 printCombination(combination2);
 
-     printf("\nHow many cards do you want to take?\n\n");
+     takeCards(player2, &nominal1, combination1, &k1, &k2, &finish);
+     printArray(player2, face, suit, 0);
+	 
+	 printf("\nHow many cards do you want to take?\n\n");
 	 scanf("%u", &finish);
-	 if(finish != 0)
+	 	 if(finish != 0)
 	 {
 		 deal(deck, player2, face, suit, &start, &finish); 
 		 printf("\nNew_array\n");
 		 printArray(player2, face, suit, 0);
 	 }
-	 combination2 = combination(player2, face, suit, &nominal2, &k1, &k2);
+	 combination2 = combination(player2, face, suit, &nominal2, &k1, &k2, &combo2);
 	 printArray(player2, face, suit, 0);
 	 printCombination(combination2);
 	 
 
-
-	 //ïå÷àòü ðåçóëüòàòà îöåíèâàíèÿ êàðò
-	 if(!printRating(&combination1, &combination2))//ñðàâíèòü êîìáèíàöèè êàðò
+	 if(!printRating(&combo1, &combo2))//ñðàâíèòü êîìáèíàöèè êàðò
 	 {
 		 if(!printRating(&nominal1, &nominal2))//åñëè êîìáèíàöèè ðàâíû, ñðàâíèòü íîìèíàëû
 		 {
@@ -211,13 +216,9 @@ void takeCards(unsigned int wPlayer[][2], unsigned int *nominal, unsigned int tt
 		m = 1;
 	} 
 	*f1 = m;
-    printf("\nTake %u cards!\n\n", m);
+   
 
-	if(tt > 7 && wPlayer[0][1] + 1 != wPlayer[1][1])
-	{
-		puts("");
-	}
-	else if(tt > 6 || tt < 4)
+	if(tt > 6 || tt < 4)
     {
        for( size_t i = 0; i < 5; ++i)
 	   {
@@ -252,7 +253,7 @@ void takeCards(unsigned int wPlayer[][2], unsigned int *nominal, unsigned int tt
 }
 
 // ïåðåòàñîâàòü êàðòû â êîëîäå(ïðè òåñòèðîâàíèè çàêîììåíòèðîâàòü ýòó ôóíêöèþ)
-/*void shuffle(unsigned int wDeck[][FACES])
+void shuffle(unsigned int wDeck[][FACES])
 {
      // äëÿ êàæäîé èç 52 êàðò ñëó÷àéíî âûáðàòü ìåñòî â êîëîäå
      for (size_t card = 1; card <= CARDS; ++card)
@@ -269,7 +270,7 @@ void takeCards(unsigned int wPlayer[][2], unsigned int *nominal, unsigned int tt
          // ïîìåñòèòü íîìåð êàðòû â âûáðàííîå ìåñòî êîëîäû
          wDeck[row][column] = card;
      }
-} */
+} 
 
 // ñäàòü êàðòû
 void deal(unsigned int wDeck[][FACES], unsigned int wPlayer[][2], const char *wFace[], const char *wSuit[],  unsigned int *n1,  unsigned int *f1)
@@ -316,7 +317,7 @@ void printArray(unsigned int wPlayer[][2], const char *wFace[], const char *wSui
 }
 
 //îïðåäåëÿåò êîìáèíàöèþ êàðò
-int  combination(unsigned int wPlayer[][2],  const char *wFace[], const  char *wSuit[], unsigned int *nominal, unsigned int *kk1, unsigned int *kk2)
+int  combination(unsigned int wPlayer[][2],  const char *wFace[], const  char *wSuit[], unsigned int *nominal, unsigned int *kk1, unsigned int *kk2, unsigned int *com)
 {
      void swap(unsigned int * element1Ptr, unsigned int * element2Ptr);//ôóíêöèÿ îáìåíèâàþùàÿ êàðòû â ÿ÷åéêàõ, íà êîòîðûå ïîêàçûâàþò óêàçàòåëè
 
@@ -355,12 +356,14 @@ int  combination(unsigned int wPlayer[][2],  const char *wFace[], const  char *w
          {
              *kk1 = p;
 			 t = 3;//ïðèîðèòåò êîìáèíàöèè
+			 *com = 3;
          }
 		 // ---------------------------6--×ÅÒÛÐÅ_ÊÀÐÒÛ----------------------------
          else if(counter[p] == 4 )//åñëè íà ðóêàõ ÷åòûðå îäèíàêîâûå êàðòû
          {
 			*kk1 = p;
             t = 6;//ïðèîðèòåò êîìáèíàöèè
+			*com = 6;
          }
      }
 
@@ -371,6 +374,7 @@ int  combination(unsigned int wPlayer[][2],  const char *wFace[], const  char *w
 		 if(counter1[p] == 5 )//åñëè ïÿòü êàðò îäíîé ìàñòè
          {
 		    t = 5;//ïðèîðèòåò êîìáèíàöèè
+			*com = 5;
 		 }
 	     // ---------------------------7(FLASH_DRO)------------------------------
          else if(counter1[p] == 4 )
@@ -410,6 +414,7 @@ int  combination(unsigned int wPlayer[][2],  const char *wFace[], const  char *w
 			   *nominal += wPlayer[i][1];//âû÷èñëÿåì ñóììó íîìèíàëîâ êàðò îäíîé ìàñòè
 		   }
 		   t = 4;
+		   *com = 4;
 	   }
 	   // ---------------------------8(STRAIGHT_DRO)------------------------------
 	   else if(wPlayer[4][1] - 1 == wPlayer[3][1] && wPlayer[3][1] - 1 == wPlayer[2][1] && wPlayer[2][1] - 1 == wPlayer[1][1] || wPlayer[3][1] - 1 == wPlayer[2][1] && wPlayer[2][1] - 1 == wPlayer[1][1] && wPlayer[1][1] - 1 == wPlayer[0][1])
@@ -429,11 +434,13 @@ int  combination(unsigned int wPlayer[][2],  const char *wFace[], const  char *w
      if(t == 1)//åñëè íà ðóêàõ îäíà ïàðà
      {
 		*nominal = *kk1;//çàïîìíèòü íîìèíàë ïåðâîé ïàðû	
+		*com = 1;
 	 }
 	 // ---------------------------2------------------------------
      else if(t == 2)//åñëè íà ðóêàõ äâå ïàðû
      {
 		 *nominal = *kk1 + *kk2;//ñ÷èòàåì ñóììó íîìèíàëîâ äâóõ ïàð
+		 *com = 2;
      } 
       return t;
 }
