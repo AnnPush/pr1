@@ -6,7 +6,8 @@
 #define FACES 13
 #define CARDS 52
 
-//ïðîòîòèïû
+//прототипы
+
 void shuffle(unsigned int wDeck[][FACES]); // òàñîâàòü êîëîäó êàðò
 int printRating(unsigned int*, unsigned int*);//ïå÷àòü ðåçóëüòàòà îöåíèâàíèÿ êàðò
 void deal(unsigned int wDeck[][FACES], unsigned int wPlayer[][2],  const char *wFace[], const char *wSuit[], unsigned int *n1,  unsigned int *f1); // ðàçäàòü êàðòû, íå èçìåíÿÿ ìàññèâ
@@ -128,7 +129,7 @@ int main(void)
 	}  
 	 
 }
-
+//орор
 void takeCards(unsigned int wPlayer[][2], unsigned int *nominal, unsigned int tt, unsigned int *kk1, unsigned int *kk2, unsigned int *f1)
 {
 	unsigned int wSortPlayer[5][2] = {0};
