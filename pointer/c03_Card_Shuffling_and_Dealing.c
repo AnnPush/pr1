@@ -6,28 +6,27 @@
 #define FACES 13
 #define CARDS 52
 
-//ïðîòîòèïû
-void shuffle(unsigned int wDeck[][FACES]); // òàñîâàòü êîëîäó êàðò
-void deal(unsigned int wDeck[][FACES], unsigned int wPlayer[][2],  const char *wFace[], const char *wSuit[], unsigned int *n1,  unsigned int *f1); // ðàçäàòü êàðòû, íå èçìåíÿÿ ìàññèâ
-int combination(unsigned int wPlayer[][2], const char *wFace[], const char *wSuit[], unsigned int *nominal, unsigned int *kk1, unsigned int *kk2);//îïðåäåëèòü êîìáèíàöèþ êàðò
-void printArray(unsigned int wPlayer[][2], const char *wFace[], const char *wSuit[], unsigned int pd);//ðàñïå÷àòàòü êàðòû èãðîêà
-void printCombination(unsigned int tt);//ðàñïå÷àòàòü êîìáèíàöèþ
-void takeCards(unsigned int wPlayer[][2], unsigned int *nominal, unsigned int tt, unsigned int *kk1, unsigned int *kk2, unsigned int *f1);//îïðåäåëèòü, ñêîëüêî êàðò âçÿòü åùå
+//прототипы
+void shuffle(unsigned int wDeck[][FACES]); // тасовать колоду карт
+void deal(unsigned int wDeck[][FACES], unsigned int wPlayer[][2],  const char *wFace[], const char *wSuit[], unsigned int *n1,  unsigned int *f1); // раздать карты, не изменяя массива
+int combination(unsigned int wPlayer[][2], const char *wFace[], const char *wSuit[], unsigned int *nominal, unsigned int *kk1, unsigned int *kk2);//определить комбинацию карт
+void printArray(unsigned int wPlayer[][2], const char *wFace[], const char *wSuit[], unsigned int pd);//распечатать карты игрока
+void printCombination(unsigned int tt);//печать комбинация карт
+void takeCards(unsigned int wPlayer[][2], unsigned int *nominal, unsigned int tt, unsigned int *kk1, unsigned int *kk2, unsigned int *f1);//сколько еще взять карт
 
 
 int main(void)
 {
-	 //1_ èíèöèàëèçàöèÿ êîëîäû êàðò íóëÿìè(ïðè òåñòèðîâàíèè çàêîììåíòèðîâàòü ýòó ñòðîêó è âûáðàòü îäíó èç ïîñëåäóþùèõ)
 	  unsigned int deck[SUITS][FACES] = {0};
 
-	 unsigned int player1[5][2]; //êàðòû íà ðóêàõ ó ïåðâîãî èãðîêà
-	 unsigned int player2[5][2]; //êàðòû íà ðóêàõ ó âòîðîãî èãðîêà
+	 unsigned int player1[5][2]; //карты на руках у первого игрока
+	 unsigned int player2[5][2]; //карты на руках у второго игрока
    
-	 unsigned int combination1;//êîìáèíàöèÿ êàðò ïåðâîãî èãðîêà
-	 unsigned int combination2;//êîìáèíàöèÿ êàðò âòîðîãî èãðîêà
+	 unsigned int combination1;//комбинация карт первого игрока
+	 unsigned int combination2;//комбинация карт второго игрока
 
-	 unsigned int nominal1 = 0;//ñóììà íîìèíàëîâ êàðò ïåðâîãî èãðîêà
-	 unsigned int nominal2 = 0;//ñóììà íîìèíàëîâ êàðò âòîðîãî èãðîêà
+	 unsigned int nominal1 = 0;//сумма номиналов карт первого игрока
+	 unsigned int nominal2 = 0;//сумма номиналов карт второго игрока
 
 	 unsigned int start = 1;
 	 unsigned int finish = 5;
