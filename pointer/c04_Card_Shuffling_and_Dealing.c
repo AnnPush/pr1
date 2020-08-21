@@ -7,10 +7,9 @@
 #define CARDS 52
 
 //прототипы
-
-void shuffle(unsigned int wDeck[][FACES]); // òàñîâàòü êîëîäó êàðò
-int printRating(unsigned int*, unsigned int*);//ïå÷àòü ðåçóëüòàòà îöåíèâàíèÿ êàðò
-void deal(unsigned int wDeck[][FACES], unsigned int wPlayer[][2],  const char *wFace[], const char *wSuit[], unsigned int *n1,  unsigned int *f1); // ðàçäàòü êàðòû, íå èçìåíÿÿ ìàññèâ
+void shuffle(unsigned int wDeck[][FACES]); // тасовать колоду карт
+int printRating(unsigned int*, unsigned int*);//печать результата оценивания карт
+void deal(unsigned int wDeck[][FACES], unsigned int wPlayer[][2],  const char *wFace[], const char *wSuit[], unsigned int *n1,  unsigned int *f1); // раздать карты, не изменяя массив
 int combination(unsigned int wPlayer[][2], const char *wFace[], const char *wSuit[], unsigned int *nominal, unsigned int *kk1, unsigned int *kk2, unsigned int *com);
 void printArray(unsigned int wPlayer[][2], const char *wFace[], const char *wSuit[], unsigned int pd);
 void printCombination(unsigned int tt);
@@ -19,18 +18,18 @@ void takeCards(unsigned int wPlayer[][2], unsigned int *nominal, unsigned int tt
 
 int main(void)
 {
-	 //1_ èíèöèàëèçàöèÿ êîëîäû êàðò íóëÿìè(ïðè òåñòèðîâàíèè çàêîììåíòèðîâàòü ýòó ñòðîêó è âûáðàòü îäíó èç ïîñëåäóþùèõ)
+	 //1_ инициализация колоды карт нулями(при тестировании закомментировать эту строку и выбрать одну из последующих)
 	 unsigned int deck[SUITS][FACES] = {0};
 
 	  
-	 unsigned int player1[5][2]; //êàðòû íà ðóêàõ ó ïåðâîãî èãðîêà
-	 unsigned int player2[5][2]; //êàðòû íà ðóêàõ ó âòîðîãî èãðîêà
+	 unsigned int player1[5][2]; //карты на руках у первого игрока
+	 unsigned int player2[5][2]; //карты на руках у второго игрока
    
-	 unsigned int combination1;//êîìáèíàöèÿ êàðò ïåðâîãî èãðîêà
-	 unsigned int combination2;//êîìáèíàöèÿ êàðò âòîðîãî èãðîêà
+	 unsigned int combination1;//комбинация карт первого игрока
+	 unsigned int combination2;//комбинация карт второго игрока
 
-	 unsigned int nominal1 = 100;//ñóììà íîìèíàëîâ êàðò ïåðâîãî èãðîêà
-	 unsigned int nominal2 = 100;//ñóììà íîìèíàëîâ êàðò âòîðîãî èãðîêà
+	 unsigned int nominal1 = 100;//сумма номиналов карт первого игрока
+	 unsigned int nominal2 = 100;//сумма номиналов карт второго игрока
 
      unsigned int combo1 = 0;
 	 unsigned int combo2 = 0;
@@ -38,30 +37,30 @@ int main(void)
 	 unsigned int start = 1;
 	 unsigned int finish = 5;
     
-	 unsigned int flag = 0;//ñ÷åò÷èê ïðè îïðåäåëåíèè ñòàðøåé êàðòû, ñêîëüêî êàðò îêàçàëèñü ðàâíû
-     unsigned int pl_dl = 0;//åñëè äèëåð - 1, åñëè èãðîê -0 
+	 unsigned int flag = 0;//счетчик при определении старшей карты, сколько карт оказались равны
+     unsigned int pl_dl = 0;//если дилер - 1, если игрок -0 
 
-	 unsigned int k1 = 100;//ïåðåìåííàÿ äëÿ çàïîìèíàíèÿ íîìèíàëà ïåðâîé ïàðû êàðò
-	 unsigned int k2 = 100;//ïåðåìåííàÿ äëÿ çàïîìèíàíèÿ íîìèíàëà âòîðîé ïàðû êàðò
+	 unsigned int k1 = 100;//переменная для запоминания номинала первой пары карт
+	 unsigned int k2 = 100;//переменная для запоминания номинала второй пары карт
      
 	 
-	 // èíèöèàëèçàöèÿ ìàññèâà ìàñòåé
+	 // инициализация массива мастей
      const char *suit[SUITS] = {"Hearts", "Diamonds", "Clubs", "Spades"};
 
-	 // èíèöèàëèçàöèÿ ìàññèâà íîìèíàëîâ(çíà÷åíèé)
+	 // инициализация массива номиналов(значений)
      const char *face[FACES] = {"Ace", "Deuce", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"};
      
-	 //çàñåÿòü ãåíåðàòîð ñëó÷àéíûõ ÷èñåë 
+	 //засеять генератор случайных чисел 
 	 srand(time(NULL)); 
-	 //òàñîâàòü êîëîäó êàðò(ïðè òåñòèðîâàíèè çàêîììåíòèðîâàòü ýòó ñòðîêó)
+	 //тасовать колоду карт(при тестировании закомментировать эту строку)
      shuffle(deck);
 
-     //ñäàòü êàðòû ïåðâîìó èãðîêó
+     //сдать карты первому игроку
      printf("\nHand1-------------------\n\n");
      deal(deck, player1, face, suit, &start, &finish); 
      printArray(player1, face, suit, 0); 
 
-     //ñäàòü êàðòû âòîðîìó èãðîêó
+     //сдать карты второму игроку
      printf("\nHand2-------------------\n\n");
      finish = 5;
 	 deal(deck, player2, face, suit, &start, &finish);
@@ -105,13 +104,13 @@ int main(void)
 	 printCombination(combination2);
 	 
 
-	 if(!printRating(&combo1, &combo2))//ñðàâíèòü êîìáèíàöèè êàðò
+	 if(!printRating(&combo1, &combo2))//сравнить комбинации карт
 	 {
-		 if(!printRating(&nominal1, &nominal2))//åñëè êîìáèíàöèè ðàâíû, ñðàâíèòü íîìèíàëû
+		 if(!printRating(&nominal1, &nominal2))//если комбинации равны, сравнить номиналы
 		 {
 			 for(size_t i = 4 ; i >= 0; --i)
 			 {
-				 if(!printRating(&player1[i][1], &player2[i][1]))//åñëè íîìèíàëû ðàâíû, ñðàâíåíèå èäåò ïî ñîðòèðîâàííîìó ìàññèâó ïî ñòàðøåé êàðòå
+				 if(!printRating(&player1[i][1], &player2[i][1]))//если номиналы равны, сравнение идет по сортированному массиву по старшей карте
 		         {
 					 flag++;
 				 }
@@ -123,13 +122,13 @@ int main(void)
 			 }
 			 if( flag == 5)
 			 {
-                  printf("\nHand1 = Hand2\n");//êàðòû èãðîêîâ ðàâíû
+                  printf("\nHand1 = Hand2\n");//карты игроков равны
 			 }
 		}
 	}  
 	 
 }
-//орор
+
 void takeCards(unsigned int wPlayer[][2], unsigned int *nominal, unsigned int tt, unsigned int *kk1, unsigned int *kk2, unsigned int *f1)
 {
 	unsigned int wSortPlayer[5][2] = {0};
@@ -189,54 +188,54 @@ void takeCards(unsigned int wPlayer[][2], unsigned int *nominal, unsigned int tt
 	}
 }
 
-// ïåðåòàñîâàòü êàðòû â êîëîäå(ïðè òåñòèðîâàíèè çàêîììåíòèðîâàòü ýòó ôóíêöèþ)
+// перетасовать карты в колоде(при тестировании закомментировать эту функцию)
 void shuffle(unsigned int wDeck[][FACES])
 {
-     // äëÿ êàæäîé èç 52 êàðò ñëó÷àéíî âûáðàòü ìåñòî â êîëîäå
+     // для каждой из 52 карт случайно выбрать место в колоде
      for (size_t card = 1; card <= CARDS; ++card)
 	 {
-         size_t row; // íîìåð ñòðîêò
-         size_t column; // íîìåð ñòîëáöà
+         size_t row; // номер строкт
+         size_t column; // номер столбца
 
-         // âûáðàòü íîâóþ ïîçèöèþ, ïîêà íå áóäåò íàéäåíà ñâîáîäíàÿ
+         // выбрать новую позицию, пока не будет найдена свободная
          do {
              row = rand() % SUITS;
              column = rand() % FACES;
          } while(wDeck[row][column] != 0); 
 
-         // ïîìåñòèòü íîìåð êàðòû â âûáðàííîå ìåñòî êîëîäû
+         // поместить номер карты в выбранное место колоды
          wDeck[row][column] = card;
      }
 } 
 
-// ñäàòü êàðòû
+// сдать карты
 void deal(unsigned int wDeck[][FACES], unsigned int wPlayer[][2], const char *wFace[], const char *wSuit[],  unsigned int *n1,  unsigned int *f1)
 {
-	 unsigned int r = 0;//ñ÷åò÷èê îïðåäåëÿþùèé íîìèíàë è ìàñòü êàðò
-     *f1 += *n1;//îïðåäåëèòü êîíå÷íóþ êàðòó ïðè ðàçäà÷å
+	 unsigned int r = 0;//счетчик определяющий номинал и масть карт
+     *f1 += *n1;//определить конечную карту при раздаче
 
-     // ñäàòü êàðòû â óêàçàííûõ ïðåäåëàõ
+     // сдать карты в указанных пределах
      for (size_t card = *n1; card < *f1; ++card)
 	 {
-         // öèêë ïî ñòðîêàì
+         // цикл по строкам
 		 for (size_t row = 0; row < SUITS; ++row)
 		 {
-             // öèêë ïî ñòîëáöàì â òåêóùåé ñòðîêå
+             // цикл по столбцам в текущей строке
              for (size_t column = 0; column < FACES; ++column)
 		     {
 				 if (wDeck[row][column] == card) 
 				 {
-					 wPlayer[r][0] = row;//çàïîìíèòü ìàñòü êàðòû, ïîëó÷åííîé èãðîêîì
-					 wPlayer[r][1] = column;//çàïîìíèòü íîìèíàë êàðòû, ïîëó÷åííîé èãðîêîì
+					 wPlayer[r][0] = row;//запомнить масть карты, полученной игроком
+					 wPlayer[r][1] = column;//запомнить номинал карты, полученной игроком
 					 ++r; 
 	            }   
             }
         }
 	 }
-	 *n1 = *f1;//îïðåäåëåëèòü ïåðâóþ êàðòó ïðè ñëåäóþùåé ðàçäà÷å êàðò
+	 *n1 = *f1;//определелить первую карту при следующей раздаче карт
 }
 
-//ðàñïå÷àòàòü êàðòû èãðîêà
+//распечатать карты игрока
 void printArray(unsigned int wPlayer[][2], const char *wFace[], const char *wSuit[], unsigned int pd)
 {
 	for( size_t i = 0; i < 5; ++i)
@@ -253,53 +252,53 @@ void printArray(unsigned int wPlayer[][2], const char *wFace[], const char *wSui
     printf("\n ");
 }
 
-//îïðåäåëÿåò êîìáèíàöèþ êàðò
+//определяет комбинацию карт
 int  combination(unsigned int wPlayer[][2],  const char *wFace[], const  char *wSuit[], unsigned int *nominal, unsigned int *kk1, unsigned int *kk2, unsigned int *com)
 {
-     void swap(unsigned int * element1Ptr, unsigned int * element2Ptr);//ôóíêöèÿ îáìåíèâàþùàÿ êàðòû â ÿ÷åéêàõ, íà êîòîðûå ïîêàçûâàþò óêàçàòåëè
+     void swap(unsigned int * element1Ptr, unsigned int * element2Ptr);//функция обменивающая карты в ячейках, на которые показывают указатели
 
-     unsigned int counter[FACES]={0};//ñêîëüêî îäèíàêîâûõ íîìèíàëîâ êàðò íà ðóêàõ ó èãðîêà
-     unsigned int counter1[SUITS]={0};//ñêîëüêî îäèíàêîâûõ ìàñòåé êàðò íà ðóêàõ ó èãðîêà
+     unsigned int counter[FACES]={0};//сколько одинаковых номиналов карт на руках у игрока
+     unsigned int counter1[SUITS]={0};//сколько одинаковых мастей карт на руках у игрока
 
      unsigned int wSortPlayer[5][2] = {0};
 
      
 
-     size_t t = 0;//ïðèîðèòåò êîìáèíàöèè
+     size_t t = 0;//приоритет комбинации
 	
      
      for(unsigned int r = 0; r < 5; ++r)
      {
-         ++counter[wPlayer[r][1]];//ñ÷èòàåì, ñêîëüêî îäèíàêîâûõ íîìèíàëîâ êàðò íà ðóêàõ ó èãðîêà
-         ++counter1[wPlayer[r][0]];//ñ÷èòàåì, ñêîëüêî îäèíàêîâûõ ìàñòåé êàðò íà ðóêàõ ó èãðîêà	
+         ++counter[wPlayer[r][1]];//считаем, сколько одинаковых номиналов карт на руках у игрока
+         ++counter1[wPlayer[r][0]];//считаем, сколько одинаковых мастей карт на руках у игрока	
      }
      
      for( unsigned int p = 0; p < FACES; ++p)
      {
-         if(counter[p] == 2 )//åñëè äâå îäèíàêîâûå êàðòû
+         if(counter[p] == 2 )//если две одинаковые карты
          {
-             t++;//óâåëè÷èâàåì ñ÷åò÷èê íà åäèíèöó, òàê êàê íà ðóêàõ  ïàðà êàðò
-			 if(t == 1)//åñëè íà ðóêàõ îäíà ïàðà
+             t++;//увеличиваем счетчик на единицу, так как на руках  пара карт
+			 if(t == 1)//если на руках одна пара
 			 {
-				 *kk1 = p;//çàïîìèíàåì íîìèíàë ïåðâîé ïàðû
+				 *kk1 = p;//запоминаем номинал первой пары
 			 }
-			 else if(t == 2)//åñëè íà ðóêàõ äâå ïàðû
+			 else if(t == 2)//если на руках две пары
 			 {
-				 *kk2 = p;//çàïîìèíàåì íîìèíàë âòîðîé ïàðû
+				 *kk2 = p;//запоминаем номинал второй пары
 			 }
          }
-		// ---------------------------3--ÒÐÈ_ÊÀÐÒû----------------------------
-         else if(counter[p] == 3 )//åñëè íà ðóêàõ òðè îäèíàêîâûå êàðòû
+		// ---------------------------3--ТРИ_КАРТы----------------------------
+         else if(counter[p] == 3 )//если на руках три одинаковые карты
          {
              *kk1 = p;
-			 t = 3;//ïðèîðèòåò êîìáèíàöèè
+			 t = 3;//приоритет комбинации
 			 *com = 3;
          }
-		 // ---------------------------6--×ÅÒÛÐÅ_ÊÀÐÒÛ----------------------------
-         else if(counter[p] == 4 )//åñëè íà ðóêàõ ÷åòûðå îäèíàêîâûå êàðòû
+		 // ---------------------------6--ЧЕТЫРЕ_КАРТЫ----------------------------
+         else if(counter[p] == 4 )//если на руках четыре одинаковые карты
          {
 			*kk1 = p;
-            t = 6;//ïðèîðèòåò êîìáèíàöèè
+            t = 6;//приоритет комбинации
 			*com = 6;
          }
      }
@@ -308,47 +307,47 @@ int  combination(unsigned int wPlayer[][2],  const char *wFace[], const  char *w
 
      for( size_t p = 0; p < SUITS; ++p)
      {  
-		 if(counter1[p] == 5 )//åñëè ïÿòü êàðò îäíîé ìàñòè
+		 if(counter1[p] == 5 )//если пять карт одной масти
          {
-		    t = 5;//ïðèîðèòåò êîìáèíàöèè
+		    t = 5;//приоритет комбинации
 			*com = 5;
 		 }
 	     // ---------------------------7(FLASH_DRO)------------------------------
          else if(counter1[p] == 4 )
 			{
                 *kk1 = p;
-                t = 7;//ïðèîðèòåò êîìáèíàöèè
+                t = 7;//приоритет комбинации
 			}
 	}
     if(t == 5)
 	{
 		 for (size_t i = 0; i < 5; ++i )
          {
-			 *nominal += wPlayer[i][1];//âû÷èñëÿåì ñóììó íîìèíàëîâ êàðò îäíîé ìàñòè
+			 *nominal += wPlayer[i][1];//вычисляем сумму номиналов карт одной масти
          }
 	}
 	//-----------------------------------------------------------------------------
 
-    //ñîðòèðîâêà ìàññèâà êàðò, êîòîðûå èìåþòñÿ íà ðóêàõ ó èãðîêà
+    //сортировка массива карт, которые имеются на руках у игрока
     for( size_t i = 0; i < 4; ++i)
     {
 		 for( size_t j = 0; j < 4; ++j)
          {	
 			if(wPlayer[j][1] > wPlayer[j + 1][1])
 			 {
-				 swap(&wPlayer[j][1], &wPlayer[j + 1][1]);//îáìåí ýëåìåíòîâ
+				 swap(&wPlayer[j][1], &wPlayer[j + 1][1]);//обмен элементов
 				 swap(&wPlayer[j][0], &wPlayer[j + 1][0]);
 			 }			
 	     }
     }
     // ---------------------------4(STRAIGHT)------------------------------
-    //îïðåäåëèòü, èäóò ëè êàðòû ïî ïîðÿäêó, íî ìàñòè ðàçíûå
+    //определить, идут ли карты по порядку, но масти разные
      	    
        if(wPlayer[4][1]-1 == wPlayer[3][1] && wPlayer[3][1] - 1 == wPlayer[2][1] && wPlayer[2][1] - 1 == wPlayer[1][1] && wPlayer[1][1] - 1 == wPlayer[0][1])
 	   {
 		   for (size_t i = 0; i < 5; ++i )
 		   {
-			   *nominal += wPlayer[i][1];//âû÷èñëÿåì ñóììó íîìèíàëîâ êàðò îäíîé ìàñòè
+			   *nominal += wPlayer[i][1];//вычисляем сумму номиналов карт одной масти
 		   }
 		   t = 4;
 		   *com = 4;
@@ -368,15 +367,15 @@ int  combination(unsigned int wPlayer[][2],  const char *wFace[], const  char *w
 			
 		 }
      // --------------------------1----------------------------
-     if(t == 1)//åñëè íà ðóêàõ îäíà ïàðà
+     if(t == 1)//если на руках одна пара
      {
-		*nominal = *kk1;//çàïîìíèòü íîìèíàë ïåðâîé ïàðû	
+		*nominal = *kk1;//запомнить номинал первой пары	
 		*com = 1;
 	 }
 	 // ---------------------------2------------------------------
-     else if(t == 2)//åñëè íà ðóêàõ äâå ïàðû
+     else if(t == 2)//если на руках две пары
      {
-		 *nominal = *kk1 + *kk2;//ñ÷èòàåì ñóììó íîìèíàëîâ äâóõ ïàð
+		 *nominal = *kk1 + *kk2;//считаем сумму номиналов двух пар
 		 *com = 2;
      } 
       return t;
@@ -422,7 +421,7 @@ void printCombination(unsigned int tt)
 	}
 }
 
-//ôóíêöèÿ îáìåíèâàþùàÿ êàðòû â ÿ÷åéêàõ, íà êîòîðûå ïîêàçûâàþò óêàçàòåëè
+//функция обменивающая карты в ячейках, на которые показывают указатели
 void swap(unsigned int * element1Ptr, unsigned int * element2Ptr)
 {
 	unsigned int temp = * element1Ptr;
@@ -430,7 +429,7 @@ void swap(unsigned int * element1Ptr, unsigned int * element2Ptr)
     * element2Ptr = temp;
 }
 
-//ïå÷àòü ðåçóëüòàòà îöåíèâàíèÿ êàðò
+//печать результата оценивания карт
 int printRating(unsigned int* ptr1, unsigned int* ptr2)
 {
 	if(*ptr1 > *ptr2)
