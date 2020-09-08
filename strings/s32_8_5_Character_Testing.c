@@ -25,8 +25,8 @@
 int main(void)
 {
 	char c;
-	puts("Enter character:\n");
+	puts("Enter char:\n");
 	scanf("%c", &c);
-	printf("Character: %c\n", c);
+	printf("Char: %c\n", c);
 	
 }
