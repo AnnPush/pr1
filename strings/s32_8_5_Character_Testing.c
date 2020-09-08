@@ -30,4 +30,7 @@ int main(void)
 	scanf("%c%d", &c, &a);
 	printf("Char: %c\n Int: %d\n", c, a);
 	
+	printf("1.1) isdigit \'%c\' = %d\n", isdigit(c));
+	printf("1.2) isdigit \'%d\' = %d\n", isdigit(a));
+	
 }
