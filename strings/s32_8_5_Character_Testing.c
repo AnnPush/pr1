@@ -24,5 +24,9 @@
 
 int main(void)
 {
+	char c;
+	puts("Enter character:\n");
+	scanf("%c", &c);
+	printf("Character: %c\n", c);
 	
 }
