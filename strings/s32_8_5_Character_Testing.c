@@ -96,7 +96,7 @@ int main(void)
 	printf("islower \'%c\' = %d\n", c, islower(c));
 	
 	/* Enter character:
-	9
+	A
 	Character: A
 	islower 'A' = 0
 	
@@ -105,4 +105,18 @@ int main(void)
 	Character: a
 	islower 'a' = 512*/
 	
+	
+	/*6) int isupper(int c) Возвращает истинное значение, 
+	если с -буква верхнего регистра, и 0 в противном случае*/
+	printf("isupper \'%c\' = %d\n", c, isupper(c));
+	
+	/* Enter character:
+	А
+	Character: A
+	isupper 'A' = 256
+	
+	Enter character:
+	a
+	Character: a
+	isupper 'a' = 0*/
 }
