@@ -209,6 +209,25 @@ int main(void)
 	Character: 3
 	ispunct '3' = 0
 	*/
+	
+	/*12) int isprint(int c) Возвращает истинное значение, если
+	 с - печатаемый символ, включая пробел, и 0 в противном случае.
+	 */
+	printf("isprint \'%c\' = %d\n", c, isprint(c));
+	
+	/*12) int isprint(int c) Возвращает истинное значение, если
+	 с - печатаемый символ, включая пробел, и 0 в противном случае.
+	 */
+	printf("isprint \'%c\' = %d\n", c, isprint(c));
+	
+	/* Enter character:
+	' '
+	Character: ' '
+	isprint ' ' = 16384
+	
+	'\n'
+	Character: '\n'
+	isprint '\n' = 0
 	*/
 	
 }
