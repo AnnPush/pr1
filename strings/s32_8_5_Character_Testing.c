@@ -190,9 +190,25 @@ int main(void)
 	Character: '\t'
 	iscntrl '' = 2
 	
-	2
+	3
 	Character: 3
 	iscntrl '3' = 0
+	
+	/*11) int ispunct(int c) Возвращает истинное значение, если
+	 с - печатаемый символ, не являющийся пробелом, буквой или цифрой,
+	 и 0 в противном случае.
+	 */
+	printf("ispunct \'%c\' = %d\n", c, ispunct(c));
+	
+	/* Enter character:
+	?
+	Character: ?
+	ispunct '?' = 4
+	
+	3
+	Character: 3
+	ispunct '3' = 0
+	*/
 	*/
 	
 }
