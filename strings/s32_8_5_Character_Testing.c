@@ -96,7 +96,7 @@ int main(void)
 	printf("islower \'%c\' = %d\n", c, islower(c));
 	
 	/* Enter character:
-	A
+	А
 	Character: A
 	islower 'A' = 0
 	
@@ -104,7 +104,6 @@ int main(void)
 	a
 	Character: a
 	islower 'a' = 512*/
-	
 	
 	/*6) int isupper(int c) Возвращает истинное значение, 
 	если с -буква верхнего регистра, и 0 в противном случае*/
@@ -119,4 +118,27 @@ int main(void)
 	a
 	Character: a
 	isupper 'a' = 0*/
+	
+	/*7) int tolower(int c) Если с - буква верхнего регистра, tolower
+	возвращает ее эквивалент в нижнем регистре. В противном случае
+	функция возвращает значение аргумента без изменений.*/
+	printf("tolower \'%c\' = %c\n", c, tolower(c));
+	
+	/* Enter character:
+	А
+	Character: A
+	tolower 'A' = a
+	*/
+	
+	/*8) int toupper(int c) Если с - буква нижнего регистра, toupper
+	возвращает ее эквивалент в верхнем регистре. В противном случае
+	функция возвращает значение аргумента без изменений.*/
+	printf("toupper \'%c\' = %c\n", c, toupper(c));
+	
+	/* Enter character:
+	a
+	Character: a
+	tolower 'a' = A
+	*/
+	
 }
