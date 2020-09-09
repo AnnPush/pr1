@@ -26,11 +26,83 @@ int main(void)
 {
 	char c;
 	int a;
-	puts("Enter char and integer:\n");
-	scanf("%c%d", &c, &a);
-	printf("Char: %c\n Int: %d\n", c, a);
+	puts("Enter character :\n");
+	scanf("%c", &c);
+	printf("Character: %c\n ", c);
 	
-	printf("1.1) isdigit \'%c\' = %d\n", isdigit(c));
-	printf("1.2) isdigit \'%d\' = %d\n", isdigit(a));
+	/*1) int isdigit(int c) Возвращает истинное значение, 
+	если с - цифра, и 0(ложное) в противном случае*/
+	printf("isdigit \'%c\' = %d\n", c, isdigit(c));
+	
+	/* Enter character:
+	9
+	Character: 9
+	isdigit '9' = 1
+	
+	Enter character:
+	a
+	Character: a
+	isdigit 'a' = 0*/
+	
+	/*2) int isalpha(int c) Возвращает истинное значение, 
+	если с -буква, и 0 в противном случае*/
+	printf("isalpha \'%c\' = %d\n", c, isalpha(c));
+	
+	/* Enter character:
+	9
+	Character: 9
+	isalpha '9' = 0
+	
+	Enter character:
+	a
+	Character: a
+	isalpha 'a' = 1024*/
+	
+	/*3) int isalnum(int c) Возвращает истинное значение, 
+	если с -буква или цифра, и 0 в противном случае*/
+	printf("isalnum \'%c\' = %d\n", c, isalnum(c));
+	
+	/* Enter character:
+	9
+	Character: 9
+	isalnum '9' = 8
+	
+	Enter character:
+	a
+	Character: a
+	isalnum 'a' = 8
+	
+	Enter character:
+	#
+	Character: #
+	isalnum '#' = 0*/
+	
+	/*4) int isxdigit(int c) Возвращает истинное значение, 
+	если с - символ шестнадцатеричной системы, и 0 в противном случае*/
+	printf("isxdigit \'%c\' = %d\n", c, isxdigit(c));
+	
+	/* Enter character:
+	F
+	Character: F
+	isxdigit 'F' = 4096
+	
+	Enter character:
+	V
+	Character: V
+	isxdigit 'V' = 0*/
+	
+	/*5) int islower(int c) Возвращает истинное значение, 
+	если с -буква нижнего регистра, и 0 в противном случае*/
+	printf("islower \'%c\' = %d\n", c, islower(c));
+	
+	/* Enter character:
+	9
+	Character: A
+	islower 'A' = 0
+	
+	Enter character:
+	a
+	Character: a
+	islower 'a' = 512*/
 	
 }
