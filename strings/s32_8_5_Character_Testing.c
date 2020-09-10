@@ -122,7 +122,7 @@ int main(void)
 	/*7) int tolower(int c) Если с - буква верхнего регистра, tolower
 	возвращает ее эквивалент в нижнем регистре. В противном случае
 	функция возвращает значение аргумента без изменений.*/
-	printf("tolower \'%c\' = %c\n", c, tolower(c));
+	printf("tolower \'%c\' = %d\n", c, tolower(c));
 	
 	/* Enter character:
 	А
@@ -193,6 +193,7 @@ int main(void)
 	3
 	Character: 3
 	iscntrl '3' = 0
+	*/
 	
 	/*11) int ispunct(int c) Возвращает истинное значение, если
 	 с - печатаемый символ, не являющийся пробелом, буквой или цифрой,
@@ -210,10 +211,6 @@ int main(void)
 	ispunct '3' = 0
 	*/
 	
-	/*12) int isprint(int c) Возвращает истинное значение, если
-	 с - печатаемый символ, включая пробел, и 0 в противном случае.
-	 */
-	printf("isprint \'%c\' = %d\n", c, isprint(c));
 	
 	/*12) int isprint(int c) Возвращает истинное значение, если
 	 с - печатаемый символ, включая пробел, и 0 в противном случае.
@@ -221,13 +218,30 @@ int main(void)
 	printf("isprint \'%c\' = %d\n", c, isprint(c));
 	
 	/* Enter character:
-	' '
-	Character: ' '
-	isprint ' ' = 16384
+	3
+	Character: 3
+	isprint '3' = 16384
 	
 	'\n'
 	Character: '\n'
 	isprint '\n' = 0
 	*/
+	
+	/*13) int isgraph(int c) Возвращает истинное значение, если
+	 с - печатаемый символ, не являющийся пробелом,
+	 и 0 в противном случае.
+	 */
+	printf("isgraph \'%c\' = %d\n", c, isgraph(c));
+	
+	/* Enter character:
+	3
+	Character: 3
+	isgraph '3' = 32768
+	
+	'\n'
+	Character: '\n'
+	isgraph '\n' = 0
+	*/
+	
 	
 }
