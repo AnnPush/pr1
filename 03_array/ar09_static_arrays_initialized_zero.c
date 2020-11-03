@@ -11,7 +11,7 @@ int main(void)
 	staticArrayInit();
 	automaticArrayInit();
 
-	puts("\n\Eecond call to each function:");
+	puts("\n\nSecond call to each function:");
 
 	staticArrayInit();
 	automaticArrayInit();
